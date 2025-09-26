@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Question</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        {% if show_answer %}
+            <h1>Result</h1>
+            <div class="question">{{ question.question }}</div>
+            
+            {% if is_correct %}
+                <div class="explanation correct">
+                    <strong>Correct!</strong> Your answer was: {{ user_answer }}
+                </div>
+            {% else %}
+                <div class="explanation incorrect">
+                    <strong>Incorrect.</strong> You answered: {{ user_answer }}.
+                    <p>The correct answer was: <strong>{{ correct_answer }}</strong></p>
+                </div>
+            {% endif %}
+
+            <div class="explanation" style="background-color: #e9ecef;">
+                <strong>Explanation:</strong> {{ question.explanation }}
+            </div>
+            
+            <a href="{{ url_for('ask_question') }}" class="btn" style="background-color: #007BFF;">Next Question &rarr;</a>
+
+        {% else %}
+            <h1>Question {{ question_num }}</h1>
+            <div class="question">{{ question.question }}</div>
+            
+            <form method="post" class="options">
+                {% for option in question.options %}
+                    <button type="submit" name="option" value="{{ option }}">{{ option }}</button>
+                {% endfor %}
+            </form>
+        {% endif %}
+    </div>
+</body>
+</html>

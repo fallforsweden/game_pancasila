@@ -1,0 +1,110 @@
+/* General Body Styles + Your Animation */
+body {
+    font-family: sans-serif;
+    color: #333;
+    animation: rotate-bg-color 15s infinite linear; /* Added your animation */
+}
+
+/* Keyframes for the background animation */
+@keyframes rotate-bg-color {
+    0%   { background-color: #87CEEB; } /* SkyBlue */
+    25%  { background-color: #98FB98; } /* PaleGreen */
+    50%  { background-color: #FFDAB9; } /* PeachPuff */
+    75%  { background-color: #DDA0DD; } /* Plum */
+    100% { background-color: #87CEEB; } /* Back to SkyBlue */
+}
+
+/* Card-like container for the content */
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Styles for Forms (index.html) */
+input[type="text"] {
+    width: 80%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+button, .btn {
+    padding: 12px 25px;
+    font-size: 16px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+button[type="submit"] {
+    background-color: #007BFF;
+}
+
+/* Styles for Question Page */
+.question {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.options button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 10px;
+    font-size: 1em;
+    text-align: left;
+    background-color: #f8f9fa;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+.options button:hover {
+    background-color: #e2e6ea;
+}
+
+.explanation {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: left;
+}
+
+.correct {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+}
+
+.incorrect {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+
+/* Styles for Results Page */
+.results {
+    font-size: 1.5em;
+    margin: 20px 0;
+}
+
+.btn.play-again {
+    background-color: #28a745;
+}
