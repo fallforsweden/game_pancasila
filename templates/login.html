@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Pancasila Cerdas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Login</h1>
+        <p>Silakan masuk untuk memulai kuis.</p>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="explanation {{ 'correct' if category == 'success' else 'incorrect' }}" style="text-align: center; margin-bottom: 20px;">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="post">
+            <input type="text" name="username" placeholder="Enter your username" required>
+            <input type="password" name="password" placeholder="Enter your password" required style="margin-top:10px;">
+            <br>
+            <button type="submit">Login</button>
+        </form>
+        <p style="margin-top: 20px;">
+            Belum punya akun? <a href="{{ url_for('register') }}">Daftar di sini</a>
+        </p>
+    </div>
+</body>
+</html>

@@ -8,18 +8,17 @@
 </head>
 <body>
     <div class="container">
-        <h1>Quiz Complete!</h1>
-        <h2>Well done, {{ username }}!</h2>
+        <h1>Quiz Selesai!</h1>
+        <h2>Kerja bagus, {{ username }}!</h2>
         <div class="results">
-            Your Final Score: <strong>{{ score }} </strong> 
-            <!-- out of {{ total_questions }} -->
+            Skor Akhir Kamu: <strong>{{ score }}</strong>
         </div>
-        <a href="{{ url_for('start_quiz') }}" class="btn play-again">Play Again?</a>
+        <a href="{{ url_for('start_quiz') }}" class="btn play-again">Main Lagi?</a>
+        <a href="{{ url_for('logout') }}" class="btn" style="background-color: #c82333;">Logout</a>
     </div>
 
     <div class="scoreboard-container">
         <h2>🏆 Global Scoreboard</h2>
-        
         <ol class="scoreboard-list">
         {% for entry in top_scores %}
             <li>
@@ -27,7 +26,7 @@
                 <span class="score-points">{{ entry.score }} points</span>
             </li>
         {% else %}
-            <li>No scores recorded yet.</li>
+            <li>Belum ada skor yang tercatat.</li>
         {% endfor %}
         </ol>
     </div>

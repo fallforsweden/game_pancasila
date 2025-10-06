@@ -8,13 +8,11 @@
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to the Quiz Game!</h1>
-        <p>Please enter your name to begin.</p>
-        <form method="post">
-            <input type="text" name="username" placeholder="Enter your name" required>
-            <br>
-            <button type="submit">Start Quiz</button>
-        </form>
+        <h1>Selamat Datang di Game Kuis Pancasila Cerdas!</h1>
+        <p>Uji wawasan kebangsaanmu dan raih skor tertinggi!</p>
+        
+        <a href="{{ url_for('login') }}" class="btn" style="background-color: #007BFF;">Login</a>
+        <a href="{{ url_for('register') }}" class="btn" style="background-color: #5a6268;">Register</a>
     </div>
 </body>
 </html>
