@@ -50,6 +50,7 @@ button, .btn {
     cursor: pointer;
     text-decoration: none;
     display: inline-block;
+    margin-top: 20px;
 }
 
 button[type="submit"] {
@@ -107,4 +108,137 @@ button[type="submit"] {
 
 .btn.play-again {
     background-color: #28a745;
+}
+
+/* --- Tambahkan kode ini di static/css/style.css --- */
+
+/* Style untuk kontainer Scoreboard agar mirip dengan kotak Quiz Complete */
+.scoreboard-container {
+    max-width: 600px; /* Samakan dengan .container utama */
+    margin: 50px auto 20px auto; /* Margin agar tidak terlalu rapat */
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: left; /* Teks di dalam kotak ini rata kiri */
+}
+
+/* Style untuk Judul Scoreboard */
+.scoreboard-container h2 {
+    color: #007BFF; /* Warna biru agar menonjol */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Style untuk Daftar Skor (Ordered List) */
+.scoreboard-list {
+    list-style: none; /* Hilangkan numbering bawaan browser (1., 2., 3.,) */
+    padding: 0;
+}
+
+/* Style untuk setiap Baris Skor (List Item) */
+.scoreboard-list li {
+    padding: 10px 0;
+    font-size: 1.1em;
+    border-bottom: 1px dashed #ccc; /* Garis pemisah antar skor */
+    display: flex; /* Untuk menyejajarkan nama dan skor */
+    justify-content: space-between; /* Untuk mendorong skor ke kanan */
+    align-items: center;
+}
+
+/* Hilangkan garis pemisah di baris terakhir */
+.scoreboard-list li:last-child {
+    border-bottom: none;
+}
+
+/* Warna untuk poin skor */
+.score-points {
+    font-weight: bold;
+    color: #28a745; /* Warna hijau Play Again */
+}
+
+.timer-display {
+    /* Penempatan */
+    text-align: center;
+    margin-bottom: 25px;
+    padding: 10px 15px;
+    
+    /* Gaya Visual */
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333; /* Warna teks default */
+    background-color: #ffe0b2; /* Warna latar belakang kuning muda (orange-like) */
+    border-radius: 8px;
+    border: 2px solid #ff9800; /* Border orange */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Tambahkan kode ini ke bagian akhir static/css/style.css --- */
+
+/* Container Utama untuk Karakter dan Gelembung */
+.game-feedback-box {
+    display: flex; /* Mengatur elemen di dalamnya sejajar horizontal */
+    align-items: flex-start; /* Elemen dimulai dari atas */
+    gap: 15px; /* Jarak antara gambar dan gelembung */
+    margin-top: 25px;
+    padding: 15px;
+    background-color: #f0f4ff; /* Latar belakang yang sama dengan penjelasan lama */
+    border-radius: 8px;
+    border: 2px solid #a9c6e0;
+}
+
+/* Style untuk Gambar Karakter */
+.character-img {
+    flex-shrink: 0; /* Mencegah gambar menyusut */
+    width: 80px; /* Lebar Karakter */
+    height: 80px; /* Tinggi Karakter */
+    overflow: hidden; 
+    border-radius: 50%; /* Membuat gambar bundar, opsional */
+    background-color: #2b6cb0; /* Warna latar belakang jika gambar tidak transparan */
+    border: 3px solid #fff;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+.retro-character {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Memastikan gambar mengisi area tanpa terdistorsi */
+    display: block;
+}
+
+/* Style untuk Gelembung Obrolan (Speech Bubble) */
+.speech-bubble {
+    position: relative;
+    background: #ffffff; /* Latar belakang putih untuk teks */
+    border: 2px solid #dcdcdc;
+    border-radius: .4em;
+    padding: 10px 15px;
+    flex-grow: 1; /* Mengisi sisa ruang */
+    text-align: left;
+}
+
+/* Membuat Ekor/Segitiga Gelembung Obrolan (Tunjuk ke Karakter) */
+.speech-bubble:before {
+    content: "";
+    position: absolute;
+    top: 15px; /* Posisi di tengah vertikal gelembung */
+    left: -12px; /* Posisi di sebelah kiri gelembung */
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 12px solid #dcdcdc; /* Border luar */
+}
+
+.speech-bubble:after {
+    content: "";
+    position: absolute;
+    top: 17px;
+    left: -8px; 
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 10px solid #ffffff; /* Warna dalam */
 }

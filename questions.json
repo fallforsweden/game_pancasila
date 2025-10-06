@@ -1,0 +1,794 @@
+[
+ {
+        "question": "Apa sila pertama dalam Pancasila?",
+        "options": ["Kemanusiaan yang Adil dan Beradab", "Ketuhanan yang Maha Esa", "Persatuan Indonesia", "Keadilan Sosial bagi Seluruh Rakyat Indonesia"],
+        "answer": "Ketuhanan yang Maha Esa",
+        "explanation": "Sila pertama berbunyi Ketuhanan yang Maha Esa."
+    },
+    {
+        "question": "Sila kedua Pancasila berbunyi?",
+        "options": ["Persatuan Indonesia", "Kemanusiaan yang Adil dan Beradab", "Kerakyatan yang Dipimpin oleh Hikmat", "Keadilan Sosial bagi Seluruh Rakyat Indonesia"],
+        "answer": "Kemanusiaan yang Adil dan Beradab",
+        "explanation": "Sila kedua menekankan pentingnya kemanusiaan."
+    },
+    {
+        "question": "Apa lambang sila ketiga Pancasila?",
+        "options": ["Pohon Beringin", "Rantai", "Bintang", "Kepala Banteng"],
+        "answer": "Pohon Beringin",
+        "explanation": "Pohon beringin melambangkan sila ketiga Persatuan Indonesia."
+    },
+    {
+        "question": "Lambang sila pertama Pancasila adalah?",
+        "options": ["Bintang", "Rantai", "Pohon Beringin", "Padi dan Kapas"],
+        "answer": "Bintang",
+        "explanation": "Bintang melambangkan Ketuhanan Yang Maha Esa."
+    },
+    {
+        "question": "Hari lahir Pancasila diperingati setiap tanggal?",
+        "options": ["17 Agustus", "1 Juni", "20 Mei", "5 Oktober"],
+        "answer": "1 Juni",
+        "explanation": "1 Juni 1945 adalah hari lahir Pancasila."
+    },
+    {
+        "question": "Agama apa yang mengajarkan delapan jalan kebenaran?",
+        "options": ["Kristen", "Hindu", "Buddha", "Konghucu"],
+        "answer": "Buddha",
+        "explanation": "Dalam ajaran Buddha dikenal Jalan Mulia Berunsur Delapan."
+    },
+    {
+        "question": "Dalam agama Hindu, Trimurti terdiri dari Brahma, Siwa, dan ...?",
+        "options": ["Wisnu", "Indra", "Ganesa", "Agni"],
+        "answer": "Wisnu",
+        "explanation": "Trimurti adalah Brahma (pencipta), Wisnu (pemelihara), Siwa (perusak)."
+    },
+    {
+        "question": "Dalam agama Kristen, ajaran utama Yesus adalah?",
+        "options": ["Kasih", "Kekuasaan", "Harta", "Kebencian"],
+        "answer": "Kasih",
+        "explanation": "Yesus mengajarkan kasih kepada sesama manusia."
+    },
+    {
+        "question": "Dalam ajaran Konghucu, nilai utama yang harus dijunjung adalah?",
+        "options": ["Ren (kemanusiaan)", "Moha", "Moksha", "Karma"],
+        "answer": "Ren (kemanusiaan)",
+        "explanation": "Ren adalah nilai utama dalam ajaran Konghucu yang menekankan kemanusiaan."
+    },
+    {
+        "question": "Sila kelima Pancasila berbunyi?",
+        "options": ["Keadilan Sosial bagi Seluruh Rakyat Indonesia", "Persatuan Indonesia", "Kemanusiaan yang Adil dan Beradab", "Ketuhanan Yang Maha Esa"],
+        "answer": "Keadilan Sosial bagi Seluruh Rakyat Indonesia",
+        "explanation": "Sila kelima menekankan keadilan sosial."
+    },
+    {
+        "question": "Hari Kemerdekaan Indonesia diperingati pada tanggal?",
+        "options": ["17 Agustus", "1 Juni", "20 Mei", "10 November"],
+        "answer": "17 Agustus",
+        "explanation": "Indonesia merdeka pada 17 Agustus 1945."
+    },
+    {
+        "question": "Apa makna dari lambang Rantai pada Pancasila?",
+        "options": ["Kekuatan", "Persatuan", "Kemanusiaan", "Keadilan"],
+        "answer": "Kemanusiaan",
+        "explanation": "Rantai melambangkan sila kedua, Kemanusiaan yang Adil dan Beradab."
+    },
+    {
+        "question": "Dalam ajaran Buddha, tujuan akhir manusia adalah mencapai?",
+        "options": ["Surga", "Nirwana", "Moksha", "Ren"],
+        "answer": "Nirwana",
+        "explanation": "Nirwana adalah keadaan terbebas dari penderitaan."
+    },
+    {
+        "question": "Agama Hindu mengenal konsep pembebasan yang disebut?",
+        "options": ["Moksha", "Nirwana", "Surga", "Reinkarnasi"],
+        "answer": "Moksha",
+        "explanation": "Moksha adalah kebebasan dari siklus kelahiran kembali."
+    },
+    {
+        "question": "Apa semboyan negara Indonesia?",
+        "options": ["Bhinneka Tunggal Ika", "Satyam Eva Jayate", "Unity in Diversity", "Gotong Royong"],
+        "answer": "Bhinneka Tunggal Ika",
+        "explanation": "Bhinneka Tunggal Ika berarti berbeda-beda tetapi tetap satu."
+    },
+    {
+        "question": "Sila keempat Pancasila berbunyi?",
+        "options": ["Persatuan Indonesia", "Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan dalam Permusyawaratan/Perwakilan", "Keadilan Sosial bagi Seluruh Rakyat Indonesia", "Kemanusiaan yang Adil dan Beradab"],
+        "answer": "Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan dalam Permusyawaratan/Perwakilan",
+        "explanation": "Sila keempat menekankan demokrasi musyawarah mufakat."
+    },
+    {
+        "question": "Dalam agama Kristen, perintah utama adalah mengasihi Tuhan dan?",
+        "options": ["Mengasihi sesama", "Mengasihi harta", "Mengasihi diri sendiri", "Mengasihi dunia"],
+        "answer": "Mengasihi sesama",
+        "explanation": "Yesus menekankan kasih kepada Tuhan dan sesama."
+    },
+    {
+        "question": "Agama Buddha mengenal hukum sebab akibat yang disebut?",
+        "options": ["Dharma", "Karma", "Moksha", "Nirwana"],
+        "answer": "Karma",
+        "explanation": "Karma adalah hukum sebab akibat dalam ajaran Buddha."
+    },
+    {
+        "question": "Negara Indonesia berdasarkan?",
+        "options": ["Pancasila", "Komunisme", "Liberalisme", "Kapitalisme"],
+        "answer": "Pancasila",
+        "explanation": "Dasar negara Indonesia adalah Pancasila."
+    },
+    {
+        "question": "Lambang sila kelima Pancasila adalah?",
+        "options": ["Padi dan Kapas", "Bintang", "Pohon Beringin", "Kepala Banteng"],
+        "answer": "Padi dan Kapas",
+        "explanation": "Padi dan kapas melambangkan sila kelima Keadilan Sosial."
+    },
+    {
+        "question": "Dalam ajaran Konghucu, lima hubungan utama disebut?",
+        "options": ["Wu Lun", "Trimurti", "Tri Dharma", "Sapta Timira"],
+        "answer": "Wu Lun",
+        "explanation": "Wu Lun adalah lima hubungan utama dalam ajaran Konghucu."
+    },
+    {
+        "question": "Apa warna dasar bendera Indonesia?",
+        "options": ["Merah dan Putih", "Merah dan Biru", "Merah dan Kuning", "Putih dan Biru"],
+        "answer": "Merah dan Putih",
+        "explanation": "Merah Putih adalah bendera kebangsaan Indonesia."
+    },
+    {
+        "question": "Hari Pahlawan diperingati pada tanggal?",
+        "options": ["10 November", "17 Agustus", "20 Mei", "1 Juni"],
+        "answer": "10 November",
+        "explanation": "10 November memperingati Pertempuran Surabaya."
+    },
+    {
+        "question": "Dalam agama Hindu, kitab sucinya disebut?",
+        "options": ["Veda", "Tripitaka", "Alkitab", "Analekta"],
+        "answer": "Veda",
+        "explanation": "Kitab suci Hindu adalah Veda."
+    },
+    {
+        "question": "Dalam agama Buddha, kitab sucinya disebut?",
+        "options": ["Tripitaka", "Veda", "Alkitab", "Analekta"],
+        "answer": "Tripitaka",
+        "explanation": "Kitab suci Buddha adalah Tripitaka."
+    },
+    {
+        "question": "Apa arti sila ketiga Pancasila?",
+        "options": ["Menjaga persatuan dan kesatuan bangsa", "Menghormati agama lain", "Menegakkan keadilan", "Melindungi hak asasi"],
+        "answer": "Menjaga persatuan dan kesatuan bangsa",
+        "explanation": "Sila ketiga menekankan pentingnya persatuan bangsa Indonesia."
+    },
+    {
+        "question": "Siapa yang pertama kali mengusulkan nama Pancasila?",
+        "options": ["Soekarno", "Mohammad Hatta", "Sutan Syahrir", "Ki Hajar Dewantara"],
+        "answer": "Soekarno",
+        "explanation": "Soekarno memperkenalkan istilah Pancasila pada 1 Juni 1945."
+    },
+    {
+        "question": "Dalam ajaran Buddha, hari besar Waisak memperingati apa?",
+        "options": ["Lahir, Sadar, dan Wafatnya Sang Buddha", "Kebangkitan Yesus", "Turunnya Weda", "Penciptaan dunia"],
+        "answer": "Lahir, Sadar, dan Wafatnya Sang Buddha",
+        "explanation": "Waisak memperingati tiga peristiwa penting dalam kehidupan Buddha."
+    },
+    {
+        "question": "Apa makna sila keempat Pancasila?",
+        "options": ["Keputusan diambil dengan musyawarah mufakat", "Kebebasan mutlak individu", "Hidup sederhana", "Mencintai alam"],
+        "answer": "Keputusan diambil dengan musyawarah mufakat",
+        "explanation": "Sila keempat mengajarkan demokrasi berdasarkan musyawarah."
+    },
+    {
+        "question": "Kitab suci agama Kristen adalah?",
+        "options": ["Alkitab", "Tripitaka", "Veda", "Analekta"],
+        "answer": "Alkitab",
+        "explanation": "Kitab suci Kristen adalah Alkitab (Perjanjian Lama dan Baru)."
+    },
+    {
+        "question": "Kitab suci agama Konghucu adalah?",
+        "options": ["Analekta", "Tripitaka", "Veda", "Alkitab"],
+        "answer": "Analekta",
+        "explanation": "Analekta berisi ajaran-ajaran Nabi Konghucu."
+    },
+    {
+        "question": "Apa semboyan hidup bangsa Indonesia yang tertulis pada lambang negara Garuda?",
+        "options": ["Gotong Royong", "Bhinneka Tunggal Ika", "Unity in Diversity", "Trisakti"],
+        "answer": "Bhinneka Tunggal Ika",
+        "explanation": "Bhinneka Tunggal Ika tertulis pada pita di lambang Garuda Pancasila."
+    },
+    {
+        "question": "Dalam Hindu, hukum sebab akibat disebut?",
+        "options": ["Karma", "Dharma", "Moksha", "Samadhi"],
+        "answer": "Karma",
+        "explanation": "Karma adalah hukum sebab akibat dalam Hindu maupun Buddha."
+    },
+    {
+        "question": "Pancasila sebagai ideologi terbuka artinya?",
+        "options": ["Tidak bisa diubah sama sekali", "Menerima perkembangan zaman tanpa meninggalkan nilai dasar", "Mengikuti ideologi luar", "Tidak memiliki ketegasan"],
+        "answer": "Menerima perkembangan zaman tanpa meninggalkan nilai dasar",
+        "explanation": "Ideologi terbuka berarti bisa berkembang sesuai kebutuhan zaman."
+    },
+    {
+        "question": "Tanggal berapa diperingati Hari Kebangkitan Nasional?",
+        "options": ["20 Mei", "17 Agustus", "1 Juni", "10 November"],
+        "answer": "20 Mei",
+        "explanation": "Hari Kebangkitan Nasional diperingati setiap 20 Mei."
+    },
+    {
+        "question": "Sila keempat Pancasila dilambangkan dengan?",
+        "options": ["Kepala Banteng", "Rantai", "Pohon Beringin", "Padi dan Kapas"],
+        "answer": "Kepala Banteng",
+        "explanation": "Kepala banteng melambangkan sila keempat."
+    },
+    {
+        "question": "Apa makna kepala banteng dalam Pancasila?",
+        "options": ["Kebijaksanaan dalam musyawarah", "Kemanusiaan", "Keadilan", "Persatuan"],
+        "answer": "Kebijaksanaan dalam musyawarah",
+        "explanation": "Kepala banteng melambangkan musyawarah mufakat."
+    },
+    {
+        "question": "Dalam agama Buddha, ajaran utama Buddha disebut?",
+        "options": ["Dharma", "Karma", "Moksha", "Yoga"],
+        "answer": "Dharma",
+        "explanation": "Dharma adalah ajaran utama Buddha."
+    },
+    {
+        "question": "Dalam agama Kristen, doa yang diajarkan Yesus disebut?",
+        "options": ["Doa Bapa Kami", "Doa Salam Maria", "Doa Rosario", "Doa Syukur"],
+        "answer": "Doa Bapa Kami",
+        "explanation": "Doa Bapa Kami diajarkan Yesus kepada murid-murid-Nya."
+    },
+    {
+        "question": "Negara yang berdasarkan Pancasila disebut?",
+        "options": ["Negara Demokrasi", "Negara Pancasila", "Negara Kesatuan", "Negara Sosialis"],
+        "answer": "Negara Kesatuan",
+        "explanation": "Indonesia adalah negara kesatuan berdasarkan Pancasila."
+    },
+    {
+        "question": "Apa arti toleransi antar umat beragama?",
+        "options": ["Menghormati agama lain", "Menyamakan semua agama", "Mengabaikan agama lain", "Menyalahkan agama lain"],
+        "answer": "Menghormati agama lain",
+        "explanation": "Toleransi artinya menghargai perbedaan keyakinan."
+    },
+    {
+        "question": "Apa makna sila kedua Pancasila?",
+        "options": ["Menghormati hak asasi manusia", "Mengutamakan kepentingan pribadi", "Menegakkan hukum dengan keras", "Menghargai harta benda"],
+        "answer": "Menghormati hak asasi manusia",
+        "explanation": "Sila kedua menekankan penghormatan terhadap hak asasi manusia."
+    },
+    {
+        "question": "Dalam Hindu, tempat pemujaan disebut?",
+        "options": ["Pura", "Wihara", "Gereja", "Kelenteng"],
+        "answer": "Pura",
+        "explanation": "Pura adalah tempat ibadah umat Hindu."
+    },
+    {
+        "question": "Dalam Buddha, tempat ibadah disebut?",
+        "options": ["Wihara", "Pura", "Gereja", "Kelenteng"],
+        "answer": "Wihara",
+        "explanation": "Wihara adalah tempat ibadah umat Buddha."
+    },
+    {
+        "question": "Dalam Kristen, tempat ibadah disebut?",
+        "options": ["Gereja", "Wihara", "Pura", "Kelenteng"],
+        "answer": "Gereja",
+        "explanation": "Gereja adalah tempat ibadah umat Kristen."
+    },
+    {
+        "question": "Dalam Konghucu, tempat ibadah disebut?",
+        "options": ["Kelenteng", "Gereja", "Pura", "Wihara"],
+        "answer": "Kelenteng",
+        "explanation": "Kelenteng adalah tempat ibadah umat Konghucu."
+    },
+    {
+        "question": "Apa tujuan bangsa Indonesia menurut pembukaan UUD 1945?",
+        "options": ["Mencerdaskan kehidupan bangsa", "Menguasai dunia", "Menguasai ekonomi global", "Menjadi negara adidaya"],
+        "answer": "Mencerdaskan kehidupan bangsa",
+        "explanation": "Tujuan bangsa Indonesia salah satunya mencerdaskan kehidupan bangsa."
+    },
+    {
+        "question": "Dalam Hindu, ajaran kebenaran disebut?",
+        "options": ["Dharma", "Karma", "Yoga", "Moksha"],
+        "answer": "Dharma",
+        "explanation": "Dharma berarti ajaran kebenaran dalam Hindu."
+    },
+    {
+        "question": "Dalam Buddha, hari raya Asadha memperingati apa?",
+        "options": ["Sang Buddha pertama kali membabarkan Dharma", "Kelahiran Sang Buddha", "Pencapaian Nirwana", "Kebangkitan Buddha"],
+        "answer": "Sang Buddha pertama kali membabarkan Dharma",
+        "explanation": "Hari Asadha memperingati khotbah pertama Sang Buddha."
+    },
+    {
+        "question": "Siapa pencipta lagu kebangsaan Indonesia Raya?",
+        "options": ["W.R. Supratman", "Soekarno", "Hatta", "Ki Hajar Dewantara"],
+        "answer": "W.R. Supratman",
+        "explanation": "W.R. Supratman menciptakan lagu Indonesia Raya."
+    },
+    {
+    "question": "Apa arti penting gotong royong dalam kehidupan sehari-hari?",
+    "options": ["Menciptakan individualisme", "Membentuk kebersamaan dan persatuan", "Meningkatkan persaingan", "Memisahkan masyarakat"],
+    "answer": "Membentuk kebersamaan dan persatuan",
+    "explanation": "Gotong royong mencerminkan persatuan dan kerja sama yang sejalan dengan Pancasila."
+  },
+  {
+    "question": "Sikap menghargai perbedaan pendapat merupakan wujud pengamalan sila ke?",
+    "options": ["Pertama", "Kedua", "Keempat", "Kelima"],
+    "answer": "Keempat",
+    "explanation": "Menghargai perbedaan pendapat merupakan bagian dari musyawarah mufakat di sila keempat."
+  },
+  {
+    "question": "Apa yang menjadi inti dari sila kelima Pancasila?",
+    "options": ["Keadilan sosial", "Persatuan", "Ketuhanan", "Musyawarah"],
+    "answer": "Keadilan sosial",
+    "explanation": "Sila kelima menekankan keadilan sosial bagi seluruh rakyat Indonesia."
+  },
+  {
+    "question": "Menghormati kebebasan beragama orang lain sesuai dengan sila?",
+    "options": ["Pertama", "Kedua", "Ketiga", "Keempat"],
+    "answer": "Pertama",
+    "explanation": "Sila pertama Pancasila menjamin kebebasan beragama."
+  },
+  {
+    "question": "Apa arti keadilan sosial menurut Pancasila?",
+    "options": ["Memberi keuntungan pada kelompok tertentu", "Keseimbangan hak dan kewajiban", "Menyamakan semua orang secara mutlak", "Mengutamakan yang kuat"],
+    "answer": "Keseimbangan hak dan kewajiban",
+    "explanation": "Keadilan sosial berarti keseimbangan antara hak dan kewajiban bagi semua."
+  },
+  {
+    "question": "Sikap saling membantu korban bencana mencerminkan sila?",
+    "options": ["Pertama", "Kedua", "Ketiga", "Kelima"],
+    "answer": "Kedua",
+    "explanation": "Sila kedua menekankan nilai kemanusiaan yang adil dan beradab."
+  },
+  {
+    "question": "Apa tujuan utama sila ketiga Pancasila?",
+    "options": ["Menjaga persatuan Indonesia", "Menjamin kebebasan beragama", "Menekankan musyawarah", "Menegakkan keadilan"],
+    "answer": "Menjaga persatuan Indonesia",
+    "explanation": "Sila ketiga mengajarkan pentingnya persatuan di tengah perbedaan."
+  },
+  {
+    "question": "Apa yang harus dilakukan jika ada konflik antarumat beragama?",
+    "options": ["Menghindari dialog", "Menyelesaikan dengan kekerasan", "Mengutamakan musyawarah dan toleransi", "Mengabaikan masalah"],
+    "answer": "Mengutamakan musyawarah dan toleransi",
+    "explanation": "Dialog dan toleransi adalah kunci menyelesaikan konflik dengan damai."
+  },
+  {
+    "question": "Pancasila sebagai ideologi terbuka berarti?",
+    "options": ["Tidak dapat berubah", "Selalu menyesuaikan dengan perkembangan zaman", "Hanya berlaku di masa lalu", "Bersifat tertutup"],
+    "answer": "Selalu menyesuaikan dengan perkembangan zaman",
+    "explanation": "Ideologi terbuka berarti dapat menyesuaikan tanpa kehilangan nilai dasarnya."
+  },
+  {
+    "question": "Sikap yang mencerminkan nilai sila kedua adalah?",
+    "options": ["Menghargai hak orang lain", "Mengejek teman", "Mengutamakan diri sendiri", "Bersikap sombong"],
+    "answer": "Menghargai hak orang lain",
+    "explanation": "Sila kedua menekankan kemanusiaan yang adil dan beradab."
+  },
+  {
+    "question": "Apa arti kerukunan antarumat beragama?",
+    "options": ["Tidak peduli dengan orang lain", "Hidup berdampingan dengan damai meski berbeda agama", "Menyatukan semua agama", "Menghapus perbedaan keyakinan"],
+    "answer": "Hidup berdampingan dengan damai meski berbeda agama",
+    "explanation": "Kerukunan berarti hidup damai dengan saling menghormati."
+  },
+  {
+    "question": "Apa nilai utama yang terkandung dalam sila pertama?",
+    "options": ["Ketuhanan", "Kemanusiaan", "Keadilan", "Persatuan"],
+    "answer": "Ketuhanan",
+    "explanation": "Sila pertama menekankan pengakuan akan adanya Tuhan Yang Maha Esa."
+  },
+  {
+    "question": "Apa makna persaudaraan universal dalam agama?",
+    "options": ["Persaudaraan hanya untuk satu kelompok", "Semua manusia bersaudara tanpa membedakan agama", "Hanya sesama agama yang dihormati", "Mengutamakan bangsa sendiri"],
+    "answer": "Semua manusia bersaudara tanpa membedakan agama",
+    "explanation": "Agama universal menekankan persaudaraan semua umat manusia."
+  },
+  {
+    "question": "Apa contoh penerapan sila kelima di sekolah?",
+    "options": ["Membeda-bedakan teman", "Membagi fasilitas secara adil", "Mengutamakan kelompok tertentu", "Mengabaikan aturan"],
+    "answer": "Membagi fasilitas secara adil",
+    "explanation": "Keadilan sosial diterapkan dengan pembagian yang adil bagi semua siswa."
+  },
+  {
+    "question": "Sikap adil terhadap teman menunjukkan pengamalan sila ke?",
+    "options": ["Pertama", "Kedua", "Keempat", "Kelima"],
+    "answer": "Kelima",
+    "explanation": "Bersikap adil adalah bagian dari sila kelima Pancasila."
+  },
+  {
+    "question": "Apa makna kemerdekaan beragama menurut Pancasila?",
+    "options": ["Kebebasan memeluk agama sesuai keyakinan", "Wajib memeluk agama tertentu", "Tidak boleh beragama", "Mengutamakan satu agama saja"],
+    "answer": "Kebebasan memeluk agama sesuai keyakinan",
+    "explanation": "Pancasila menjamin kebebasan beragama bagi setiap warga negara."
+  },
+  {
+    "question": "Apa arti penting persatuan bangsa?",
+    "options": ["Memecah belah kelompok", "Menguatkan rasa kebangsaan", "Mengutamakan diri sendiri", "Mengabaikan kepentingan bersama"],
+    "answer": "Menguatkan rasa kebangsaan",
+    "explanation": "Persatuan memperkuat identitas kebangsaan Indonesia."
+  },
+  {
+    "question": "Apa contoh musyawarah dalam kehidupan sehari-hari?",
+    "options": ["Diskusi menentukan ketua kelas", "Bertengkar dengan teman", "Mengabaikan pendapat orang lain", "Mengambil keputusan sepihak"],
+    "answer": "Diskusi menentukan ketua kelas",
+    "explanation": "Musyawarah berarti berdiskusi untuk mencapai mufakat bersama."
+  },
+  {
+    "question": "Apa yang diajarkan agama universal tentang perdamaian?",
+    "options": ["Kekerasan sebagai solusi", "Perdamaian sebagai tujuan hidup", "Mengutamakan konflik", "Menolak persaudaraan"],
+    "answer": "Perdamaian sebagai tujuan hidup",
+    "explanation": "Agama universal selalu menekankan hidup damai antarumat manusia."
+  },
+  {
+    "question": "Apa makna simbol bintang pada sila pertama?",
+    "options": ["Cahaya Tuhan", "Musyawarah", "Persatuan", "Keadilan"],
+    "answer": "Cahaya Tuhan",
+    "explanation": "Bintang melambangkan Ketuhanan Yang Maha Esa."
+  },
+  {
+    "question": "Apa yang ditekankan sila kedua dalam hubungan antarmanusia?",
+    "options": ["Kemanusiaan yang adil dan beradab", "Persatuan bangsa", "Ketuhanan Yang Maha Esa", "Keadilan sosial"],
+    "answer": "Kemanusiaan yang adil dan beradab",
+    "explanation": "Sila kedua mengajarkan untuk memperlakukan sesama dengan adil dan beradab."
+  },
+  {
+    "question": "Apa kewajiban kita terhadap teman berbeda keyakinan?",
+    "options": ["Menghormati keyakinannya", "Memaksanya ikut keyakinan kita", "Mengucilkannya", "Menghindarinya"],
+    "answer": "Menghormati keyakinannya",
+    "explanation": "Sikap toleransi berarti menghormati teman yang berbeda keyakinan."
+  },
+  {
+    "question": "Mengutamakan kepentingan bersama di atas kepentingan pribadi sesuai sila ke?",
+    "options": ["Pertama", "Ketiga", "Keempat", "Kelima"],
+    "answer": "Ketiga",
+    "explanation": "Sila ketiga menekankan persatuan dan kepentingan bersama."
+  },
+  {
+    "question": "Apa arti sila keempat dalam praktik demokrasi?",
+    "options": ["Kekuasaan mutlak pemimpin", "Musyawarah dan mufakat", "Menolak pendapat minoritas", "Kebebasan tanpa aturan"],
+    "answer": "Musyawarah dan mufakat",
+    "explanation": "Sila keempat menekankan musyawarah dalam demokrasi."
+  },
+  {
+    "question": "Apa makna simbol pohon beringin pada Pancasila?",
+    "options": ["Persatuan Indonesia", "Keadilan sosial", "Kemanusiaan", "Kerakyatan"],
+    "answer": "Persatuan Indonesia",
+    "explanation": "Pohon beringin melambangkan sila ketiga, Persatuan Indonesia."
+  },
+  {
+    "question": "Apa makna simbol rantai pada sila kedua?",
+    "options": ["Persatuan Indonesia", "Kerakyatan", "Kemanusiaan yang adil dan beradab", "Keadilan sosial"],
+    "answer": "Kemanusiaan yang adil dan beradab",
+    "explanation": "Rantai melambangkan hubungan antarmanusia yang saling terkait."
+  },
+  {
+    "question": "Menghormati keputusan hasil musyawarah mencerminkan pengamalan sila ke?",
+    "options": ["Pertama", "Kedua", "Keempat", "Kelima"],
+    "answer": "Keempat",
+    "explanation": "Sila keempat menekankan musyawarah untuk mufakat."
+  },
+  {
+    "question": "Apa makna simbol padi dan kapas dalam Pancasila?",
+    "options": ["Keadilan sosial", "Persatuan", "Kerakyatan", "Ketuhanan"],
+    "answer": "Keadilan sosial",
+    "explanation": "Padi dan kapas melambangkan sila kelima, keadilan sosial bagi seluruh rakyat Indonesia."
+  },
+  {
+    "question": "Apa yang dimaksud dengan toleransi antarumat beragama?",
+    "options": ["Menghargai perbedaan keyakinan", "Menyalahkan agama lain", "Mengutamakan agama sendiri", "Menghindari pertemanan dengan berbeda agama"],
+    "answer": "Menghargai perbedaan keyakinan",
+    "explanation": "Toleransi berarti sikap saling menghormati meskipun berbeda keyakinan."
+  },
+  {
+    "question": "Apa makna simbol kepala banteng pada Pancasila?",
+    "options": ["Ketuhanan", "Kerakyatan", "Persatuan", "Keadilan"],
+    "answer": "Kerakyatan",
+    "explanation": "Kepala banteng melambangkan sila keempat, kerakyatan yang dipimpin oleh hikmat kebijaksanaan."
+  },
+  {
+    "question": "Apa tujuan utama sila kedua?",
+    "options": ["Menghargai hak asasi manusia", "Mengutamakan persatuan", "Menegakkan musyawarah", "Menjamin kebebasan ekonomi"],
+    "answer": "Menghargai hak asasi manusia",
+    "explanation": "Sila kedua mengajarkan kemanusiaan yang adil dan beradab, termasuk menghargai hak asasi manusia."
+  },
+  {
+    "question": "Apa yang diajarkan agama universal tentang kasih sayang?",
+    "options": ["Hanya pada sesama agama", "Hanya pada keluarga", "Kepada semua makhluk hidup", "Kepada diri sendiri saja"],
+    "answer": "Kepada semua makhluk hidup",
+    "explanation": "Kasih sayang dalam agama universal mencakup seluruh umat manusia dan makhluk hidup."
+  },
+  {
+    "question": "Apa contoh pengamalan sila pertama di sekolah?",
+    "options": ["Berdoa sebelum pelajaran", "Tidak membantu teman", "Bertengkar dengan teman", "Bolos sekolah"],
+    "answer": "Berdoa sebelum pelajaran",
+    "explanation": "Berdoa sebelum belajar mencerminkan nilai Ketuhanan Yang Maha Esa."
+  },
+  {
+    "question": "Apa makna persamaan derajat dalam Pancasila?",
+    "options": ["Semua orang memiliki kedudukan yang sama di hadapan hukum", "Hanya pejabat yang berhak dihormati", "Orang kaya lebih tinggi derajatnya", "Perbedaan kasta tetap dipertahankan"],
+    "answer": "Semua orang memiliki kedudukan yang sama di hadapan hukum",
+    "explanation": "Persamaan derajat mencerminkan sila kedua dan kelima."
+  },
+  {
+    "question": "Apa arti penting semboyan Bhinneka Tunggal Ika?",
+    "options": ["Berbeda-beda tetapi tetap satu", "Semua harus sama", "Hanya ada satu budaya", "Mengutamakan mayoritas"],
+    "answer": "Berbeda-beda tetapi tetap satu",
+    "explanation": "Bhinneka Tunggal Ika menekankan persatuan dalam perbedaan."
+  },
+  {
+    "question": "Apa makna demokrasi menurut sila keempat?",
+    "options": ["Kebebasan mutlak tanpa aturan", "Keputusan bersama melalui musyawarah", "Kekuasaan tanpa batas", "Pendapat satu orang yang paling benar"],
+    "answer": "Keputusan bersama melalui musyawarah",
+    "explanation": "Demokrasi dalam Pancasila menekankan musyawarah mufakat."
+  },
+  {
+    "question": "Apa sikap yang mencerminkan sila ketiga?",
+    "options": ["Menjaga persatuan dan kesatuan bangsa", "Mengutamakan kepentingan pribadi", "Memecah belah kelompok", "Tidak peduli pada bangsa"],
+    "answer": "Menjaga persatuan dan kesatuan bangsa",
+    "explanation": "Sila ketiga menekankan pentingnya persatuan Indonesia."
+  },
+  {
+    "question": "Apa makna kebebasan beragama di Indonesia?",
+    "options": ["Boleh memilih agama sesuai keyakinan", "Wajib mengikuti agama mayoritas", "Tidak boleh beragama", "Mengutamakan agama tertentu"],
+    "answer": "Boleh memilih agama sesuai keyakinan",
+    "explanation": "UUD 1945 dan Pancasila menjamin kebebasan beragama."
+  },
+  {
+    "question": "Apa yang diajarkan sila kelima tentang kehidupan bermasyarakat?",
+    "options": ["Harus adil dalam berbagi", "Hanya peduli pada diri sendiri", "Mengutamakan kelompok kaya", "Mengabaikan kaum lemah"],
+    "answer": "Harus adil dalam berbagi",
+    "explanation": "Sila kelima menekankan keadilan sosial."
+  },
+  {
+    "question": "Apa makna hidup rukun menurut agama universal?",
+    "options": ["Menghargai sesama dan tidak memaksakan kehendak", "Selalu bersaing dengan orang lain", "Menyalahkan orang berbeda keyakinan", "Mengutamakan diri sendiri"],
+    "answer": "Menghargai sesama dan tidak memaksakan kehendak",
+    "explanation": "Hidup rukun adalah ajaran universal semua agama."
+  },
+  {
+    "question": "Apa makna simbol bintang di sila pertama bagi bangsa Indonesia?",
+    "options": ["Melambangkan cahaya Tuhan", "Lambang demokrasi", "Keadilan sosial", "Kemanusiaan"],
+    "answer": "Melambangkan cahaya Tuhan",
+    "explanation": "Bintang melambangkan sila Ketuhanan Yang Maha Esa."
+  },
+  {
+    "question": "Apa contoh keadilan sosial dalam kehidupan sehari-hari?",
+    "options": ["Membagi makanan sama rata", "Memonopoli fasilitas umum", "Hanya membantu teman dekat", "Mengutamakan orang kaya"],
+    "answer": "Membagi makanan sama rata",
+    "explanation": "Keadilan sosial berarti memberikan hak yang adil kepada semua orang."
+  },
+  {
+    "question": "Apa yang ditekankan agama universal tentang perdamaian dunia?",
+    "options": ["Perang sebagai jalan utama", "Perdamaian untuk semua manusia", "Kekerasan dibenarkan", "Konflik adalah tujuan"],
+    "answer": "Perdamaian untuk semua manusia",
+    "explanation": "Agama universal menekankan perdamaian sebagai nilai tertinggi."
+  },
+  {
+    "question": "Apa arti penting sila ketiga dalam kehidupan berbangsa?",
+    "options": ["Menjaga persatuan bangsa", "Mengutamakan diri sendiri", "Mengabaikan masyarakat", "Mengutamakan kelompok tertentu"],
+    "answer": "Menjaga persatuan bangsa",
+    "explanation": "Sila ketiga menekankan pentingnya persatuan dan kesatuan."
+  },
+  {
+    "question": "Apa makna simbol pohon beringin?",
+    "options": ["Kerakyatan", "Kemanusiaan", "Persatuan Indonesia", "Keadilan sosial"],
+    "answer": "Persatuan Indonesia",
+    "explanation": "Pohon beringin melambangkan sila ketiga, persatuan Indonesia."
+  },
+  {
+    "question": "Apa yang diajarkan sila kedua tentang hubungan antarindividu?",
+    "options": ["Harus adil dan beradab", "Harus selalu bersaing", "Boleh memanfaatkan orang lain", "Tidak perlu menghormati orang lain"],
+    "answer": "Harus adil dan beradab",
+    "explanation": "Sila kedua menekankan kemanusiaan yang adil dan beradab."
+  },
+  {
+    "question": "Apa contoh penerapan musyawarah di rumah?",
+    "options": ["Membicarakan rencana liburan keluarga", "Memutuskan sendiri tanpa bertanya", "Mengabaikan pendapat anak", "Mengutamakan satu orang saja"],
+    "answer": "Membicarakan rencana liburan keluarga",
+    "explanation": "Musyawarah adalah kebiasaan baik dalam pengambilan keputusan bersama."
+  },
+  {
+    "question": "Apa arti penting kerukunan antarumat beragama di Indonesia?",
+    "options": ["Menciptakan damai dan persatuan bangsa", "Membuat konflik semakin besar", "Mengutamakan mayoritas", "Menyalahkan minoritas"],
+    "answer": "Menciptakan damai dan persatuan bangsa",
+    "explanation": "Kerukunan beragama menjaga persatuan bangsa."
+  },
+  {
+    "question": "Apa contoh sikap yang sesuai sila kelima?",
+    "options": ["Membantu teman yang kesulitan", "Mengabaikan hak orang lain", "Bertindak semena-mena", "Mengutamakan kelompok kaya"],
+    "answer": "Membantu teman yang kesulitan",
+    "explanation": "Sila kelima menekankan keadilan sosial untuk semua."
+  },
+  {
+    "question": "Apa makna keadilan menurut agama universal?",
+    "options": ["Memperlakukan semua orang dengan seimbang", "Mengutamakan kelompok tertentu", "Menyalahkan orang berbeda keyakinan", "Mengabaikan kejujuran"],
+    "answer": "Memperlakukan semua orang dengan seimbang",
+    "explanation": "Agama universal menekankan keadilan untuk semua manusia."
+  },
+  {
+    "question": "Apa sikap yang sesuai sila pertama?",
+    "options": ["Menghormati perbedaan agama", "Menghina keyakinan lain", "Memaksakan agama sendiri", "Tidak peduli pada kepercayaan orang"],
+    "answer": "Menghormati perbedaan agama",
+    "explanation": "Sila pertama menekankan Ketuhanan dan toleransi beragama."
+  },
+  {
+    "question": "Apa arti penting Pancasila bagi bangsa Indonesia?",
+    "options": ["Dasar negara dan pedoman hidup", "Hanya hiasan belaka", "Tidak relevan lagi", "Hanya untuk generasi tua"],
+    "answer": "Dasar negara dan pedoman hidup",
+    "explanation": "Pancasila adalah dasar negara dan panduan dalam kehidupan bermasyarakat."
+  },
+  {
+    "question": "Apa makna simbol padi dan kapas di sila kelima?",
+    "options": ["Kemakmuran yang merata", "Persatuan Indonesia", "Musyawarah", "Kemanusiaan"],
+    "answer": "Kemakmuran yang merata",
+    "explanation": "Padi dan kapas melambangkan kesejahteraan dan keadilan sosial."
+  },
+  {
+    "question": "Apa contoh nyata pengamalan sila ketiga?",
+    "options": ["Menghormati perbedaan budaya", "Mengutamakan diri sendiri", "Merendahkan orang lain", "Membeda-bedakan teman"],
+    "answer": "Menghormati perbedaan budaya",
+    "explanation": "Menghargai perbedaan budaya menunjukkan semangat persatuan."
+  },
+  {
+    "question": "Apa arti penting musyawarah dalam demokrasi?",
+    "options": ["Menghasilkan keputusan bersama", "Mengabaikan pendapat minoritas", "Membiarkan konflik berlanjut", "Hanya menguntungkan pihak tertentu"],
+    "answer": "Menghasilkan keputusan bersama",
+    "explanation": "Musyawarah adalah ciri khas demokrasi Pancasila."
+  },
+  {
+    "question": "Apa makna kemanusiaan yang adil dalam sila kedua?",
+    "options": ["Perlakuan adil tanpa diskriminasi", "Mengutamakan kelompok tertentu", "Menyalahkan orang berbeda", "Hanya adil pada keluarga"],
+    "answer": "Perlakuan adil tanpa diskriminasi",
+    "explanation": "Sila kedua menekankan kemanusiaan yang adil dan beradab."
+  },
+  {
+    "question": "Apa arti penting perdamaian menurut agama universal?",
+    "options": ["Menciptakan harmoni antar manusia", "Menimbulkan perpecahan", "Meningkatkan konflik", "Mengutamakan kekerasan"],
+    "answer": "Menciptakan harmoni antar manusia",
+    "explanation": "Perdamaian adalah nilai utama dalam agama universal."
+  },
+  {
+    "question": "Apa makna simbol kepala banteng di sila keempat?",
+    "options": ["Kerakyatan", "Kemanusiaan", "Persatuan", "Keadilan"],
+    "answer": "Kerakyatan",
+    "explanation": "Kepala banteng melambangkan kerakyatan yang dipimpin oleh hikmat kebijaksanaan."
+  },
+  {
+    "question": "Apa sikap yang sesuai dengan sila kedua?",
+    "options": ["Menolong sesama", "Menghina orang lain", "Mengabaikan perbedaan", "Mengejek teman"],
+    "answer": "Menolong sesama",
+    "explanation": "Sila kedua menekankan kemanusiaan yang adil dan beradab."
+  },
+  {
+    "question": "Apa arti penting keadilan sosial dalam Pancasila?",
+    "options": ["Menciptakan keseimbangan hak dan kewajiban", "Mengutamakan kelompok tertentu", "Hanya untuk orang kaya", "Mengabaikan kaum lemah"],
+    "answer": "Menciptakan keseimbangan hak dan kewajiban",
+    "explanation": "Keadilan sosial berarti keseimbangan bagi seluruh rakyat Indonesia."
+  },
+  {
+    "question": "Apa contoh sikap toleransi di sekolah?",
+    "options": ["Menghargai teman yang berbeda agama", "Mengejek teman karena berbeda", "Mengabaikan teman minoritas", "Tidak mau berteman"],
+    "answer": "Menghargai teman yang berbeda agama",
+    "explanation": "Toleransi adalah wujud pengamalan sila pertama."
+  },
+  {
+    "question": "Apa makna sila keempat bagi kehidupan politik?",
+    "options": ["Musyawarah untuk mufakat", "Kekuasaan mutlak pemimpin", "Tidak peduli pada rakyat", "Keputusan sepihak"],
+    "answer": "Musyawarah untuk mufakat",
+    "explanation": "Sila keempat menekankan demokrasi musyawarah."
+  },
+  {
+    "question": "Apa arti penting persatuan dalam sila ketiga?",
+    "options": ["Menjaga keutuhan bangsa", "Meningkatkan konflik", "Memecah belah masyarakat", "Mengutamakan kepentingan pribadi"],
+    "answer": "Menjaga keutuhan bangsa",
+    "explanation": "Persatuan Indonesia adalah inti dari sila ketiga."
+  },
+  {
+    "question": "Apa makna simbol rantai emas di sila kedua?",
+    "options": ["Hubungan antarmanusia", "Keadilan sosial", "Persatuan Indonesia", "Musyawarah"],
+    "answer": "Hubungan antarmanusia",
+    "explanation": "Rantai emas melambangkan hubungan antargenerasi manusia yang saling terkait."
+  },
+  {
+    "question": "Apa contoh pengamalan sila pertama di masyarakat?",
+    "options": ["Menghormati ibadah agama lain", "Menghina kepercayaan orang", "Memaksakan keyakinan", "Mengabaikan perbedaan agama"],
+    "answer": "Menghormati ibadah agama lain",
+    "explanation": "Sila pertama menekankan penghormatan pada agama dan kepercayaan."
+  },
+  {
+    "question": "Apa arti penting kasih sayang menurut agama universal?",
+    "options": ["Menjaga harmoni dalam kehidupan", "Membuat perpecahan", "Menyakiti sesama", "Mengutamakan diri sendiri"],
+    "answer": "Menjaga harmoni dalam kehidupan",
+    "explanation": "Kasih sayang menciptakan kedamaian dalam kehidupan manusia."
+  },
+  {
+    "question": "Apa sikap yang sesuai dengan sila kelima?",
+    "options": ["Adil kepada semua orang", "Membeda-bedakan teman", "Mengabaikan hak orang lain", "Mengutamakan kelompok tertentu"],
+    "answer": "Adil kepada semua orang",
+    "explanation": "Sila kelima menekankan keadilan sosial."
+  },
+  {
+    "question": "Apa arti penting musyawarah dalam keluarga?",
+    "options": ["Mengambil keputusan bersama", "Mengabaikan pendapat anak", "Hanya orang tua yang memutuskan", "Mengutamakan satu orang saja"],
+    "answer": "Mengambil keputusan bersama",
+    "explanation": "Musyawarah dalam keluarga melatih demokrasi sejak dini."
+  },
+  {
+    "question": "Apa makna sila kedua bagi hubungan sosial?",
+    "options": ["Menjaga sikap adil dan beradab", "Mengutamakan kekerasan", "Mengabaikan orang lain", "Memanfaatkan orang lain"],
+    "answer": "Menjaga sikap adil dan beradab",
+    "explanation": "Sila kedua mengajarkan hubungan sosial yang adil dan beradab."
+  },
+  {
+    "question": "Apa makna sila pertama bagi bangsa Indonesia?",
+    "options": ["Ketuhanan sebagai dasar moral", "Mengutamakan kekerasan", "Tidak peduli pada agama", "Hanya mementingkan diri sendiri"],
+    "answer": "Ketuhanan sebagai dasar moral",
+    "explanation": "Sila pertama menekankan kepercayaan kepada Tuhan sebagai dasar moral bangsa."
+  },
+  {
+    "question": "Apa contoh sikap yang sesuai dengan sila ketiga?",
+    "options": ["Menjaga persatuan meski berbeda suku", "Mengutamakan ego pribadi", "Membeda-bedakan teman", "Mengejek budaya lain"],
+    "answer": "Menjaga persatuan meski berbeda suku",
+    "explanation": "Sila ketiga mengajarkan persatuan dalam keberagaman."
+  },
+  {
+    "question": "Apa makna simbol pohon beringin di sila ketiga?",
+    "options": ["Persatuan Indonesia", "Kerakyatan", "Kemanusiaan", "Keadilan sosial"],
+    "answer": "Persatuan Indonesia",
+    "explanation": "Pohon beringin melambangkan tempat berteduh, menyimbolkan persatuan bangsa."
+  },
+  {
+    "question": "Apa arti penting keadilan sosial dalam kehidupan berbangsa?",
+    "options": ["Memberikan hak dan kewajiban yang seimbang", "Mengabaikan kaum lemah", "Hanya menguntungkan pihak tertentu", "Menyalahkan kelompok minoritas"],
+    "answer": "Memberikan hak dan kewajiban yang seimbang",
+    "explanation": "Keadilan sosial adalah tujuan akhir Pancasila."
+  },
+  {
+    "question": "Apa makna persatuan dalam semboyan Bhinneka Tunggal Ika?",
+    "options": ["Tetap satu meski berbeda", "Harus seragam semua", "Mengabaikan perbedaan", "Mengutamakan satu budaya saja"],
+    "answer": "Tetap satu meski berbeda",
+    "explanation": "Bhinneka Tunggal Ika artinya berbeda-beda tetapi tetap satu."
+  },
+  {
+    "question": "Apa contoh nyata toleransi dalam kehidupan sehari-hari?",
+    "options": ["Mengucapkan selamat hari raya pada teman berbeda agama", "Menyalahkan orang berbeda keyakinan", "Mengabaikan tetangga minoritas", "Tidak peduli pada perayaan orang lain"],
+    "answer": "Mengucapkan selamat hari raya pada teman berbeda agama",
+    "explanation": "Toleransi tercermin dalam sikap menghargai perayaan agama lain."
+  },
+  {
+    "question": "Apa arti penting sila keempat bagi bangsa Indonesia?",
+    "options": ["Menjalankan demokrasi musyawarah", "Mengabaikan suara rakyat", "Mengutamakan satu kelompok", "Memutuskan sepihak"],
+    "answer": "Menjalankan demokrasi musyawarah",
+    "explanation": "Sila keempat menekankan demokrasi dengan musyawarah mufakat."
+  },
+  {
+    "question": "Apa makna kemanusiaan dalam agama universal?",
+    "options": ["Menghormati hak dan martabat setiap manusia", "Mengutamakan kelompok sendiri", "Mengabaikan orang lain", "Memanfaatkan orang untuk kepentingan pribadi"],
+    "answer": "Menghormati hak dan martabat setiap manusia",
+    "explanation": "Agama universal menekankan kemanusiaan yang adil dan bermartabat."
+  },
+  {
+    "question": "Apa makna sila kelima bagi pembangunan bangsa?",
+    "options": ["Mewujudkan kesejahteraan yang adil bagi seluruh rakyat", "Mengutamakan satu kelompok saja", "Mengabaikan kepentingan rakyat kecil", "Menguntungkan orang kaya"],
+    "answer": "Mewujudkan kesejahteraan yang adil bagi seluruh rakyat",
+    "explanation": "Sila kelima menekankan keadilan sosial untuk semua."
+  },
+  {
+    "question": "Apa sikap yang sesuai dengan sila kedua?",
+    "options": ["Menghargai hak asasi manusia", "Mengabaikan hak orang lain", "Menghina orang berbeda", "Memanfaatkan kelemahan orang"],
+    "answer": "Menghargai hak asasi manusia",
+    "explanation": "Sila kedua mengajarkan kemanusiaan yang adil dan beradab."
+  },
+  {
+    "question": "Apa arti penting toleransi antarumat beragama di Indonesia?",
+    "options": ["Menjaga perdamaian dan persatuan bangsa", "Menimbulkan konflik", "Meningkatkan diskriminasi", "Mengabaikan kelompok minoritas"],
+    "answer": "Menjaga perdamaian dan persatuan bangsa",
+    "explanation": "Toleransi antarumat beragama menciptakan kedamaian nasional."
+  },
+  {
+    "question": "Apa makna demokrasi dalam sila keempat?",
+    "options": ["Keputusan bersama dengan hikmat kebijaksanaan", "Kekuasaan mutlak pemimpin", "Pendapat satu orang yang dipaksakan", "Mengabaikan suara rakyat"],
+    "answer": "Keputusan bersama dengan hikmat kebijaksanaan",
+    "explanation": "Sila keempat menekankan kerakyatan dengan hikmat kebijaksanaan."
+  },
+  {
+    "question": "Apa arti penting persatuan dalam kehidupan sehari-hari?",
+    "options": ["Saling menghargai meski berbeda", "Selalu bertengkar", "Mengutamakan kelompok sendiri", "Mengabaikan kepentingan bersama"],
+    "answer": "Saling menghargai meski berbeda",
+    "explanation": "Persatuan dapat dijaga dengan saling menghargai."
+  }
+]

@@ -11,9 +11,25 @@
         <h1>Quiz Complete!</h1>
         <h2>Well done, {{ username }}!</h2>
         <div class="results">
-            Your Final Score: <strong>{{ score }} out of {{ total_questions }}</strong>
+            Your Final Score: <strong>{{ score }} </strong> 
+            <!-- out of {{ total_questions }} -->
         </div>
         <a href="{{ url_for('start_quiz') }}" class="btn play-again">Play Again?</a>
+    </div>
+
+    <div class="scoreboard-container">
+        <h2>🏆 Global Scoreboard</h2>
+        
+        <ol class="scoreboard-list">
+        {% for entry in top_scores %}
+            <li>
+                <span>{{ loop.index }}. <strong>{{ entry.username }}</strong></span>
+                <span class="score-points">{{ entry.score }} points</span>
+            </li>
+        {% else %}
+            <li>No scores recorded yet.</li>
+        {% endfor %}
+        </ol>
     </div>
 </body>
 </html>

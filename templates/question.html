@@ -5,13 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Question</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    {% if not show_answer %}
+    <script>
+    // Bungkus semua kode kamu di dalam event listener ini
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        // Cek apakah elemen timer ada (hanya ada jika not show_answer)
+        const timerElement = document.getElementById('timer');
+        if (!timerElement) {
+            return; // Hentikan eksekusi jika bukan halaman pertanyaan aktif
+        }
+
+        let timeLeft = 30; // Batas waktu 30 detik
+        
+        // Dapatkan elemen form
+        const formElement = document.getElementById('question-form');
+        
+        function countdown() {
+            if (timeLeft <= 0) {
+                // Hentikan interval
+                clearInterval(timerInterval);
+                timerElement.textContent = "Waktu Habis! Mengirim Jawaban...";
+                
+                setTimeout(() => {
+                    formElement.submit(); 
+                }, 500); 
+                return;
+            }
+            
+            // Perbarui tampilan timer
+            timerElement.textContent = `Waktu Tersisa: ${timeLeft} detik`;
+            
+            // Ganti warna saat waktu hampir habis
+            if (timeLeft <= 10) {
+                timerElement.style.color = '#c53030'; // Merah
+            }
+            
+            timeLeft -= 1;
+        }
+
+        const timerInterval = setInterval(countdown, 1000);
+        
+        // Hentikan timer jika pengguna mengklik tombol apa pun
+        document.querySelectorAll('.options button').forEach(button => {
+            button.addEventListener('click', () => {
+                clearInterval(timerInterval);
+            });
+        });
+    });
+    </script>
+    {% endif %}
+
 </head>
 <body>
     <div class="container">
         {% if show_answer %}
             <h1>Result</h1>
             <div class="question">{{ question.question }}</div>
-            
+
             {% if is_correct %}
                 <div class="explanation correct">
                     <strong>Correct!</strong> Your answer was: {{ user_answer }}
@@ -23,22 +75,37 @@
                 </div>
             {% endif %}
 
-            <div class="explanation" style="background-color: #e9ecef;">
-                <strong>Explanation:</strong> {{ question.explanation }}
+            <div class="game-feedback-box">
+                <div class="character-img">
+                    <img src="{{ url_for('static', filename='img/karakter.jpg') }}" alt="Character" class="retro-character">
+                </div>
+                
+                <div class="speech-bubble">
+                    <p><strong>Hei, iniloh penjelasannya!</strong></p>
+                    <p>
+                        {{ question.explanation }}
+                    </p>
+                </div>
             </div>
-            
-            <a href="{{ url_for('ask_question') }}" class="btn" style="background-color: #007BFF;">Next Question &rarr;</a>
-
-        {% else %}
+            <a href="{{ next_url }}" class="btn" style="background-color: #007BFF;">
+                {% if is_correct %}
+                    Soal Selanjutnya &rarr;
+                {% else %}
+                    Lihat Hasil Akhir &rarr;
+                {% endif %}
+            </a>
+        
+        {% else %} 
+            <div id="timer" class="timer-display">Waktu Tersisa: 30 detik</div>
             <h1>Question {{ question_num }}</h1>
             <div class="question">{{ question.question }}</div>
             
-            <form method="post" class="options">
+            <form method="post" class="options" id="question-form">
                 {% for option in question.options %}
                     <button type="submit" name="option" value="{{ option }}">{{ option }}</button>
                 {% endfor %}
             </form>
         {% endif %}
-    </div>
+        </div>
 </body>
 </html>
