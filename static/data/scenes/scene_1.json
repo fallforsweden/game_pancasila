@@ -1,0 +1,51 @@
+{
+  "scene_id": 1,
+  "title": "Awal Perjalanan Sang Pembelajar",
+  "background": "bg_placeholder.png",
+  "events": [
+    {
+      "type": "dialogue",
+      "character": "Mentor",
+      "text": "Selamat datang di Akademi Pancasila!"
+    },
+    {
+      "type": "dialogue",
+      "character": "You",
+      "text": "Terima kasih, Guru. Saya siap belajar."
+    },
+    {
+      "type": "question",
+      "text": "Apa makna dari sila ke-3 Pancasila?",
+      "options": [
+        "Persatuan Indonesia",
+        "Keadilan Sosial",
+        "Kerakyatan",
+        "Ketuhanan"
+      ],
+      "answer": "Persatuan Indonesia",
+      "explanation": "Sila ke-3 menekankan pentingnya menjaga persatuan dan kesatuan bangsa."
+    },
+    {
+      "type": "dialogue",
+      "character": "Mentor",
+      "text": "Bagus! Kamu memahami maknanya dengan baik."
+    },
+    {
+      "type": "question",
+      "text": "Apa simbol dari sila ke-4?",
+      "options": [
+        "Rantai Emas",
+        "Kepala Banteng",
+        "Pohon Beringin",
+        "Bintang"
+      ],
+      "answer": "Kepala Banteng",
+      "explanation": "Kepala banteng melambangkan semangat musyawarah untuk mufakat."
+    },
+    {
+      "type": "dialogue",
+      "character": "You",
+      "text": "Wah, menarik sekali, Guru!"
+    }
+  ]
+}

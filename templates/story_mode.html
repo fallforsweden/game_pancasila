@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Story Mode - Pancasila Cerdas</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #081229;
+      --box-dark: #071028;
+      --box-light: #2f8fd6;
+      --accent: #00ffd6;
+      --text: #e8f7ff;
+      --border: #05203a;
+      --scanline-alpha: 0.04;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Press Start 2P', monospace;
+      background: #000;
+      overflow: hidden;
+    }
+
+    /* background */
+    .story-background {
+      position: fixed;
+      inset: 0;
+      background: center/cover no-repeat;
+      z-index: 1;
+      opacity: 0.5;
+    }
+
+    /* character */
+    .character {
+      position: absolute;
+      bottom: 200px;
+      height: 50%;
+      z-index: 2;
+      opacity: 0.4;
+      transition: opacity .25s ease, transform .25s ease;
+      image-rendering: pixelated;
+    }
+
+    .character.left { left: 5%; }
+    .character.right { right: 5%; }
+
+    .character.active {
+      opacity: 1;
+      transform: translateY(-6px) scale(1.02);
+      filter: drop-shadow(0 6px 6px rgba(0,0,0,0.6));
+    }
+
+    /* textbox */
+    .dialogue-wrap {
+      position: absolute;
+      left: 3%;
+      right: 3%;
+      bottom: 50px;
+      z-index: 4;
+      display: flex;
+      justify-content: center;
+    }
+
+    .dialogue-box {
+      width: 100%;
+      max-width: 1280px;
+      min-height: 120px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,var(--scanline-alpha)) 1px, transparent 1px) 0 0/100% 4px,
+        var(--box-dark);
+      border: 6px solid var(--border);
+      box-shadow:
+        6px 6px 0 rgba(0,0,0,0.4),
+        inset 3px 3px 0 rgba(255,255,255,0.04);
+      padding: 18px 22px;
+      color: var(--text);
+      box-sizing: border-box;
+    }
+
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .name {
+      color: var(--accent);
+      font-size: 12px;
+    }
+
+    .dialogue-text {
+      margin-top: 10px;
+      font-size: 14px;
+      line-height: 1.4;
+      white-space: pre-wrap;
+      min-height: 60px;
+    }
+
+    .btn {
+      background: var(--box-light);
+      color: #001520;
+      border: 4px solid var(--border);
+      padding: 10px 16px;
+      font-size: 12px;
+      cursor: pointer;
+      box-shadow: 4px 4px 0 rgba(0,0,0,0.3);
+      border-radius: 0;
+    }
+
+    .btn:hover { filter: brightness(1.1); }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    /* options for quiz */
+    .options {
+      display: flex;
+      flex-direction: column;
+      margin-top: 12px;
+      gap: 8px;
+    }
+
+    .option-btn {
+      background: #112a4c;
+      color: var(--text);
+      border: 3px solid var(--border);
+      padding: 10px;
+      text-align: left;
+      font-size: 12px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .option-btn:hover {
+      background: #2b67a5;
+    }
+
+    .option-btn.correct {
+      background: #0c684a;
+    }
+
+    .option-btn.wrong {
+      background: #842e2e;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="story-background" id="background"></div>
+
+  <img id="char-left" src="{{ url_for('static', filename='img/GURU.png') }}" class="character left" alt="Mentor">
+  <img id="char-right" src="{{ url_for('static', filename='img/MURID.png') }}" class="character right" alt="Player">
+
+  <div class="dialogue-wrap">
+    <div class="dialogue-box">
+      <div class="meta">
+        <div class="name" id="char-name">Mentor</div>
+        <button id="next-btn" class="btn">Next ➜</button>
+      </div>
+      <div class="dialogue-text" id="dialogue-text">Memuat cerita...</div>
+      <div id="options" class="options"></div>
+    </div>
+  </div>
+
+  <script>
+    const background = document.getElementById("background");
+    const charLeft = document.getElementById("char-left");
+    const charRight = document.getElementById("char-right");
+    const nameEl = document.getElementById("char-name");
+    const textEl = document.getElementById("dialogue-text");
+    const nextBtn = document.getElementById("next-btn");
+    const optionsBox = document.getElementById("options");
+
+    let data = null;
+    let index = 0;
+
+    // 🔹 Load JSON Scene
+    fetch("/static/data/scenes/scene_1.json")
+      .then(res => res.json())
+      .then(json => {
+        data = json;
+        background.style.backgroundImage = `url('/static/img/${data.background}')`;
+        runEvent();
+      });
+
+    function setActiveSpeaker(name){
+      if(name.toLowerCase().includes("mentor")){
+        charLeft.classList.add("active");
+        charRight.classList.remove("active");
+      } else {
+        charRight.classList.add("active");
+        charLeft.classList.remove("active");
+      }
+    }
+
+    function runEvent(){
+      const event = data.events[index];
+      optionsBox.innerHTML = ""; // clear option buttons
+      nextBtn.disabled = false;
+
+      if(!event){
+        textEl.textContent = "✨ Cerita selesai! Kembali ke menu utama.";
+        nameEl.textContent = "";
+        nextBtn.textContent = "Selesai";
+        nextBtn.disabled = true;
+        return;
+      }
+
+      if(event.type === "dialogue"){
+        nameEl.textContent = event.character;
+        textEl.textContent = event.text;
+        setActiveSpeaker(event.character);
+      }
+      else if(event.type === "question"){
+        nameEl.textContent = "❓ Kuiz";
+        textEl.textContent = event.text;
+        nextBtn.disabled = true;
+
+        event.options.forEach(opt => {
+          const btn = document.createElement("button");
+          btn.className = "option-btn";
+          btn.textContent = opt;
+          btn.onclick = () => {
+            if(opt === event.answer){
+              btn.classList.add("correct");
+              textEl.textContent = "✅ Benar! " + event.explanation;
+            } else {
+              btn.classList.add("wrong");
+              textEl.textContent = "❌ Salah. " + event.explanation;
+            }
+            nextBtn.disabled = false;
+          };
+          optionsBox.appendChild(btn);
+        });
+      }
+    }
+
+    nextBtn.addEventListener("click", () => {
+      index++;
+      runEvent();
+    });
+  </script>
+</body>
+</html>
