@@ -1,8 +1,17 @@
 /* General Body Styles + Your Animation */
 body {
-    font-family: sans-serif;
+    font-family: PressStart2;
     color: #333;
     animation: rotate-bg-color 15s infinite linear; /* Added your animation */
+}
+
+@font-face {
+  font-family: PressStart2; /* set name */
+  src: url(/static/font/PressStart2.ttf); /* url of the font */
+}
+
+p {
+  font-family: PressStart2; /* use font */
 }
 
 /* Keyframes for the background animation */
