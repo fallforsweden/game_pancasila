@@ -263,19 +263,42 @@ button[type="submit"] {
     margin-top: 40px;
 }
 
-/* Button styles */
+/* Button styles - PENGGANTI KODE LAMA */
 .mode-button {
     display: inline-block;
     text-decoration: none;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    /* Transisi untuk gerakan naik/turun yang mulus */
+    transition: transform 0.1s ease-out;
 }
 
 .mode-image {
-    width: 220px;           /* Adjust size as you like */
+    width: 220px;
     height: auto;
+    /* ✨ INI BAGIAN UTAMANYA ✨ */
+    /* Membuat bayangan pixelated yang tajam (blur=0) */
+    filter: drop-shadow(4px 4px 0 #212529); 
+    /* Transisi untuk perubahan bayangan yang mulus */
+    transition: filter 0.1s ease-out;
 }
 
+/* Efek saat mouse berada di atas tombol */
 .mode-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    /* Sedikit mengangkat tombol ke atas */
+    transform: translateY(-4px);
+}
+
+.mode-button:hover .mode-image {
+    /* Membuat bayangan lebih besar saat tombol terangkat */
+    filter: drop-shadow(8px 8px 0 #212529);
+}
+
+/* Efek saat tombol ditekan */
+.mode-button:active {
+    /* Menekan tombol ke bawah */
+    transform: translateY(2px);
+}
+
+.mode-button:active .mode-image {
+    /* Membuat bayangan lebih kecil, seolah tombol menutupi bayangannya */
+    filter: drop-shadow(2px 2px 0 #212529);
 }
