@@ -12,16 +12,14 @@
         <p>Silakan pilih mode permainan yang ingin kamu mainkan.</p>
 
         <div class="mode-selection-container">
-            <!-- Opsi Story Mode -->
-            <a href="{{ url_for('story_mode') }}" class="mode-button story-mode">
-                <h2>📜 Story Mode</h2>
-                <p>Ikuti perjalanan belajar Pancasila melalui cerita interaktif. (Segera Hadir)</p>
+            <!-- Story Mode Button -->
+            <a href="{{ url_for('story_mode') }}" class="mode-button">
+                <img src="{{ url_for('static', filename='img/story_mode.png') }}" alt="Story Mode" class="mode-image">
             </a>
 
-            <!-- Opsi Endless Mode -->
-            <a href="{{ url_for('start_quiz') }}" class="mode-button endless-mode">
-                <h2>♾️ Endless Mode</h2>
-                <p>Jawab pertanyaan sebanyak-banyaknya dan raih skor tertinggi di papan peringkat!</p>
+            <!-- Endless Mode Button -->
+            <a href="{{ url_for('start_quiz') }}" class="mode-button">
+                <img src="{{ url_for('static', filename='img/endless_mode.png') }}" alt="Endless Mode" class="mode-image">
             </a>
         </div>
 

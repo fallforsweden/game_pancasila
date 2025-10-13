@@ -2,8 +2,12 @@
 body {
     font-family: PressStart2;
     color: #333;
-    animation: rotate-bg-color 15s infinite linear; /* Added your animation */
+    background: url("/static/img/opening_background.png") no-repeat center center fixed;
+    background-size: cover;
+    background-attachment: fixed;
+    background-color: #000; /* fallback if image doesn’t load */
 }
+
 
 @font-face {
   font-family: PressStart2; /* set name */
@@ -14,26 +18,23 @@ p {
   font-family: PressStart2; /* use font */
 }
 
-/* Keyframes for the background animation */
-@keyframes rotate-bg-color {
-    0%   { background-color: #87CEEB; } /* SkyBlue */
-    25%  { background-color: #98FB98; } /* PaleGreen */
-    50%  { background-color: #FFDAB9; } /* PeachPuff */
-    75%  { background-color: #DDA0DD; } /* Plum */
-    100% { background-color: #87CEEB; } /* Back to SkyBlue */
-}
-
 /* Card-like container for the content */
 .container {
     max-width: 600px;
-    margin: 50px auto;
     padding: 30px;
-    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+    background-color: rgba(255, 255, 255, 0.9);
     border: 1px solid #ddd;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     text-align: center;
+
+    /* Centering setup */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
+
 
 h1 {
     color: #333;
@@ -250,4 +251,31 @@ button[type="submit"] {
     border-top: 8px solid transparent;
     border-bottom: 8px solid transparent;
     border-right: 10px solid #ffffff; /* Warna dalam */
+}
+
+/* Mode selection layout *//* Mode selection layout - side by side */
+.mode-selection-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;               /* Space between buttons */
+    flex-wrap: wrap;         /* So they stack if the screen is small */
+    margin-top: 40px;
+}
+
+/* Button styles */
+.mode-button {
+    display: inline-block;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mode-image {
+    width: 220px;           /* Adjust size as you like */
+    height: auto;
+}
+
+.mode-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
 }

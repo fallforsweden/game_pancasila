@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash
+from flask import Flask, render_template, request, redirect, url_for, session, flash, make_response
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -114,45 +114,94 @@ def choose_mode():
 def story_mode():
     return render_template('story_mode.html')
 
+# Ganti fungsi start_quiz yang lama dengan yang ini
+# Ganti fungsi start_quiz yang lama dengan yang ini
 @app.route('/start-endless')
 @login_required
 def start_quiz():
+    # Menginisialisasi skor dan nyawa
     session.pop('score', None)
     session.pop('q_indices', None)
     session.pop('last_q_data', None)
     session['score'] = 0
+    session['lives'] = 3  # Memberikan 3 kesempatan di awal
+    
     question_indices = list(range(len(QUESTIONS)))
     random.shuffle(question_indices)
     session['q_indices'] = question_indices
     session['current_q_index'] = 0
     return redirect(url_for('ask_question'))
 
+# Ganti fungsi ask_question yang lama dengan yang ini
 @app.route('/question', methods=['GET', 'POST'])
 @login_required
 def ask_question():
-    if 'q_indices' not in session: return redirect(url_for('start_quiz'))
+    # Pastikan kuis sudah dimulai
+    if 'q_indices' not in session or 'lives' not in session:
+        return redirect(url_for('start_quiz'))
+
     current_q_index_pos = session.get('current_q_index', 0)
+    # Jika pertanyaan habis, mulai dari awal lagi
     if current_q_index_pos >= len(session['q_indices']):
         random.shuffle(session['q_indices'])
         session['current_q_index'] = 0
         current_q_index_pos = 0
+
     question_index = session['q_indices'][current_q_index_pos]
     question_data = QUESTIONS[question_index]
+    
+    # --- PERBAIKAN UTAMA ADA DI SINI ---
+    response = None # Variabel untuk menyimpan response
+
     if request.method == 'POST':
         user_answer = request.form.get('option')
         correct_answer = question_data['answer']
         is_correct = (user_answer and user_answer == correct_answer)
-        if not user_answer: user_answer, is_correct = 'Waktu Habis', False
+
+        # Jika waktu habis
+        if not user_answer:
+            user_answer = 'Waktu Habis'
+            is_correct = False
+
+        game_over = False
         if is_correct:
             session['score'] += 1
             session['current_q_index'] += 1
             next_url = url_for('ask_question')
         else:
-            next_url = url_for('results')
-        return render_template('question.html', question=question_data, show_answer=True, is_correct=is_correct, user_answer=user_answer, correct_answer=correct_answer, next_url=next_url)
-    question_num = session.get('score', 0) + 1
-    return render_template('question.html', question=question_data, show_answer=False, question_num=question_num)
+            session['lives'] -= 1
+            if session['lives'] > 0:
+                session['current_q_index'] += 1
+                next_url = url_for('ask_question')
+            else:
+                game_over = True
+                next_url = url_for('results')
+        
+        # Buat response untuk dikirim
+        response = make_response(render_template('question.html',
+                                                 question=question_data,
+                                                 show_answer=True,
+                                                 is_correct=is_correct,
+                                                 user_answer=user_answer,
+                                                 correct_answer=correct_answer,
+                                                 next_url=next_url,
+                                                 lives=session.get('lives', 0), # Kirim 'lives'
+                                                 game_over=game_over))
+    else: # Method GET
+        question_num = session.get('score', 0) + 1
+        # Buat response untuk dikirim
+        response = make_response(render_template('question.html',
+                                                 question=question_data,
+                                                 show_answer=False,
+                                                 question_num=question_num,
+                                                 lives=session.get('lives', 3))) # Kirim 'lives'
 
+    # Tambahkan header anti-cache ke response
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = '0'
+    
+    return response
 @app.route('/results')
 @login_required
 def results():

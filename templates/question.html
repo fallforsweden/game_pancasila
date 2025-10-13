@@ -8,6 +8,11 @@
 
     {% if not show_answer %}
     <script>
+
+        history.pushState(null, null, location.href);
+    window.onpopstate = function () {
+        history.go(1);
+    };
     // Bungkus semua kode kamu di dalam event listener ini
     document.addEventListener('DOMContentLoaded', function() {
         
@@ -54,14 +59,23 @@
             });
         });
     });
+    
     </script>
     {% endif %}
+    
 
 </head>
 <body>
     <div class="container">
         {% if show_answer %}
             <h1>Result</h1>
+            
+            <div class="lives-display" style="margin-bottom: 1rem;">
+    {% for _ in range(lives) %}
+        <img src="{{ url_for('static', filename='img/health.png') }}" alt="Life" style="width: 30px; height: 30px; margin-left: 4px;">
+    {% endfor %}
+</div>
+
             <div class="question">{{ question.question }}</div>
 
             {% if is_correct %}
@@ -82,13 +96,12 @@
                 
                 <div class="speech-bubble">
                     <p><strong>Hei, iniloh penjelasannya!</strong></p>
-                    <p>
-                        {{ question.explanation }}
-                    </p>
+                    <p>{{ question.explanation }}</p>
                 </div>
             </div>
+
             <a href="{{ next_url }}" class="btn" style="background-color: #007BFF;">
-                {% if is_correct %}
+                {% if not game_over %}
                     Soal Selanjutnya &rarr;
                 {% else %}
                     Lihat Hasil Akhir &rarr;
@@ -97,6 +110,13 @@
         
         {% else %} 
             <div id="timer" class="timer-display">Waktu Tersisa: 30 detik</div>
+            
+            <div class="lives-display" style="margin-top: 0.5rem;">
+    {% for _ in range(lives) %}
+        <img src="{{ url_for('static', filename='img/health.png') }}" alt="Life" style="width: 30px; height: 30px; margin-left: 4px;">
+    {% endfor %}
+</div>
+
             <h1>Question {{ question_num }}</h1>
             <div class="question">{{ question.question }}</div>
             
@@ -106,6 +126,6 @@
                 {% endfor %}
             </form>
         {% endif %}
-        </div>
+    </div>
 </body>
 </html>
