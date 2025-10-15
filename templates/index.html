@@ -7,9 +7,27 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <div class="container">
-        <a href="{{ url_for('login') }}" class="btn" style="background-color: #007BFF;">Login</a>
-        <a href="{{ url_for('register') }}" class="btn" style="background-color: #5a6268;">Register</a>
+    <!-- ☁️ Awan langsung tampil & langsung bergerak -->
+    <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
+    <img src="{{ url_for('static', filename='img/awan2.png') }}" alt="cloud" class="ix-cloud large">
+    <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
+    <img src="{{ url_for('static', filename='img/awan2.png') }}" alt="cloud" class="ix-cloud large">
+    <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
+    <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
+    <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
+    <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
+
+
+    <img src="../static/img/pancasilacerdas.png" alt="Pancasila Cerdas" class="judulpancasilaku">
+    <!-- 🌇 Box login & register -->
+    <div class="ix-container">
+        <a href="{{ url_for('login') }}" class="ix-btn">
+            <img src="{{ url_for('static', filename='img/loginbutton.png') }}" alt="Login" class="ix-img">
+        </a>
+
+        <a href="{{ url_for('register') }}" class="ix-btn">
+            <img src="{{ url_for('static', filename='img/registerbutton.png') }}" alt="Register" class="ix-img">
+        </a>
     </div>
 </body>
 </html>

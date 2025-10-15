@@ -102,7 +102,7 @@ def login():
 def logout():
     logout_user()
     flash('Kamu berhasil logout.', 'success')
-    return redirect(url_for('index'))
+    return redirect(url_for('login'))
 
 @app.route('/choose-mode')
 @login_required

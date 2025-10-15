@@ -6,6 +6,7 @@ body {
     background-size: cover;
     background-attachment: fixed;
     background-color: #000; /* fallback if image doesn’t load */
+    overflow-x: hidden;
 }
 
 
@@ -16,6 +17,7 @@ body {
 
 p {
   font-family: PressStart2; /* use font */
+  font-size: 1em;
 }
 
 /* Card-like container for the content */
@@ -33,12 +35,14 @@ p {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 200;
 }
 
 
 h1 {
     color: #333;
     margin-bottom: 20px;
+    font-size: 1.4em;
 }
 
 /* Styles for Forms (index.html) */
@@ -64,7 +68,7 @@ button, .btn {
 }
 
 button[type="submit"] {
-    background-color: #007BFF;
+    background-color: transparent;
 }
 
 /* Styles for Question Page */
@@ -102,12 +106,15 @@ button[type="submit"] {
     background-color: #d4edda;
     border-color: #c3e6cb;
     color: #155724;
+    line-height: 30px;
 }
 
 .incorrect {
     background-color: #f8d7da;
     border-color: #f5c6cb;
     color: #721c24;
+    font-size: 13px;
+    line-height: 30px;
 }
 
 /* Styles for Results Page */
@@ -171,7 +178,6 @@ button[type="submit"] {
 .timer-display {
     /* Penempatan */
     text-align: center;
-    margin-bottom: 25px;
     padding: 10px 15px;
     
     /* Gaya Visual */
@@ -226,6 +232,7 @@ button[type="submit"] {
     padding: 10px 15px;
     flex-grow: 1; /* Mengisi sisa ruang */
     text-align: left;
+    line-height: 25px;
 }
 
 /* Membuat Ekor/Segitiga Gelembung Obrolan (Tunjuk ke Karakter) */
@@ -301,4 +308,360 @@ button[type="submit"] {
 .mode-button:active .mode-image {
     /* Membuat bayangan lebih kecil, seolah tombol menutupi bayangannya */
     filter: drop-shadow(2px 2px 0 #212529);
+}
+
+    :root {
+            --ix-cloud-speed1: 70s;
+            --ix-cloud-speed2: 100s;
+            --ix-cloud-opacity1: 0.9;
+            --ix-cloud-opacity2: 0.8;
+            --ix-cloud-size1: 240px;
+            --ix-cloud-size2: 380px;
+        }
+
+    /* 🌇 Container utama */
+        .ix-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 25px 40px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            z-index: 3;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(5px);
+            border: 2px solid #222;
+            box-shadow: 0 4px 0 #222, inset 0 -3px 0 rgba(0,0,0,0.3);
+            border-radius: 16px;
+            padding: 30px 40px;
+
+        }
+
+        /* ☁️ Awan */
+        .ix-cloud {
+            position: absolute;
+            top: 0;
+            animation: ix-cloudMove linear infinite;
+            opacity: var(--ix-cloud-opacity1);
+            z-index: 1;
+            pointer-events: none; /* biar gak ganggu klik */
+        }
+
+        /* Ukuran & kecepatan */
+        .ix-cloud.small {
+            width: var(--ix-cloud-size1);
+            animation-duration: var(--ix-cloud-speed1);
+        }
+
+        .ix-cloud.large {
+            width: var(--ix-cloud-size2);
+            opacity: var(--ix-cloud-opacity2);
+            animation-duration: var(--ix-cloud-speed2);
+        }
+
+        /* 🌬️ Animasi awan */
+        @keyframes ix-cloudMove {
+            0% {
+                transform: translateX(-300px);
+            }
+            100% {
+                transform: translateX(calc(100vw + 300px));
+            }
+        }
+
+
+        /* Posisi acak biar natural */
+        .ix-cloud:nth-of-type(1) {
+            top: 60px;
+            left: -100px;
+        }
+        .ix-cloud:nth-of-type(2) {
+            top: 130px;
+            left: 200px;
+        }
+        .ix-cloud:nth-of-type(3) {
+            top: 80px;
+            left: 500px;
+        }
+        .ix-cloud:nth-of-type(4) {
+            top: 150px;
+            left: 900px;
+        }
+
+        /* 🌆 Tombol dengan gambar */
+        .ix-btn {
+            display: inline-block;
+            margin: 10px;
+            text-decoration: none;
+            transition: transform 0.1s ease-out;
+        }
+
+        .ix-img {
+            width: 220px;
+            height: auto;
+            filter: drop-shadow(4px 4px 0 #212529);
+            transition: filter 0.1s ease-out;
+        }
+
+        .ix-btn:hover {
+            transform: translateY(-4px);
+        }
+
+        .ix-btn:hover .ix-img {
+            filter: drop-shadow(8px 8px 0 #212529);
+        }
+
+        .ix-btn:active {
+            transform: translateY(2px);
+        }
+
+        .ix-btn:active .ix-img {
+            filter: drop-shadow(2px 2px 0 #212529);
+        }
+
+        .judulpancasilaku {
+        display: block;
+        position: relative;
+        margin: 0 auto;
+        margin-bottom: -10px; /* jarak kecil antara judul dan container */
+        top: 0;
+        width: 580px; /* sesuaikan ukuran gambar */
+        z-index: 0;
+        }
+
+        @keyframes pancasilafadein {
+        from { opacity: 0; transform: translateX(-50%) translateY(-15px); }
+        to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+
+/* ==================================== */
+/* Gaya Retro Khusus Halaman Login (Tanpa Karakter) */
+/* ==================================== */
+
+/* Container Utama Login (Mempertahankan box-shadow retro) */
+.container-login {
+    max-width: 450px; /* Lebar sedikit lebih sempit */
+    padding: 40px; 
+    background-color: #ffffff; 
+    border: 3px solid #333; 
+    border-radius: 0; 
+    box-shadow: 8px 8px 0 #212529; /* Bayangan pixelated */
+    text-align: center;
+    
+    /* Centering setup */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+}
+
+/* Judul dan Paragraf */
+.container-login h1 {
+    color: #007BFF; 
+    text-shadow: 2px 2px 0 #333; 
+    margin-bottom: 10px;
+}
+
+.container-login p {
+    color: #333;
+    margin-bottom: 25px;
+    font-size: 0.8em; 
+}
+
+/* -------------------------------------- */
+/* Mempercantik Input Field (Textbox) */
+/* -------------------------------------- */
+.container-login input[type="text"], 
+.container-login input[type="password"] {
+    width: 90%; 
+    padding: 10px;
+    font-size: 14px; 
+    
+    /* Styling baru untuk textbox */
+    border: 3px solid #000; /* Border hitam tebal */
+    border-radius: 0; 
+    background-color: #f0f0f0; 
+    
+    /* Efek 3D / Box-Shadow yang lebih baik */
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2); /* Bayangan ke dalam (inset) */
+    
+    margin-bottom: 15px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Efek saat input difokuskan */
+.container-login input[type="text"]:focus, 
+.container-login input[type="password"]:focus {
+    outline: none; /* Hilangkan outline default browser */
+    border-color: #007BFF; /* Border biru saat fokus */
+    box-shadow: inset 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+/* Gaya Placeholder Input */
+.container-login ::placeholder {
+    color: #777;
+    opacity: 1; 
+}
+
+/* -------------------------------------- */
+/* Gaya Tombol Login (Tanpa Gambar/Bayangan Biru) */
+/* -------------------------------------- */
+
+/* Menggunakan kembali style button general, tapi dispesifikan untuk login */
+.container-login .btn-submit-login {
+    /* Menimpa style umum button */
+    display: inline-block;
+    padding: 12px 25px;
+    font-size: 16px;
+    margin-top: 20px; 
+    
+    /* Gaya Retro Tombol */
+    color: white; 
+    background-color: #007BFF; /* Warna biru bersih */
+    border: 3px solid #0056b3; /* Border yang lebih gelap dari background */
+    border-radius: 0;
+    cursor: pointer;
+    text-shadow: 1px 1px 0 #0056b3; /* Bayangan teks untuk pop-out */
+    box-shadow: 4px 4px 0 #0056b3; /* Bayangan tebal 3D / retro */
+    
+    transition: all 0.1s ease;
+}
+
+/* Efek Tombol Ditekan */
+.container-login .btn-submit-login:active {
+    /* Saat ditekan, tombol bergerak ke bawah untuk menutupi bayangan */
+    background-color: #0056b3; /* Warna lebih gelap */
+    transform: translate(4px, 4px); /* Pindah sejauh ukuran bayangan */
+    box-shadow: 0 0 0 #0056b3; /* Hilangkan bayangan */
+}
+
+/* Gaya Tautan Daftar */
+.login-register-link a {
+    color: #28a745; 
+    text-decoration: none;
+    font-weight: bold;
+    border-bottom: 2px solid transparent; 
+    transition: border-bottom 0.1s;
+}
+
+.login-register-link a:hover {
+    border-bottom: 2px solid #28a745; 
+}
+
+
+/* ============================== */
+/* TIMER & LIVES DI ATAS CONTAINER */
+/* ============================== */
+:root {
+    --timer-bg-j7: rgba(0, 0, 0, 0.65);
+    --timer-border-j7: #ffb300;
+    --timer-text-j7: #ffffff;
+}
+
+/* Bungkus biar timer nempel di atas container */
+.timer-wrapper-j7 {
+    position: absolute;
+    top: -85px; /* jarak dari atas container */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Timer utama */
+.timer-display {
+    background-color: var(--timer-bg-j7);
+    color: var(--timer-text-j7);
+    font-family: "PressStart2", monospace;
+    font-size: 1.1em;
+    border: 2px solid var(--timer-border-j7);
+    border-radius: 12px;
+    padding: 12px 25px;
+    text-align: center;
+    letter-spacing: 1px;
+    box-shadow: 0 0 10px rgba(255, 179, 0, 0.5);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Kedip saat sisa waktu sedikit */
+@keyframes blink-j7 {
+    50% { opacity: 0.4; }
+}
+
+.timer-display.low-time {
+    color: #ff3d00;
+    border-color: #ff3d00;
+    animation: blink-j7 0.7s infinite;
+}
+
+/* Lives di bawah timer */
+.lives-display {
+    margin-top: 8px;
+    display: flex;
+    justify-content: center;
+}
+
+.lives-display img {
+    width: 50px;
+    height: 50px;
+    margin: 0 3px;
+    image-rendering: pixelated;
+}
+
+/* ============================== */
+/* POSISI TIMER & DARAH KIRI-KANAN */
+/* ============================== */
+.top-bar {
+    display: flex;
+    justify-content: space-between; /* kiri-kanan */
+    align-items: center;
+    margin-bottom: 40px;
+    padding: 0 10px;
+}
+
+.top-bar .lives-display {
+    display: flex;
+    align-items: center;
+}
+
+.top-bar .lives-display img {
+    width: 50px;
+    height: 50px;
+    image-rendering: pixelated;
+}
+
+.top-bar .timer-display {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    border: 2px solid #ffb300;
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-family: "PressStart2", monospace;
+    font-size: 1em;
+    box-shadow: 0 0 10px rgba(255, 179, 0, 0.5);
+}
+
+.question-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #222;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px #f5d06f; /* efek pixel retro */
+    margin-bottom: 15px;
+    line-height: 35px;
+}
+
+.question-text {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 10px 15px;
+    border-radius: 8px;
+    display: inline-block;
 }

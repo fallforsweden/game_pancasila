@@ -38,9 +38,13 @@
                 }, 500); 
                 return;
             }
+
+            if (timeLeft <= 10) {
+                timerElement.classList.add('low-time');
+            }
             
             // Perbarui tampilan timer
-            timerElement.textContent = `Waktu Tersisa: ${timeLeft} detik`;
+            timerElement.textContent = timeLeft;
             
             // Ganti warna saat waktu hampir habis
             if (timeLeft <= 10) {
@@ -66,26 +70,36 @@
 
 </head>
 <body>
+       <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
+    <img src="{{ url_for('static', filename='img/awan2.png') }}" alt="cloud" class="ix-cloud large">
+    <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
+    <img src="{{ url_for('static', filename='img/awan2.png') }}" alt="cloud" class="ix-cloud large">
+    <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
+    <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
+    <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
+    <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
+
+
     <div class="container">
         {% if show_answer %}
             <h1>Result</h1>
             
-            <div class="lives-display" style="margin-bottom: 1rem;">
-    {% for _ in range(lives) %}
-        <img src="{{ url_for('static', filename='img/health.png') }}" alt="Life" style="width: 30px; height: 30px; margin-left: 4px;">
-    {% endfor %}
-</div>
+            <!-- <div class="lives-display" style="margin-bottom: 1rem;">
+                {% for _ in range(lives) %}
+                    <img src="{{ url_for('static', filename='img/health.png') }}" alt="Life" style="width: 50px !important; height: 50px !important;">
+                {% endfor %}
+            </div> -->
 
-            <div class="question">{{ question.question }}</div>
+            <div class="question-title">{{ question.question }}</div>
 
             {% if is_correct %}
                 <div class="explanation correct">
-                    <strong>Correct!</strong> Your answer was: {{ user_answer }}
+                    <strong>Correct!</strong><br> Your answer was: <br>{{ user_answer }}
                 </div>
             {% else %}
                 <div class="explanation incorrect">
-                    <strong>Incorrect.</strong> You answered: {{ user_answer }}.
-                    <p>The correct answer was: <strong>{{ correct_answer }}</strong></p>
+                    <strong>Incorrect.<br></strong> You answered: <br><strong>{{ user_answer }}</strong>.
+                    <p>The correct answer was:<br><strong>{{ correct_answer }}</strong></p>
                 </div>
             {% endif %}
 
@@ -109,16 +123,18 @@
             </a>
         
         {% else %} 
-            <div id="timer" class="timer-display">Waktu Tersisa: 30 detik</div>
-            
-            <div class="lives-display" style="margin-top: 0.5rem;">
-    {% for _ in range(lives) %}
-        <img src="{{ url_for('static', filename='img/health.png') }}" alt="Life" style="width: 30px; height: 30px; margin-left: 4px;">
-    {% endfor %}
-</div>
+            <div class="top-bar">
+                <div class="lives-display">
+                    {% for _ in range(lives) %}
+                        <img src="{{ url_for('static', filename='img/health.png') }}" alt="Life">
+                    {% endfor %}
+                </div>
+
+                <div id="timer" class="timer-display">30</div>
+            </div>
 
             <h1>Question {{ question_num }}</h1>
-            <div class="question">{{ question.question }}</div>
+            <div class="question-title">{{ question.question }}</div>
             
             <form method="post" class="options" id="question-form">
                 {% for option in question.options %}

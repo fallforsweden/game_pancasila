@@ -7,9 +7,19 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1>Login</h1>
-        <p>Silakan masuk untuk memulai kuis.</p>
+    <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
+    <img src="{{ url_for('static', filename='img/awan2.png') }}" alt="cloud" class="ix-cloud large">
+    <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
+    <img src="{{ url_for('static', filename='img/awan2.png') }}" alt="cloud" class="ix-cloud large">
+    <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
+    <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
+    <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
+    <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
+
+    <div class="container-login"> 
+        <h1>LOGIN</h1>
+        <br>
+        <p>Silakan masuk untuk memulai kuis</p>
         
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
@@ -22,14 +32,18 @@
         {% endwith %}
 
         <form method="post">
-            <input type="text" name="username" placeholder="Enter your username" required>
-            <input type="password" name="password" placeholder="Enter your password" required style="margin-top:10px;">
-            <br>
-            <button type="submit">Login</button>
+            <input type="text" name="username" placeholder="Masukkan Nama Pengguna" required>
+            <input type="password" name="password" placeholder="Masukkan Kata Sandi" required> 
+        
+            <button type="submit" class="ix-btn" >
+                <img src="{{ url_for('static', filename='img/loginbutton.png') }}" alt="Tombol Login" class="ix-img" style="width: 170px !important;">
+            </button>
         </form>
-        <p style="margin-top: 20px;">
+        
+        <p style="margin-top: 30px;" class="login-register-link"> 
             Belum punya akun? <a href="{{ url_for('register') }}">Daftar di sini</a>
         </p>
+        
     </div>
 </body>
 </html>
