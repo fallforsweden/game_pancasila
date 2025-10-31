@@ -1,0 +1,42 @@
+{
+  "scene_id": "scene_test",
+  "next_scene": "scene_testis",
+  "assets": {
+    "background": "bg_placeholder.png",
+    "characters": {
+      "left": "guru2.png",
+      "right": "MURID.png"
+    }
+  },
+  "events": [
+    {
+      "type": "dialogue",
+      "speaker_pos": "left",
+      "character": "Mentor",
+      "text": "Selamat datang di mode cerita, dogg."
+    },
+    {
+      "type": "dialogue",
+      "speaker_pos": "right",
+      "character": "Murid",
+      "text": "Wah, apa yang akan kita pelajari hari ini, Pak?"
+    },
+    {
+      "type": "question",
+      "text": "Apa sila pertama Pancasila?",
+      "options": [
+        "Keadilan Sosial",
+        "Ketuhanan Yang Maha Esa",
+        "Persatuan Indonesia"
+      ],
+      "answer": "Ketuhanan Yang Maha Esa",
+      "explanation": "Sila pertama adalah 'Ketuhanan Yang Maha Esa', dilambangkan dengan bintang."
+    },
+    {
+      "type": "dialogue",
+      "speaker_pos": "left",
+      "character": "Mentor",
+      "text": "Bagus sekali! Kamu sudah siap untuk adegan berikutnya."
+    }
+  ]
+}

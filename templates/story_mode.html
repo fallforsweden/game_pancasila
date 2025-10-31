@@ -8,6 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
   <style>
+    /* ... (Your CSS is perfect, no changes needed) ... */
     :root {
       --bg-dark: #081229;
       --box-dark: #071028;
@@ -33,6 +34,8 @@
       background: center/cover no-repeat;
       z-index: 1;
       opacity: 0.5;
+      /* --- CHANGED --- Added transition for smooth bg changes */
+      transition: background-image 0.5s ease-in-out;
     }
 
     /* character */
@@ -42,7 +45,7 @@
       height: 50%;
       z-index: 2;
       opacity: 0.4;
-      transition: opacity .25s ease, transform .25s ease;
+      transition: opacity .25s ease, transform .25s ease, bottom .25s ease;
       image-rendering: pixelated;
     }
 
@@ -51,8 +54,16 @@
 
     .character.active {
       opacity: 1;
-      transform: translateY(-6px) scale(1.02);
+      bottom: 206px; /* --- CHANGED --- simpler transform */
+      /* transform: translateY(-6px) scale(1.02); */
       filter: drop-shadow(0 6px 6px rgba(0,0,0,0.6));
+    }
+
+
+    /* --- ADD THIS NEW RULE --- */
+    .character.hidden {
+      opacity: 0;
+      pointer-events: none; /* Prevents clicking on the invisible character */
     }
 
     /* textbox */
@@ -145,18 +156,27 @@
       background: #842e2e;
     }
 
+    /* --- ADDED --- So you can't click a wrong answer again */
+    .option-btn:disabled {
+        opacity: 0.7;
+    }
+
+    /* ... (your existing .character and .character.active rules) ... */
+
+    
+
   </style>
 </head>
 <body>
   <div class="story-background" id="background"></div>
 
-  <img id="char-left" src="{{ url_for('static', filename='img/guru2.png') }}" class="character left" alt="Mentor">
-  <img id="char-right" src="{{ url_for('static', filename='img/MURID.png') }}" class="character right" alt="Player">
+  <img id="char-left" src="" class="character left" alt="Character Left">
+  <img id="char-right" src="" class="character right" alt="Character Right">
 
   <div class="dialogue-wrap">
     <div class="dialogue-box">
       <div class="meta">
-        <div class="name" id="char-name">Mentor</div>
+        <div class="name" id="char-name"></div>
         <button id="next-btn" class="btn">Next ➜</button>
       </div>
       <div class="dialogue-text" id="dialogue-text">Memuat cerita...</div>
@@ -173,74 +193,180 @@
     const nextBtn = document.getElementById("next-btn");
     const optionsBox = document.getElementById("options");
 
-    let data = null;
-    let index = 0;
+    let currentSceneData = null;
+    let eventIndex = 0;
 
-    // 🔹 Load JSON Scene
-    fetch("/static/data/scenes/scene_1.json")
-      .then(res => res.json())
-      .then(json => {
-        data = json;
-        background.style.backgroundImage = `url('/static/img/${data.background}')`;
-        runEvent();
-      });
+    // 🔹 1. Main function to load a scene from the server
+    function loadScene(url) {
+      textEl.textContent = "Memuat...";
+      nextBtn.disabled = true;
 
-    function setActiveSpeaker(name){
-      if(name.toLowerCase().includes("mentor")){
+      fetch(url)
+        .then(res => res.json())
+        .then(data => {
+          if (data.story_complete) {
+            showStoryEnd("Cerita telah selesai!");
+            return;
+          }
+          if (data.error) {
+            showStoryEnd(`Error: ${data.error}`);
+            return;
+          }
+
+          currentSceneData = data;
+          eventIndex = 0;
+
+          // --- 1. THIS PART IS NEW ---
+          // It preloads all images so the swap is instant
+          if (data.assets.preload_images) {
+            data.assets.preload_images.forEach(imgName => {
+              const img = new Image();
+              img.src = `/static/img/${imgName}`;
+            });
+          }
+          // ------------------------------------
+
+          // Load background
+          background.style.backgroundImage = `url('/static/img/${currentSceneData.assets.background}')`;
+          
+          // --- 2. THIS PART IS THE LIKELY FIX ---
+          // Make sure you are using "initial_characters" here
+          charLeft.src = `/static/img/${currentSceneData.assets.initial_characters.left}`;
+          charRight.src = `/static/img/${currentSceneData.assets.initial_characters.right}`;
+          // ----------------------------------------------------
+
+          // Start the first event
+          runEvent();
+        });
+    }
+
+    function setActiveSpeaker(position){
+      charLeft.classList.remove("active", "hidden");
+      charRight.classList.remove("active", "hidden");
+
+      if(position === "left"){
         charLeft.classList.add("active");
-        charRight.classList.remove("active");
-      } else {
+      } 
+      else if (position === "right") {
         charRight.classList.add("active");
-        charLeft.classList.remove("active");
+      } 
+      else if (position === "narrator") {
+        charLeft.classList.add("hidden");
+        charRight.classList.add("hidden");
       }
+    }
+    
+    function showStoryEnd(message) {
+      textEl.textContent = `✨ ${message} ✨`;
+      nameEl.textContent = "Selesai";
+      nextBtn.textContent = "Selesai";
+      nextBtn.disabled = true;
+      optionsBox.innerHTML = "";
+      setActiveSpeaker(null);
+    }
+    
+    function goToNextScene() {
+      const nextSceneId = currentSceneData.next_scene;
+      
+      if (!nextSceneId) {
+        showStoryEnd("Cerita telah selesai!");
+        return;
+      }
+      
+      textEl.textContent = "Menyimpan progres dan memuat adegan berikutnya...";
+      nameEl.textContent = "";
+      nextBtn.disabled = true;
+      setActiveSpeaker(null);
+      
+      fetch("/api/story/complete", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          finished_scene: currentSceneData.scene_id,
+          next_scene: nextSceneId
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if(data.status === 'success') {
+          loadScene("/api/story/current");
+        } else {
+          showStoryEnd(`Error: ${data.error}`);
+        }
+      });
     }
 
     function runEvent(){
-      const event = data.events[index];
-      optionsBox.innerHTML = ""; // clear option buttons
-      nextBtn.disabled = false;
+      const event = currentSceneData.events[eventIndex];
+      optionsBox.innerHTML = ""; 
+      nextBtn.disabled = false;  
 
       if(!event){
-        textEl.textContent = "✨ Cerita selesai! Kembali ke menu utama.";
-        nameEl.textContent = "";
-        nextBtn.textContent = "Selesai";
-        nextBtn.disabled = true;
+        goToNextScene();
         return;
       }
 
       if(event.type === "dialogue"){
         nameEl.textContent = event.character;
         textEl.textContent = event.text;
-        setActiveSpeaker(event.character);
+        setActiveSpeaker(event.speaker_pos);
       }
+
       else if(event.type === "question"){
         nameEl.textContent = "❓ Kuiz";
         textEl.textContent = event.text;
-        nextBtn.disabled = true;
+        nextBtn.disabled = true; 
+        setActiveSpeaker(null);
 
         event.options.forEach(opt => {
           const btn = document.createElement("button");
           btn.className = "option-btn";
           btn.textContent = opt;
+
           btn.onclick = () => {
+            optionsBox.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
             if(opt === event.answer){
               btn.classList.add("correct");
-              textEl.textContent = "✅ Benar! " + event.explanation;
+              textEl.textContent = "Benar! " + event.explanation;
+              nextBtn.disabled = false;
             } else {
               btn.classList.add("wrong");
-              textEl.textContent = "❌ Salah. " + event.explanation;
+              textEl.textContent = "Salah. " + event.explanation + " Silakan coba lagi.";
+              
+              setTimeout(() => {
+                textEl.textContent = event.text;
+                optionsBox.querySelectorAll('.option-btn').forEach(b => {
+                  b.disabled = false; 
+                  b.classList.remove("wrong");
+                });
+              }, 2000);
             }
-            nextBtn.disabled = false;
           };
           optionsBox.appendChild(btn);
         });
       }
+      else if(event.type === "character_swap") {
+        if (event.position === "left") {
+          charLeft.src = `/static/img/${event.image}`;
+        } else if (event.position === "right") {
+          charRight.src = `/static/img/${event.image}`;
+        }
+        
+        eventIndex++;
+        runEvent();
+      }
     }
 
+    // --- (Event Listeners) ---
     nextBtn.addEventListener("click", () => {
-      index++;
+      eventIndex++;
       runEvent();
     });
+
+    // --- (Initial Load) ---
+    // Start the engine by fetching the user's current scene from the API
+    loadScene("/api/story/current");
+
   </script>
 </body>
 </html>

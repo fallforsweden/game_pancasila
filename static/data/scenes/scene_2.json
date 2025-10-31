@@ -1,0 +1,31 @@
+{
+  "scene_id": "scene_2",
+  "next_scene": "scene_3",
+  "assets": {
+    "background": "bg_placeholder.png",
+    "initial_characters": {
+      "left": "guru2.png",
+      "right": "MURID.png"
+    }
+  },
+  "events": [
+    {
+      "type": "dialogue",
+      "speaker_pos": "left",
+      "character": "Mentor",
+      "text": "Sekarang kita berada di kelas. Ini adalah adegan kedua."
+    },
+    {
+      "type": "dialogue",
+      "speaker_pos": "right",
+      "character": "Murid",
+      "text": "Wow, latar belakang dan karakternya bisa di-set per adegan!"
+    },
+    {
+      "type": "dialogue",
+      "speaker_pos": "left",
+      "character": "Mentor",
+      "text": "Ini adalah akhir dari cerita. 'next_scene' di-set ke 'null'."
+    }
+  ]
+}

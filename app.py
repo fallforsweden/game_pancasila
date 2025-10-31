@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash, make_response
+from flask import Flask, render_template,jsonify, request, redirect, url_for, session, flash, make_response
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -26,6 +26,11 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     password_hash = db.Column(db.String(256), nullable=False)
+    
+    # --- ADD THIS LINE ---
+    current_scene = db.Column(db.String(100), nullable=False, default='scene_1')
+    # ---------------------
+
     def set_password(self, password): self.password_hash = generate_password_hash(password)
     def check_password(self, password): return check_password_hash(self.password_hash, password)
 
@@ -58,11 +63,8 @@ def init_db_command():
 # --- Application Routes ---
 @app.route('/')
 def index():
-    # --- PERUBAHAN DI SINI ---
-    # Jika pengguna sudah login, langsung arahkan ke pilihan mode.
     if current_user.is_authenticated:
         return redirect(url_for('choose_mode'))
-    # Jika belum, tampilkan halaman utama dengan tombol Login/Register.
     return render_template('index.html')
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -114,7 +116,51 @@ def choose_mode():
 def story_mode():
     return render_template('story_mode.html')
 
-# Ganti fungsi start_quiz yang lama dengan yang ini
+@app.route('/api/story/current')
+@login_required
+def get_current_scene():
+    """
+    Fetches the JSON data for the user's current scene.
+    """
+    scene_name = current_user.current_scene
+    scene_filename = f"{scene_name}.json"
+    
+    # We expect scene files to be in /static/data/scenes/
+    scene_path = os.path.join(app.static_folder, 'data', 'scenes', scene_filename)
+
+    if not os.path.exists(scene_path):
+        # If the scene file doesn't exist, it might mean the story is over.
+        # Or, if scene_1 is missing, it's a server error.
+        if scene_name == 'scene_1':
+            return jsonify({"error": "FATAL: scene_1.json not found"}), 500
+        else:
+            # User has finished the last scene, and there is no next scene file.
+            return jsonify({"story_complete": True})
+            
+    with open(scene_path, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+    return jsonify(data)
+
+
+@app.route('/api/story/complete', methods=['POST'])
+@login_required
+def complete_scene():
+    """
+    Called by JS when a scene is finished. Updates the user's progress.
+    """
+    data = request.json
+    next_scene_name = data.get('next_scene')
+
+    if not next_scene_name:
+        return jsonify({"error": "No 'next_scene' provided in request"}), 400
+
+    # Get the user from the DB and update their scene
+    user = User.query.get(current_user.id)
+    user.current_scene = next_scene_name
+    db.session.commit()
+    
+    return jsonify({"status": "success", "new_scene": next_scene_name})
+
 # Ganti fungsi start_quiz yang lama dengan yang ini
 @app.route('/start-endless')
 @login_required
