@@ -259,6 +259,82 @@ def results():
     session.pop('score', None); session.pop('q_indices', None); session.pop('current_q_index', None)
     return render_template('results.html', username=current_user.username, score=score, top_scores=top_scores)
 
+@app.route('/api/story/progress', methods=['POST'])
+@login_required
+def save_story_progress():
+    """
+    Menyimpan posisi event terakhir yang sudah dicapai user di story mode.
+    """
+    data = request.json
+    current_scene = data.get('scene_id')
+    current_event_index = data.get('event_index')
+
+    if not current_scene or current_event_index is None:
+        return jsonify({"error": "Incomplete data"}), 400
+
+    # Simpan ke session
+    session['story_progress'] = {
+        "scene": current_scene,
+        "event_index": current_event_index
+    }
+
+    return jsonify({"status": "progress_saved"})
+
+@app.route("/api/answer-record", methods=["POST"])
+def record_answer():
+    data = request.get_json()
+    path = "static/data/answer_records.json"
+
+    # Pastikan file ada
+    if not os.path.exists(path):
+        with open(path, "w") as f:
+            json.dump([], f)
+
+    with open(path, "r") as f:
+        records = json.load(f)
+
+    records.append(data)
+
+    with open(path, "w") as f:
+        json.dump(records, f, indent=2)
+
+    return jsonify({"status": "ok"})
+
+@app.route("/api/stats")
+def api_stats():
+    file_path = os.path.join("static", "data", "answer_records.json")
+
+    # Pastikan file ada
+    if not os.path.exists(file_path):
+        print("File tidak ditemukan:", file_path)
+        return jsonify([])
+
+    try:
+        with open(file_path, "r", encoding="utf-8") as f:
+            records = json.load(f)
+    except Exception as e:
+        print("Gagal membaca file:", e)
+        return jsonify([])
+
+    # Hitung soal yang paling banyak salah
+    wrong_stats = {}
+    for r in records:
+        if not r.get("is_correct", True):  # ambil hanya jawaban salah
+            q = r.get("question_text", "Tanpa teks soal")
+            wrong_stats[q] = wrong_stats.get(q, 0) + 1
+
+    result = [
+        {"question_text": q, "wrong_count": c}
+        for q, c in sorted(wrong_stats.items(), key=lambda x: x[1], reverse=True)
+    ]
+
+    return jsonify(result)
+
+
+@app.route("/stats")
+def stats_page():
+    return render_template("stats.html")
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
 

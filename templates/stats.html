@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Statistik Kesalahan Soal</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    canvas {
+      max-width: 700px;
+      margin: 0 auto 30px;
+      display: block;
+    }
+    table {
+      margin: 0 auto;
+      border-collapse: collapse;
+      width: 90%;
+      background: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px 10px;
+    }
+    th {
+      background-color: #007bff;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <h1>Statistik Soal Paling Banyak Salah</h1>
+
+  <canvas id="mistakeChart"></canvas>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Peringkat</th>
+        <th>Pertanyaan</th>
+        <th>Jumlah Salah</th>
+      </tr>
+    </thead>
+    <tbody id="statsTableBody">
+      <tr><td colspan="3">Memuat data...</td></tr>
+    </tbody>
+  </table>
+
+  <script>
+    async function loadStats() {
+      const res = await fetch("/api/stats");
+      const data = await res.json();
+
+      const labels = data.map(d => d.question_text);
+      const values = data.map(d => d.wrong_count);
+
+      // update tabel
+      const tbody = document.getElementById("statsTableBody");
+      tbody.innerHTML = "";
+      data.forEach((item, i) => {
+        const row = `
+          <tr>
+            <td>${i + 1}</td>
+            <td>${item.question_text}</td>
+            <td>${item.wrong_count}</td>
+          </tr>
+        `;
+        tbody.innerHTML += row;
+      });
+
+      // tampilkan chart
+      const ctx = document.getElementById("mistakeChart");
+      new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: labels,
+          datasets: [{
+            label: "Jumlah Salah",
+            data: values,
+            backgroundColor: "rgba(255, 99, 132, 0.6)"
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: { display: true, text: "Jumlah Salah" }
+            },
+            x: {
+              ticks: { autoSkip: false, maxRotation: 45, minRotation: 30 }
+            }
+          }
+        }
+      });
+    }
+
+    loadStats();
+  </script>
+</body>
+</html>

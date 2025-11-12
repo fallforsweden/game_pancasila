@@ -179,6 +179,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const data = await response.json();
 
+            fetch("/api/answer-record", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    question_text: data.question || "{{ question.question }}",
+                    user_answer: data.user_answer,
+                    correct_answer: data.correct_answer,
+                    is_correct: data.correct,
+                    timestamp: new Date().toISOString()
+                })
+            });
+
             answerBox.style.display = 'block';
 
             answerBox.innerHTML = `

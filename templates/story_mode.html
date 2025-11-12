@@ -196,50 +196,6 @@
     let currentSceneData = null;
     let eventIndex = 0;
 
-    // 🔹 1. Main function to load a scene from the server
-    function loadScene(url) {
-      textEl.textContent = "Memuat...";
-      nextBtn.disabled = true;
-
-      fetch(url)
-        .then(res => res.json())
-        .then(data => {
-          if (data.story_complete) {
-            showStoryEnd("Cerita telah selesai!");
-            return;
-          }
-          if (data.error) {
-            showStoryEnd(`Error: ${data.error}`);
-            return;
-          }
-
-          currentSceneData = data;
-          eventIndex = 0;
-
-          // --- 1. THIS PART IS NEW ---
-          // It preloads all images so the swap is instant
-          if (data.assets.preload_images) {
-            data.assets.preload_images.forEach(imgName => {
-              const img = new Image();
-              img.src = `/static/img/${imgName}`;
-            });
-          }
-          // ------------------------------------
-
-          // Load background
-          background.style.backgroundImage = `url('/static/img/${currentSceneData.assets.background}')`;
-          
-          // --- 2. THIS PART IS THE LIKELY FIX ---
-          // Make sure you are using "initial_characters" here
-          charLeft.src = `/static/img/${currentSceneData.assets.initial_characters.left}`;
-          charRight.src = `/static/img/${currentSceneData.assets.initial_characters.right}`;
-          // ----------------------------------------------------
-
-          // Start the first event
-          runEvent();
-        });
-    }
-
     function setActiveSpeaker(position){
       charLeft.classList.remove("active", "hidden");
       charRight.classList.remove("active", "hidden");
@@ -264,7 +220,18 @@
       optionsBox.innerHTML = "";
       setActiveSpeaker(null);
     }
-    
+
+    function saveProgress() {
+      fetch("/save-progress", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          scene: currentSceneData.scene_id,
+          event_index: eventIndex
+        })
+      });
+    }
+        
     function goToNextScene() {
       const nextSceneId = currentSceneData.next_scene;
       
@@ -360,13 +327,79 @@
     // --- (Event Listeners) ---
     nextBtn.addEventListener("click", () => {
       eventIndex++;
+      saveProgress();
       runEvent();
     });
 
     // --- (Initial Load) ---
-    // Start the engine by fetching the user's current scene from the API
-    loadScene("/api/story/current");
+// --- (Initial Load) ---
+function loadScene(url, fromSession = true) {
+  textEl.textContent = "Memuat...";
+  nextBtn.disabled = true;
 
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      if (data.story_complete) {
+        showStoryEnd("Cerita telah selesai!");
+        return;
+      }
+      if (data.error) {
+        showStoryEnd(`Error: ${data.error}`);
+        return;
+      }
+
+      currentSceneData = data;
+      eventIndex = data.resume_event || 0;
+
+      if (data.assets.preload_images) {
+        data.assets.preload_images.forEach(imgName => {
+          const img = new Image();
+          img.src = `/static/img/${imgName}`;
+        });
+      }
+
+      background.style.backgroundImage = `url('/static/img/${data.assets.background}')`;
+      charLeft.src = `/static/img/${data.assets.initial_characters.left}`;
+      charRight.src = `/static/img/${data.assets.initial_characters.right}`;
+
+      // Jika ini buka ulang halaman, coba lanjut dari progres session
+      if (fromSession) {
+        fetch("/session-data")
+          .then(r => r.json())
+          .then(sess => {
+            if (
+              sess.story_progress &&
+              sess.story_progress.scene === data.scene_id
+            ) {
+              eventIndex = sess.story_progress.event_index;
+            }
+            runEvent();
+          })
+          .catch(() => runEvent()); // kalau gagal ambil session tetap lanjut
+      } else {
+        runEvent();
+      }
+    });
+}
+
+// Jalankan fungsi saat halaman dimuat
+fetch("/session-data")
+  .then(r => r.json())
+  .then(sess => {
+    if (sess.story_progress && sess.story_progress.scene) {
+      // Kalau ada progres sebelumnya, lanjutkan
+      loadScene("/api/story/current", true);
+    } else {
+      // Kalau belum pernah main, mulai baru
+      loadScene("/api/story/current", false);
+    }
+  })
+  .catch(() => loadScene("/api/story/current", false));
+
+
+
+    
   </script>
 </body>
 </html>
