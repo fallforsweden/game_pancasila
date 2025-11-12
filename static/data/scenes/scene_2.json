@@ -3,29 +3,257 @@
   "next_scene": "scene_3",
   "assets": {
     "background": "bg_placeholder.png",
+
     "initial_characters": {
       "left": "guru2.png",
-      "right": "MURID.png"
-    }
+      "right": "GURU.png"
+    },
+
+    "preload_images": [
+      "guru2.png",
+      "MURID.png",
+      "GURU.png"
+    ]
   },
   "events": [
-    {
+     {
       "type": "dialogue",
-      "speaker_pos": "left",
-      "character": "Mentor",
-      "text": "Sekarang kita berada di kelas. Ini adalah adegan kedua."
+      "speaker_pos": "narrator", 
+      "character": "Prologue",
+      "text": "2 Agustus 2025 Langit biru perlahan berubah menjadi abu-abu. Angin sepoi-sepoi berhembus lembut, membuat udara di sekitar sekolah sejuk."
+
     },
-    {
+{
       "type": "dialogue",
-      "speaker_pos": "right",
-      "character": "Murid",
-      "text": "Wow, latar belakang dan karakternya bisa di-set per adegan!"
+      "speaker_pos": "narrator", 
+      "character": "Prologue",
+      "text": "Ardi sedang berjalan santai. Setelah disibukkan tugas-tugas kelas, akhirnya ia punya waktu senggang. Ia melangkah menyusuri koridor sekolah, secara tidak sengaja Ardi melihat sahabat nya, si Ardha."
+
     },
+
     {
       "type": "dialogue",
-      "speaker_pos": "left",
-      "character": "Mentor",
-      "text": "Ini adalah akhir dari cerita. 'next_scene' di-set ke 'null'."
-    }
+      "speaker_pos": "narrator", 
+      "character": "Narator",
+      "text": "Dari kejauhan, Ardi memperhatikan candaan Ardha yang terdengar seperti ejekan."
+    },
+   
+    {
+      "type": "dialogue",
+      "speaker_pos": "narrator", 
+      "character": "Ardi",
+      "text": "Dirimu tidak berubah, Ardha, tetap saja melontarkan jokes rasis."
+    },
+
+{
+      "type": "question",
+      "text": "Melihat dari sikap Ardi yang tidak membiarkan temannya terus melakukan perbuatan rasis dan berniat menasihati, Ardi menunjukkan nilai Pancasila berupa...",
+      "options": [
+        "Kepentingan Pribadi",
+        "Martabat Kemanusiaan",
+        "Musyawarah",
+        "Gotong Royong",
+        "Disiplin"
+      ],
+      "answer": "Martabat Kemanusiaan",
+      "explanation": "Tindakan Ardi mencerminkan penghormatan terhadap Martabat Kemanusiaan (Sila ke-2) karena ia menjunjung tinggi hak sesama."
+    },
+
+{
+      "type": "dialogue",
+      "speaker_pos": "narrator", 
+      "character": "Ardi",
+      "text": "Aku harus ngomong langsung ke dia"
+    },
+
+  {
+      "type": "dialogue",
+      "speaker_pos": "narrator", 
+      "character": "Narator",
+      "text": "Beberapa hari kemudian, Di dekat mushola, Ardi melihat Ardha sedang duduk."
+    },
+
+ {
+      "type": "dialogue",
+      "speaker_pos": "narrator", 
+      "character": "Ardi",
+      "text": "Ardha, bisa bicara sebentar?"
+    },
+
+     {
+      "type": "dialogue",
+      "speaker_pos": "narrator", 
+      "character": "Ardha",
+      "text": "Oh iya, ada apa?"
+    },
+
+{
+      "type": "dialogue",
+      "speaker_pos": "narrator", 
+      "character": "Ardha",
+      "text": "Dha belakangan ini kamu makin sering ngomongin jokes rasis. Kalo gitu kamu enggak sejalan dengan sila ke-3"
+    },
+
+{
+      "type": "dialogue",
+      "speaker_pos": "narrator", 
+      "character": "Ardha",
+      "text": "Hah!?!? Emang kamu tau apa tentang Sila ke-3?!?!?"
+    },
+{
+  "type": "question",
+  "text": "Bagaimana sebaiknya Ardi menanggapi reaksi keras dari Ardha agar pembicaraan tetap berjalan dengan baik?",
+  "options": [
+    "Sila ke-3 berkaitan dengan persatuan Indonesia",
+    "Sila ke-3 berkaitan dengan gotong royong",
+    "Sila ke-3 berkaitan dengan mufakat"
+  ],
+  "answer": "Sila ke-3 berkaitan dengan persatuan Indonesia",
+  "explanation": "Prinsip ini didukung UU No. 40 Tahun 2008 tentang Penghapusan Diskriminasi Ras dan Etnis, dimana setiap orang berhak dihargai tanpa diskriminasi."
+},
+
+{
+      "type": "dialogue",
+      "speaker_pos": "narrator", 
+      "character": "Ardha",
+      "text": "Udahlah, orang sekarang pada normalisasi itu ko"
+    },
+{
+      "type": "dialogue",
+      "speaker_pos": "narrator", 
+      "character": "Ardi",
+      "text": "Tapi mikirin nggak perasaan orang lain kalo denger candaan yang kamu ucapin itu"
+    },
+
+    {
+      "type": "question",
+      "text": "Saat Ardha menganggap rasisme telah 'dinormalisasi', nilai Pancasila apa yang paling mendasar dilupakan oleh Ardha?",
+      "options": [
+        "Kemanusiaan yang Adil dan Beradab",
+        "Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan",
+        "Keadilan Sosial bagi Seluruh Rakyat Indonesia",
+        "Ketuhanan Yang Maha Esa",
+        "Persatuan Indonesia"
+      ],
+      "answer": "Kemanusiaan yang Adil dan Beradab",
+      "explanation": "Melontarkan candaan rasis melanggar prinsip (Sila Ke-2) karena tidak menjunjung tinggi martabat, menghormati."
+    },
+
+    {
+      "type": "dialogue",
+      "speaker_pos": "narrator", 
+      "character": "Ardi",
+      "text": "Udahlah, enggak usah ikut campur"
+    },
+
+    {
+  "type": "dialogue",
+  "speaker_pos": "narrator",
+  "character": "Narator",
+  "text": "Tanpa berkata sepatah kata pun, Ardha langsung meninggalkan Ardi sendirian."
+},
+
+{
+  "type": "dialogue",
+  "speaker_pos": "narrator",
+  "character": "Narator",
+  "text": "Beberapa hari kemudian. Ardha melihat Elliot. Tanpa pikir panjang, Ardha kembali melontarkan candaan."
+},
+
+{
+  "type": "dialogue",
+  "speaker_pos": "narrator",
+  "character": "Elliot",
+  "text": "Lo pikir lucu ngomong kayak gitu?"
+},
+{
+  "type": "dialogue",
+  "speaker_pos": "narrator",
+  "character": "Elliot",
+  "text": "Lo kira enak tiap hari diejek karena warna kulit?"
+},
+
+ {
+      "type": "dialogue",
+      "speaker_pos": "narrator", 
+      "character": "Narator",
+      "text": "Suasana kantin langsung hening. Ardha mundur setengah langkah, tapi Elliot makin maju."
+    },
+{
+  "type": "dialogue",
+  "speaker_pos": "narrator",
+  "character": "Elliot",
+  "text": "Kalau lo masih nganggap itu lucu, berarti lo belum ngerti jadi manusia."
+},
+
+ {
+      "type": "dialogue",
+      "speaker_pos": "narrator", 
+      "character": "Narator",
+      "text": "Dorongan terakhir membuat Ardha hampir terjatuh. Seorang teman yang melihat kejadian itu segera berlari ke arah Ardi"
+    },
+
+   {
+      "type": "dialogue",
+      "speaker_pos": "narrator", 
+      "character": "Arif",
+      "text": "Di, ada keributan di kantin! Cepat ke sana!"
+    },
+ {
+      "type": "dialogue",
+      "speaker_pos": "narrator", 
+      "character": "Narator",
+      "text": "Ardi buru-buru berdiri. Ia keluar kelas dan berjalan cepat ke arah kantin. Saat sampai, Ardi langsung melerai"
+    },
+
+{
+  "type": "dialogue",
+  "speaker_pos": "narrator",
+  "character": "Ardi",
+  "text": "Santai dulu, kita selesaikan tanpa kekerasan."
+},
+
+{
+  "type": "dialogue",
+  "speaker_pos": "narrator",
+  "character": "Ardi",
+  "text": "Dha, kamu sadar kan kalau candaanmu bisa nyakitin orang lain."
+},
+
+{
+  "type": "dialogue",
+  "speaker_pos": "narrator",
+  "character": "Ardha",
+  "text": "Iya Di, aku pantas nerima ini. Aku keterlaluan waktu itu."
+},
+
+{
+  "type": "dialogue",
+  "speaker_pos": "narrator",
+  "character": "Ardi",
+  "text": "Dha, yang penting bukan cuma enggak boleh rasis, tapi kita juga harus menghormati dan toleran terhadap perbedaan agama orang lain."
+},
+
+{
+      "type": "question",
+      "text": "Tindakan Ardi melerai Elliot dan Ardha serta meminta penyelesaian tanpa kekerasan mencerminkan pengamalan sila keberapa?",
+      "options": [
+        "Sila ke-1: Mengutamakan dialog untuk mencari perdamaian.",
+        "Sila ke-2: Mengedepankan penyelesaian masalah secara beradab dan menjunjung tinggi kemanusiaan.",
+        "Sila ke-3: Mengutamakan persatuan sekolah di atas kepentingan pribadi.",
+        "Sila ke-4: Mengedepankan musyawarah dalam mengambil keputusan.",
+        "Sila ke-5: Memberikan keadilan dengan menghukum pelaku rasisme."
+      ],
+      "answer": "Sila ke-2: Mengedepankan penyelesaian masalah secara beradab dan menjunjung tinggi kemanusiaan.",
+      "explanation": "Menghentikan perkelahian dan meminta penyelesaian masalah 'tanpa kekerasan' adalah wujud konkret dari Sila ke-2."
+    },
+
+{
+  "type": "dialogue",
+  "speaker_pos": "narrator",
+  "character": "Narator",
+  "text": "Ardha menunduk sambil mengangguk. Elliot menenangkan diri. Suasana kantin perlahan kembali tenang."
+}
+
   ]
 }

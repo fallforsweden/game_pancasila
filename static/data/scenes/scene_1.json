@@ -6,7 +6,7 @@
 
     "initial_characters": {
       "left": "guru2.png",
-      "right": "MURID.png"
+      "right": "GURU.png"
     },
 
     "preload_images": [
@@ -20,67 +20,431 @@
     {
       "type": "dialogue",
       "speaker_pos": "narrator", 
-      "character": "Narator",
-      "text": "Pada 28 April 2080, Ardi seorang fisikawan jenius, keluar rumah untuk berjalan-jalan sambil memperhatikan seberapa mengkhawatirkan nya kondisi Indonesia."
+      "character": "Prologue",
+      "text": "Pada 28 April 2080, Ardi fisikawan jenius,keluar rumah berjalan-jalan, memperhatikan seberapa mengkhawatirkan nya kondisi Indonesia ditahun 2080. Dari acara berita tv yang menampilkan berita berita buruk lainnya."
     },
 
     {
       "type": "dialogue",
       "speaker_pos": "narrator", 
-      "character": "Narator",
-      "text": "Dari acara berita tv yang menampilkan tentang korupsi yang merajalela, rasisme yang menjamur, dan berita berita buruk lainnya."
+      "character": "Prologue",
+      "text": "Melihat kondisi Indonesia memburuk, Ardi bertekad memperbaiki permasalahan Indonesia dengan membuat mesin waktu untuk kembali ke masa lalu. Setelah melakukan penelitian dan pembuatan mesin waktu, ia telah menyelesaikan penemuannya untuk mencapai tujuannya."
     },
 
     {
       "type": "dialogue",
       "speaker_pos": "narrator", 
-      "character": "Narator",
-      "text": "Dengan melihat kondisi Indonesia yang makin kian memburuk, Ardi sang fisikawan jenius bertekad untuk memperbaiki permasalahan Indonesia dimasa sekarang dengan membuat mesin waktu untuk Kembali ke masa lalu."
+      "character": "Act 1",
+      "text": "Ardi terbangun. Ia terkejut: berhasil melompati waktu dari 2080 ke masa SMA."
     },
 
     {
       "type": "dialogue",
-      "speaker_pos": "narrator", 
-      "character": "Narator",
-      "text": "Setelah melakukan penelitian selama 6 bulan dan membuat mesin Waktu selama 12 bulan untuk membuatnya, kini ia telah menyelesaikan penemuannya untuk mencapai tujuannya, yaitu memperbaiki moralitas bangsa dengan cara kembali ke masa lalu."
+      "speaker_pos": "left", 
+      "character": "Ardi",
+      "text": "Aduh... kelas X IPA 2 itu di mana, ya?"
     },
 
     {
       "type": "dialogue",
       "speaker_pos": "right",
-      "character": "Murid",
-      "text": "Wah, apa yang akan kita pelajari hari ini, Pak?"
+      "character": "Narator",
+      "text": "Saat ia berbalik, bahunya tanpa sengaja menyenggol setumpuk kertas yang dibawa seseorang. Lembarannya berterbangan ke lantai."
+    },
+    
+    {
+      "type": "dialogue",
+      "speaker_pos": "right",
+      "character": "Ardi",
+      "text": "Wah! Maaf banget, aku nggak sengaja—"
+    },
+
+ {
+      "type": "dialogue",
+      "speaker_pos": "right",
+      "character": "Nadia",
+      "text": "Nggak apa-apa kok... Tapi kayaknya kamu bukan dari sini ya? Baru pindah?"
+    },
+   
+    {
+      "type": "dialogue",
+      "speaker_pos": "right",
+      "character": "Ardi",
+      "text": "Iya, baru hari ini masuk."
+    },
+
+ {
+      "type": "dialogue",
+      "speaker_pos": "right",
+      "character": "Nadia",
+      "text": "Tenang aja, aku Nadia, kebetulan lagi nyiapin proposal acara sekolah."
+    },
+
+{
+      "type": "dialogue",
+      "speaker_pos": "right",
+      "character": "Ardi",
+      "text": "Acara sekolah?"
+    },
+
+{
+      "type": "dialogue",
+      "speaker_pos": "right",
+      "character": "Nadia",
+      "text": "ya... tapi akhir-akhir ini agak ribet. Anak-anak OSIS lagi pada beda pendapat soal acara pensi."
+    },
+     
+{
+      "type": "dialogue",
+      "speaker_pos": "right",
+      "character": "Ardi",
+      "text": "Aku bisa bantu. Masalahnya pasti soal gimana menyatukan tim ya?"
+    },
+
+{
+      "type": "question",
+      "text": "Bagaimana Ardi menjelaskan arti kerja sama kepada Nadia agar sesuai dengan nilai Pancasila?",
+      "options": [
+        "Kerja sama adalah bentuk gotong royong (Sila ke-4 Pancasila).",
+        "Kerja sama berarti semua harus menuruti satu pemimpin.",
+        "Kerja sama gampang asal semua setuju tanpa debat."
+      ],
+      "answer": "Kerja sama adalah bentuk gotong royong (Sila ke-4 Pancasila).",
+      "explanation": "Kerja sama adalah bentuk gotong royong (Sila ke-4 Pancasila)  semua anggota saling mendengarkan, menghargai, dan berkontribusi untuk mencapai tujuan bersama"
+    },
+
+ {
+      "type": "dialogue",
+      "speaker_pos": "right",
+      "character": "Nadia",
+      "text": "Boleh juga jawabanmu, oke deh. Kamu boleh bantu"
+    },
+{
+      "type": "dialogue",
+      "speaker_pos": "right",
+      "character": "Ardi",
+      "text": "Oke, baiklah"
+    },
+
+{
+      "type": "dialogue",
+      "speaker_pos": "narrator",
+      "character": "Narator",
+      "text": "Nadia meminta anggota OSIS untuk berkumpul"
+    },
+     
+ {
+      "type": "dialogue",
+      "speaker_pos": "right",
+      "character": "Alya",
+      "text": "Dia siapa Nadia?"
+    },
+
+ {
+      "type": "dialogue",
+      "speaker_pos": "right",
+      "character": "Nadia",
+      "text": "Ini Ardi, yang bakal bantu kita"
+    },
+
+ {
+      "type": "dialogue",
+      "speaker_pos": "right",
+      "character": "Alya",
+      "text": "Dia? emang dia tau apaan? emang dia bisa nyatuin pendapat kita?"
+    },
+    
+     {
+      "type": "dialogue",
+      "speaker_pos": "right",
+      "character": "Ardi",
+      "text": "Pertama, kita perlu tau masing-masing ide"
+    },
+
+ {
+      "type": "dialogue",
+      "speaker_pos": "right",
+      "character": "Ardi",
+      "text": "Jadi, bisa keluarkan pendapat kalian masing-masing?"
+    },
+
+{
+  "type": "dialogue",
+  "speaker_pos": "right",
+  "character": "Alya",
+  "text": "Oke, aku duluan. Menurutku acara pensi harus fokus ke penampilan band sekolah. Itu yang paling ditunggu siswa-siswi tiap tahun."
+},
+
+{
+  "type": "dialogue",
+  "speaker_pos": "left",
+  "character": "Nadia",
+  "text": "Tapi kalau semua fokus ke band, bagian teater dan tari tradisional bisa keteteran. Aku rasa harus ada keseimbangan."
+},
+
+{
+  "type": "dialogue",
+  "speaker_pos": "right",
+  "character": "Ardi",
+  "text": "Nah, itu dia masalahnya. Setiap orang punya ide bagus, tapi nggak ada yang mau ngalah."
+},
+
+{
+      "type": "dialogue",
+      "speaker_pos": "right",
+      "character": "Ardi",
+      "text": "Kita perlu buat tim gabungan dari tiap divisi."
+},
+
+{
+      "type": "dialogue",
+      "speaker_pos": "right",
+      "character": "Ardi",
+      "text": "Setiap anggota dilibatkan dengan ide-ide berbeda biar saling melengkapi. Inilah bentuk nyata dari kerja sama dan gotong royong."
+},
+
+{
+      "type": "dialogue",
+      "speaker_pos": "right",
+      "character": "Alya",
+      "text": "Kalau tiap divisi kirim  perwakilan, kita bisa bikin konsep yang lebih beragam tapi tetap satu arah."
+},
+    
+{
+  "type": "dialogue",
+  "speaker_pos": "right",
+  "character": "Alya",
+  "text": "Masuk akal juga. Nggak nyangka anak baru bisa bantu nyelesain masalah kita."
+},
+
+{
+  "type": "question",
+  "text": "Saat OSIS berbeda pendapat, Ardi meminta semua mendengarkan dan mencari titik tengah. Nilai Pancasila apa yang tercermin?",
+  "options": [
+    "Persatuan",
+    "Kejujuran",
+    "Keadilan",
+    "Kepemimpinan"
+  ],
+  "answer": "Persatuan",
+  "explanation": "Menghargai perbedaan pendapat dan tetap bekerja sama mencerminkan persatuan, sesuai sila ke-3 Pancasila."
+},
+
+{
+      "type": "dialogue",
+      "speaker_pos": "narrator",
+      "character": "Narator",
+      "text": "Beberapa hari kemudian, suasana ruang OSIS jauh lebih hidup. Di papan tulis, terdapat daftar tugas, dan skema acara yang disusun bersama."
     },
 
     {
-      "type": "character_swap",
-      "position": "left",
-      "image": "GURU.png"
-    },
+  "type": "dialogue",
+  "speaker_pos": "right",
+  "character": "Alya",
+  "text": "Tim dekor kalian urus dekorasi yang bisa menarik perhatian orang ya"
+},
 
+  {
+  "type": "dialogue",
+  "speaker_pos": "right",
+  "character": "Nadia",
+  "text": "Tim teknis cek persiapan untuk acara ya"
+},
+
+{
+  "type": "dialogue",
+  "speaker_pos": "narrator",
+  "character": "Narator",
+  "text": "Semua tampak sibuk dengan bagiannya masing-masing. "
+},
+
+{
+  "type": "dialogue",
+  "speaker_pos": "right",
+  "character": "Alya",
+  "text": "Eh, dekorasinya kok belum jadi juga?"
+},
+
+{
+  "type": "dialogue",
+  "speaker_pos": "left",
+  "character": "Afif",
+  "text": "Iya, tadi tim konsumsi numpahin sirup pas nyiapin minuman di dekat sini"
+},
+
+{
+  "type": "dialogue",
+  "speaker_pos": "right",
+  "character": "Alya",
+  "text": "Tapi kenapa nggak langsung koordinasi aja? Jangan nunggu sampai semua jadi berantakan gini dong!"
+},
+
+{
+  "type": "dialogue",
+  "speaker_pos": "left",
+  "character": "Afif",
+  "text": "Kita udah coba ngomong, tapi semua orang sibuk. Lagian bukan salah tim dekor sepenuhnya juga kan?"
+},
+
+{
+  "type": "dialogue",
+  "speaker_pos": "narrator",
+  "character": "Narator",
+  "text": "Suasana memanas. Alya dan Afif saling adu argumen, menarik perhatian anggota lain yang mulai gelisah dengan perdebatan itu."
+},
+
+{
+  "type": "dialogue",
+  "speaker_pos": "right",
+  "character": "Nadia",
+  "text": "Hei, hei, tenang dulu. Jangan saling nyalahin. Kita cari solusinya bareng, oke?"
+},
+
+{
+  "type": "dialogue",
+  "speaker_pos": "narrator",
+  "character": "Narator",
+  "text": "Tiba-tiba, lampu ruangan padam. Suasana berubah, semua anggota panik."
+},
+
+{
+  "type": "dialogue",
+  "speaker_pos": "right",
+  "character": "Alya",
+  "text": "Waduh! Kok bisa mati listrik sih pas lagi sibuk begini?"
+},
+
+{
+  "type": "dialogue",
+  "speaker_pos": "left",
+  "character": "Afif",
+  "text": "Jangan-jangan tim teknis lupa ngecek kabel sambungan. Dari tadi aku udah liat colokan mereka longgar."
+},
+
+{
+  "type": "dialogue",
+  "speaker_pos": "right",
+  "character": "Nadia",
+  "text": "Eh, jangan asal nuduh gitu! Kita udah pastiin semua aman sebelum mulai. Bisa aja tim dekorasi nyedot listrik kebanyakan!"
+},
+
+{
+  "type": "dialogue",
+  "speaker_pos": "left",
+  "character": "Ardi",
+  "text": "Udah, udah. Sebaiknya kita cari solusi bareng-bareng"
+},
+
+{
+  "type": "dialogue",
+  "speaker_pos": "left",
+  "character": "Ardi",
+  "text": "Tim Teknis cek ada kelonggaran colokan, Tim Dekor mastiin ada yang korslet"
+},
+
+{
+  "type": "dialogue",
+  "speaker_pos": "narrator",
+  "character": "Narator",
+  "text": "Semua anggota bergerak. Tim teknis memeriksa sambungan kabel, tim dekor memastikan tidak ada alat yang korslet."
+},
+
+{
+  "type": "question",
+  "text": "Setelah lampu padam, Ardi membagi tugas memeriksa masalah listrik bersama. Nilai Pancasila apa yang tercermin?",
+  "options": [
+    "Gotong royong",
+    "Persatuan",
+    "Tanggung jawab",
+    "Disiplin"
+  ],
+  "answer": "Gotong royong",
+  "explanation": "Gotong royong tercermin saat anggota bekerja sama menyelesaikan masalah dengan tujuan yang sama."
+},
+
+{
+  "type": "dialogue",
+  "speaker_pos": "right",
+  "character": "Nadia",
+  "text": "Nah, kayak gitu. Kalau kita saling bantu, masalah kayak gini bisa cepat ketemu penyebabnya."
+},
+
+{
+  "type": "dialogue",
+  "speaker_pos": "left",
+  "character": "Afif",
+  "text": "Iya, maaf juga tadi sempat emosi. Aku cuma khawatir dekorasinya nggak kelar tepat waktu."
+},
+
+{
+  "type": "dialogue",
+  "speaker_pos": "right",
+  "character": "Alya",
+  "text": "Nggak apa-apa. Aku juga kebawa suasana. Yang penting sekarang kita saling bantu aja."
+},
+
+{
+  "type": "dialogue",
+  "speaker_pos": "narrator",
+  "character": "Narator",
+  "text": "Tak lama kemudian, listrik kembali menyala. Semua anggota kembali bekerja dengan semangat baru."
+},
+
+{
+  "type": "dialogue",
+  "speaker_pos": "right",
+  "character": "Ardi",
+  "text": "Nah, gitu dong! Ternyata kerja sama bisa nyalain semangat juga."
+},
+
+{
+  "type": "dialogue",
+  "speaker_pos": "narrator",
+  "character": "Narator",
+  "text": "Tawa pun pecah di ruangan OSIS. Kini mereka sadar semangat kerja sama mereka juga menyala kembali"
+},
+
+ {
+      "type": "dialogue",
+      "speaker_pos": "narrator",
+      "character": "Narator",
+      "text": "Hari H pensi pun tiba."
+    },
     {
       "type": "dialogue",
       "speaker_pos": "left",
-      "character": "guru(?)",
-      "text": "Bagus sekali! Kamu sudah siap untuk adegan berikutnya."
+      "character": "Alya",
+      "text": "Dekor udah siap, panggungnya keren banget!"
     },
-
+    {
+      "type": "dialogue",
+      "speaker_pos": "right",
+      "character": "Nadia",
+      "text": "Tim teknis juga aman, semua lancar."
+    },
+    {
+      "type": "dialogue",
+      "speaker_pos": "left",
+      "character": "Ardi",
+      "text": "Kerja bareng ternyata bikin hasilnya luar biasa."
+    },
     {
       "type": "question",
-      "text": "Apa sila pertama Pancasila?",
+      "text": "Apa pelajaran dari kerja sama tim OSIS saat pensi?",
       "options": [
-        "Keadilan Sosial",
-        "Ketuhanan Yang Maha Esa",
-        "Persatuan Indonesia"
+        "Kerja sama membuat tugas berat jadi ringan.",
+        "Lebih baik bekerja sendiri agar cepat selesai.",
+        "Masalah akan hilang kalau dihindari."
       ],
-      "answer": "Ketuhanan Yang Maha Esa",
-      "explanation": "Sila pertama adalah 'Ketuhanan Yang Maha Esa', dilambangkan dengan bintang."
+      "answer": "Kerja sama membuat tugas berat jadi ringan.",
+      "explanation": "Hasil terbaik datang dari saling percaya dan bantu satu sama lain."
     },
     {
       "type": "dialogue",
-      "speaker_pos": "left",
-      "character": "Mentor",
-      "text": "Bagus sekali! Kamu sudah siap untuk adegan berikutnya."
+      "speaker_pos": "narrator",
+      "character": "Narator",
+      "text": "Pensi berjalan sukses. Semua tersenyum bangga melihat kerja keras mereka terbayar."
     }
+
   ]
 }

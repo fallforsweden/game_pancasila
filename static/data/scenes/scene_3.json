@@ -1,0 +1,357 @@
+{
+  "scene_id": "scene_2",
+  "next_scene": "scene_3",
+  "assets": {
+    "background": "bg_placeholder.png",
+
+    "initial_characters": {
+      "left": "guru2.png",
+      "right": "GURU.png"
+    },
+
+    "preload_images": [
+      "guru2.png",
+      "MURID.png",
+      "GURU.png"
+    ]
+  },
+  "events": [
+     {
+      "type": "dialogue",
+      "speaker_pos": "narrator", 
+      "character": "Prologue",
+      "text": "Beberapa minggu telah berlalu sejak kejadian."
+
+    },
+{
+      "type": "dialogue",
+      "speaker_pos": "left", 
+      "character": "Alya",
+      "text": "Huft.. keuangan OSIS menurun padahal nggak ada kegiatan besar. Kayaknya harus tanya Aldi deh yang pegang buku utama"
+    },
+
+{
+  "type": "dialogue",
+  "speaker_pos": "narrator",
+  "character": "Narator",
+  "text": "Alya menyusuri koridor dan menemukan Aldi duduk di bangku taman."
+},
+
+{
+  "type": "dialogue",
+  "speaker_pos": "left",
+  "character": "Alya",
+  "text": "Aldi! Lagi ngapain?"
+},
+
+{
+  "type": "dialogue",
+  "speaker_pos": "right",
+  "character": "Aldi",
+  "text": "Lagi santai aja, Al. Kenapa?"
+},
+
+{
+      "type": "dialogue",
+      "speaker_pos": "left", 
+      "character": "Alya",
+      "text": "Oh gitu, ada yang mau aku omongin nih soalnya."
+    },
+
+    {
+      "type": "dialogue",
+      "speaker_pos": "right", 
+      "character": "Aldi",
+      "text": "Hmm? Kenapa, Al?"
+    },
+{
+  "type": "dialogue",
+  "speaker_pos": "left",
+  "character": "Alya",
+  "text": "Aku cek buku kas, kok saldo menurun ya?"
+},
+    
+    {
+      "type": "dialogue",
+      "speaker_pos": "right", 
+      "character": "Aldi",
+      "text": "Hah? Serius? Coba nanti aku cek di buku keuangannya."
+    },
+
+ {
+      "type": "dialogue",
+      "speaker_pos": "left", 
+      "character": "Alya",
+      "text": "Oh gitu, baiklah."
+    },
+
+     {
+      "type": "dialogue",
+      "speaker_pos": "left", 
+      "character": "Aldi",
+      "text": "Semoga dia nggak curiga"
+    },
+
+{
+      "type": "dialogue",
+      "speaker_pos": "narrator", 
+      "character": "Narator",
+      "text": "Esok hari, Alya melihat Ardi sedang berjalan sendirian di koridor sekolah"
+    },
+
+    {
+      "type": "dialogue",
+      "speaker_pos": "left", 
+      "character": "Alya",
+      "text": "Ardi"
+    },
+
+    {
+      "type": "dialogue",
+      "speaker_pos": "right", 
+      "character": "Ardi",
+      "text": "Eh, Alya. Kenapa?"
+    },
+
+    {
+      "type": "dialogue",
+      "speaker_pos": "left", 
+      "character": "Alya",
+      "text": "Aku curiga sama Aldi soal keuangan OSIS. Bisa bantu aku cari tahu?"
+    },
+     
+    {
+  "type": "question",
+  "text": "Saat Alya meminta bantuan, Ardi menyanggupi karena merasa bertanggung jawab secara moral. Nilai Pancasila apa yang harus Ardi pegang?",
+  "options": [
+    "Ketegasan dalam Menegakkan Kebenaran (Kejujuran)",
+    "Persatuan dan gotong royong",
+    "Mengutamakan musyawarah",
+    "Menghormati hak pribadi Aldi",
+    "Keadilan Sosial dan Transparansi"
+  ],
+  "answer": "Ketegasan dalam Menegakkan Kebenaran (Kejujuran)",
+  "explanation": "Tanggung jawab moral Ardi sebagai teman dan warga sekolah adalah bertindak tegas untuk mencari dan menegakkan kebenaran (Kejujuran)."
+},
+
+    {
+      "type": "dialogue",
+      "speaker_pos": "right", 
+      "character": "Ardi",
+      "text": "Oke deh. Untuk awal-awal kayaknya harus cari Aldi"
+    },
+
+    {
+      "type": "dialogue",
+      "speaker_pos": "left", 
+      "character": "Ardi",
+      "text": "Kalau Aldi bilang mau cek ulang laporan, kemungkinan dia bakal nyari data atau nyatet sesuatu."
+    },
+
+     {
+      "type": "dialogue",
+      "speaker_pos": "narrator", 
+      "character": "Narator",
+      "text": "Ardi mencari keberadaan Aldi. Tak lama, Ardi menemukan Aldi di ruangan OSIS sedang menulis bukan di kas utama."
+    },
+
+    {
+      "type": "dialogue",
+      "speaker_pos": "left", 
+      "character": "Ardi",
+      "text": "Kenapa dia nggak pakai buku kas?"
+    },
+
+{
+      "type": "dialogue",
+      "speaker_pos": "narrator", 
+      "character": "Narator",
+      "text": "Tiba-tiba ponsel Aldi bergetar. Ia cepat-cepat mengangkat telepon dan berdiri."
+    },
+
+     {
+      "type": "dialogue",
+      "speaker_pos": "left", 
+      "character": "Aldi",
+      "text": "Oh… iya, bentar, aku keluar dulu"
+     },
+
+     {
+  "type": "dialogue",
+  "speaker_pos": "narrator",
+  "character": "Ardi",
+  "text": "Setelah Aldi keluar, Ardi melihat buku kecil di meja."
+},
+
+       {
+      "type": "dialogue",
+      "speaker_pos": "left", 
+      "character": "Ardi",
+      "text": "Ini dia… beberapa transaksi nggak ada di buku besar, tapi ada di buku kecil"
+     }, 
+{
+      "type": "dialogue",
+      "speaker_pos": "left", 
+      "character": "Ardi",
+      "text": "Kalau aku mau bukti ini aman, aku harus simpen bukti sebelum Aldi balik"
+     },
+
+{
+  "type": "question",
+  "text": "Ardi menemukan transaksi di buku kecil Aldi yang berbeda dari buku kas utama. Nilai Pancasila apa yang tercermin?",
+  "options": [
+    "Kejujuran",
+    "Tanggung jawab",
+    "Persatuan",
+    "Gotong royong"
+  ],
+  "answer": "Kejujuran",
+  "explanation": "Kejujuran tercermin saat Ardi menegakkan kebenaran dan memastikan semua transaksi tercatat dengan benar"
+},
+
+{
+      "type": "dialogue",
+      "speaker_pos": "narrator", 
+      "character": "Narator",
+      "text": "Ardi mengeluarkan ponsel dari saku, memastikan layar tidak menyala terlalu terang. Ia memotret setiap bukti."
+     },
+
+     {
+      "type": "dialogue",
+      "speaker_pos": "left", 
+      "character": "Ardi",
+      "text": "Oke… bukti sudah aman di ponsel. Sekarang tinggal tunjukin ke Alya"
+     },
+
+     {
+      "type": "dialogue",
+      "speaker_pos": "narrator", 
+      "character": "Narator",
+      "text": "Ardi menemui Alya dan menunjukkan bukti di ponselnya."
+     },
+
+     {
+  "type": "question",
+  "text": "Ardi menunjukkan bukti transaksi ke Alya untuk dibahas dalam rapat OSIS. Nilai Pancasila apa yang tercermin?",
+  "options": [
+    "Tanggung jawab",
+    "Disiplin",
+    "Kerja sama",
+    "Persatuan"
+  ],
+  "answer": "Tanggung jawab",
+  "explanation": "Tanggung jawab tercermin saat Ardi memastikan masalah keuangan ditangani dengan benar dan transparan."
+},
+       {
+      "type": "dialogue",
+      "speaker_pos": "left", 
+      "character": "Alya",
+      "text": "Ada transaksi 150.000, 200.000, dan 80.000 yang nggak tercatat. kita rapat OSIS besok."
+     },
+
+     {
+      "type": "dialogue",
+      "speaker_pos": "left", 
+      "character": "Alya",
+      "text": "Aldi, bisa jelasin ini?"
+     },
+
+     {
+      "type": "dialogue",
+      "speaker_pos": "right", 
+      "character": "Aldi",
+      "text": "Itu cuma catatan pribadi, aku salah nulis aja"
+     },
+
+     {
+      "type": "dialogue",
+      "speaker_pos": "left", 
+      "character": "Alya",
+      "text": "Tapi nominalnya beda. Gimana bisa salah tiga kali"
+     },
+
+     {
+      "type": "dialogue",
+      "speaker_pos": "narrator", 
+      "character": "Narator",
+      "text": "Aldi menunduk, tak bisa menjawab. Tangan mengepal di pangkuan, dan wajah nya memucat"
+     },
+
+     {
+      "type": "dialogue",
+      "speaker_pos": "left", 
+      "character": "Nadia",
+      "text": "Masalah ini akan kita laporkan ke pembina OSIS"
+     },
+
+     {
+      "type": "dialogue",
+      "speaker_pos": "left", 
+      "character": "Nadia",
+      "text": " Ardi, kamu tetap di sini. Aku mau kamu ikut waktu aku lapor nanti."
+     },
+
+   {
+      "type": "dialogue",
+      "speaker_pos": "narrator", 
+      "character": "Narator",
+      "text": "Semua anggota meninggalkan ruangan OSIS, kecuali Nadia, Ardi dan Aldi"
+     },
+
+       {
+      "type": "dialogue",
+      "speaker_pos": "left", 
+      "character": "Ardi",
+      "text": "Nad… boleh aku ngomong sebentar?"
+     },
+
+       {
+      "type": "dialogue",
+      "speaker_pos": "right", 
+      "character": "Nadia",
+      "text": "Cepat ya, tapi jangan lama."
+     },
+
+      {
+      "type": "dialogue",
+      "speaker_pos": "left", 
+      "character": "Ardi",
+      "text": "Aku tahu Aldi salah, tapi kasih dia kesempatan buat tanggung jawab"
+     },
+       
+{
+      "type": "question",
+      "text": "Permintaan Ardi untuk memberi Aldi kesempatan bertanggung jawab, adalah perwujudan dari nilai Pancasila yang mana?",
+      "options": [
+        "Keadilan Sosial dan Perbaikan Diri",
+        "Kemanusiaan dan Kasih Sayang",
+        "Persatuan dan Kekeluargaan",
+        "Kerakyatan dan Musyawarah",
+        "Ketuhanan dan Pengampunan"
+      ],
+      "answer": "Keadilan Sosial dan Perbaikan Diri",
+      "explanation": "Memberi kesempatan perbaikan dan pengawasan kepada pelanggar adalah wujud Keadilan Sosial (Sila ke-5)."
+    },
+       {
+      "type": "dialogue",
+      "speaker_pos": "right", 
+      "character": "Nadia",
+      "text": "Kamu yakin Ardi? Tapi kalau dia ulangi lagi, aku nggak bakal ragu buat lapor ke pembina"
+     },
+
+       {
+      "type": "dialogue",
+      "speaker_pos": "left", 
+      "character": "Ardi",
+      "text": "Iya, aku dan kamu bakal ngawasin Aldi"
+     },
+
+     {
+      "type": "dialogue",
+      "speaker_pos": "left", 
+      "character": "Aldi",
+      "text": "Makasih... aku janji bakal benerin semuanya."
+     }
+  ]
+
+}

@@ -199,10 +199,10 @@ def ask_question():
     # --- PERBAIKAN UTAMA ADA DI SINI ---
     response = None # Variabel untuk menyimpan response
 
-    if request.method == 'POST':
-        user_answer = request.form.get('option')
+    if request.method == 'POST' and request.is_json:
+        user_answer = request.json.get('option')
         correct_answer = question_data['answer']
-        is_correct = (user_answer and user_answer == correct_answer)
+        is_correct = (user_answer == correct_answer)
 
         # Jika waktu habis
         if not user_answer:
@@ -213,26 +213,25 @@ def ask_question():
         if is_correct:
             session['score'] += 1
             session['current_q_index'] += 1
-            next_url = url_for('ask_question')
         else:
             session['lives'] -= 1
             if session['lives'] > 0:
                 session['current_q_index'] += 1
-                next_url = url_for('ask_question')
             else:
                 game_over = True
-                next_url = url_for('results')
         
         # Buat response untuk dikirim
-        response = make_response(render_template('question.html',
-                                                 question=question_data,
-                                                 show_answer=True,
-                                                 is_correct=is_correct,
-                                                 user_answer=user_answer,
-                                                 correct_answer=correct_answer,
-                                                 next_url=next_url,
-                                                 lives=session.get('lives', 0), # Kirim 'lives'
-                                                 game_over=game_over))
+        return jsonify({
+            "correct": is_correct,
+            "user_answer": user_answer,
+            "correct_answer": correct_answer,
+            "explanation": question_data['explanation'],
+            "question": question_data['question'],
+            "game_over": game_over,
+            "lives": session.get("lives", 0),
+            "max_lives": 3
+        })
+            
     else: # Method GET
         question_num = session.get('score', 0) + 1
         # Buat response untuk dikirim

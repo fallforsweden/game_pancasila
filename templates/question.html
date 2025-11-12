@@ -31,11 +31,20 @@
             if (timeLeft <= 0) {
                 // Hentikan interval
                 clearInterval(timerInterval);
-                timerElement.textContent = "Waktu Habis! Mengirim Jawaban...";
+                timerElement.textContent = "Waktu Habis!";
                 
                 setTimeout(() => {
-                    formElement.submit(); 
-                }, 500); 
+                    fetch(location.href, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ option: null })
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        updateLives(data.lives, 3);     // update darah
+                        showResultBox(data);            // tampilkan result seperti klik tombol
+                    });
+                }, 1000); 
                 return;
             }
 
@@ -109,7 +118,7 @@
                 </div>
                 
                 <div class="speech-bubble">
-                    <p><strong>Hei, iniloh penjelasannya!</strong></p>
+                    <p><strong>Iniloh penjelasannya!</strong></p>
                     <p>{{ question.explanation }}</p>
                 </div>
             </div>
@@ -125,8 +134,13 @@
         {% else %} 
             <div class="top-bar">
                 <div class="lives-display">
-                    {% for _ in range(lives) %}
-                        <img src="{{ url_for('static', filename='img/health.png') }}" alt="Life">
+                    {% set max_lives = 3 %}
+                    {% for i in range(max_lives) %}
+                        {% if i < lives %}
+                            <img src="{{ url_for('static', filename='img/health.png') }}" alt="Life">
+                        {% else %}
+                            <img src="{{ url_for('static', filename='img/HeartStroke.png') }}" alt="Lost Life">
+                        {% endif %}
                     {% endfor %}
                 </div>
 
@@ -136,12 +150,157 @@
             <h1>Question {{ question_num }}</h1>
             <div class="question-title">{{ question.question }}</div>
             
-            <form method="post" class="options" id="question-form">
+            <form class="options" id="question-form">
                 {% for option in question.options %}
-                    <button type="submit" name="option" value="{{ option }}">{{ option }}</button>
+                    <button type="button" value="{{ option }}">{{ option }}</button>
                 {% endfor %}
             </form>
+
+            <div id="answer-box" style="display:none; margin-top:20px;"></div>
         {% endif %}
     </div>
+
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+    const btns = document.querySelectorAll('#question-form button');
+    const answerBox = document.getElementById('answer-box');
+
+    btns.forEach(btn => {
+        btn.addEventListener('click', async function () {
+            const selected = this.value;
+
+            document.getElementById('question-form').style.display = 'none';
+
+            const response = await fetch(location.href, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ option: selected })
+            });
+
+            const data = await response.json();
+
+            answerBox.style.display = 'block';
+
+            answerBox.innerHTML = `
+                ${
+                    data.correct
+                    ? `
+                        <div class="explanation correct">
+                            <strong>Correct!</strong><br> Your answer was: <br>${data.user_answer}
+                        </div>
+                    `
+                    : `
+                        <div class="explanation incorrect">
+                            <strong>Incorrect.<br></strong> You answered: <br><strong>${data.user_answer}</strong>.
+                            <p>The correct answer was:<br><strong>${data.correct_answer}</strong></p>
+                        </div>
+                    `
+                }
+
+                <div class="game-feedback-box">
+                    <div class="character-img">
+                        <img src="/static/img/karakter.jpg" alt="Character" class="retro-character">
+                    </div>
+
+                    <div class="speech-bubble">
+                        <p><strong>Iniloh penjelasannya!</strong></p>
+                        <p>${data.explanation}</p>
+                    </div>
+                </div>
+
+                <a id="next-btn" class="btn" style="background-color:#007BFF; cursor:pointer;">
+                    ${data.game_over ? "Lihat Hasil Akhir →" : "Soal Selanjutnya →"}
+                </a>
+            `;
+
+            const nextBtn = document.getElementById('next-btn');
+
+            nextBtn.addEventListener('click', () => {
+                if (data.game_over) {
+                    window.location.href = "/results";
+                } else {
+                    window.location.reload();
+                }
+            });
+
+            const livesDisplay = document.querySelector('.lives-display');
+            livesDisplay.innerHTML = '';
+
+            for (let i = 0; i < data.max_lives; i++) {
+                if (i < data.lives) {
+                    // nyawa masih ada
+                    livesDisplay.innerHTML += `
+                        <img src="/static/img/health.png" alt="Life">
+                    `;
+                } else {
+                    // nyawa hilang → tampilkan heart kosong
+                    livesDisplay.innerHTML += `
+                        <img src="/static/img/HeartStroke.png" alt="Lost Life">
+                    `;
+                }
+            }
+
+
+            // jika game over, redirect otomatis
+            // if (data.game_over) {
+            //     setTimeout(() => {
+            //         window.location.href = "/results";
+            //     }, 1200);
+            // } else {
+            //     // lanjut soal berikutnya
+            //     setTimeout(() => {
+            //         window.location.reload();
+            //     }, 1300);
+            // }
+        });
+    });
+});
+
+
+function updateLives(lives, max) {
+    const livesDisplay = document.querySelector('.lives-display');
+    livesDisplay.innerHTML = '';
+    for (let i = 0; i < max; i++) {
+        if (i < lives) {
+            livesDisplay.innerHTML += `<img src="/static/img/health.png">`;
+        } else {
+            livesDisplay.innerHTML += `<img src="/static/img/HeartStroke.png">`;
+        }
+    }
+}
+
+function showResultBox(data) {
+    document.getElementById('question-form').style.display = 'none';
+    const answerBox = document.getElementById('answer-box');
+    answerBox.style.display = "block";
+
+    answerBox.innerHTML = `
+        ${data.correct
+            ? `<div class="explanation correct"><strong>Correct!</strong><br>Your answer was:<br>${data.user_answer}</div>`
+            : `<div class="explanation incorrect"><strong>Incorrect.</strong><br>You answered:<br>${data.user_answer}<br>
+                <p>The correct answer was:<br><strong>${data.correct_answer}</strong></p></div>`
+        }
+
+        <div class="game-feedback-box">
+            <div class="character-img"><img src="/static/img/karakter.jpg" class="retro-character"></div>
+            <div class="speech-bubble">
+                <p><strong>Iniloh penjelasannya!</strong></p>
+                <p>${data.explanation}</p>
+            </div>
+        </div>
+
+        <a id="next-btn" class="btn" style="background-color:#007BFF; cursor:pointer;">
+            ${data.game_over ? "Lihat Hasil Akhir →" : "Soal Selanjutnya →"}
+        </a>
+    `;
+
+    document.getElementById('next-btn').onclick = () => {
+        if (data.game_over) window.location.href = "/results";
+        else window.location.reload();
+    };
+}
+
+</script>
+
 </body>
 </html>
