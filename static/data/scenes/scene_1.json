@@ -5,14 +5,16 @@
     "background": "bg_placeholder.png",
 
     "initial_characters": {
-      "left": "guru2.png",
-      "right": "GURU.png"
+      "left": "ardi.png",
+      "right": "nadia.png"
     },
 
     "preload_images": [
-      "guru2.png",
-      "MURID.png",
-      "GURU.png"
+      "alya.png",
+      "ardi.png",
+      "nadia.png",
+      "afif.png",
+      "koridor.png"
     ]
 
   },
@@ -47,14 +49,14 @@
 
     {
       "type": "dialogue",
-      "speaker_pos": "right",
+      "speaker_pos": "narrator",
       "character": "Narator",
       "text": "Saat ia berbalik, bahunya tanpa sengaja menyenggol setumpuk kertas yang dibawa seseorang. Lembarannya berterbangan ke lantai."
     },
     
     {
       "type": "dialogue",
-      "speaker_pos": "right",
+      "speaker_pos": "left",
       "character": "Ardi",
       "text": "Wah! Maaf banget, aku nggak sengaja—"
     },
@@ -68,7 +70,7 @@
    
     {
       "type": "dialogue",
-      "speaker_pos": "right",
+      "speaker_pos": "left",
       "character": "Ardi",
       "text": "Iya, baru hari ini masuk."
     },
@@ -82,7 +84,7 @@
 
 {
       "type": "dialogue",
-      "speaker_pos": "right",
+      "speaker_pos": "left",
       "character": "Ardi",
       "text": "Acara sekolah?"
     },
@@ -96,7 +98,7 @@
      
 {
       "type": "dialogue",
-      "speaker_pos": "right",
+      "speaker_pos": "left",
       "character": "Ardi",
       "text": "Aku bisa bantu. Masalahnya pasti soal gimana menyatukan tim ya?"
     },
@@ -121,7 +123,7 @@
     },
 {
       "type": "dialogue",
-      "speaker_pos": "right",
+      "speaker_pos": "left",
       "character": "Ardi",
       "text": "Oke, baiklah"
     },
@@ -132,10 +134,16 @@
       "character": "Narator",
       "text": "Nadia meminta anggota OSIS untuk berkumpul"
     },
+    
+    {
+      "type": "character_swap",
+      "position": "left",
+      "image": "alya.png"
+    },
      
  {
       "type": "dialogue",
-      "speaker_pos": "right",
+      "speaker_pos": "left",
       "character": "Alya",
       "text": "Dia siapa Nadia?"
     },
@@ -149,9 +157,15 @@
 
  {
       "type": "dialogue",
-      "speaker_pos": "right",
+      "speaker_pos": "left",
       "character": "Alya",
       "text": "Dia? emang dia tau apaan? emang dia bisa nyatuin pendapat kita?"
+    },
+    
+        {
+      "type": "character_swap",
+      "position": "left",
+      "image": "ardi.png"
     },
     
      {
@@ -167,7 +181,13 @@
       "character": "Ardi",
       "text": "Jadi, bisa keluarkan pendapat kalian masing-masing?"
     },
-
+    
+     {
+      "type": "character_swap",
+      "position": "right",
+      "image": "alya.png"
+    },
+    
 {
   "type": "dialogue",
   "speaker_pos": "right",
@@ -175,12 +195,24 @@
   "text": "Oke, aku duluan. Menurutku acara pensi harus fokus ke penampilan band sekolah. Itu yang paling ditunggu siswa-siswi tiap tahun."
 },
 
+     {
+      "type": "character_swap",
+      "position": "left",
+      "image": "nadia.png"
+    },
+
 {
   "type": "dialogue",
   "speaker_pos": "left",
   "character": "Nadia",
   "text": "Tapi kalau semua fokus ke band, bagian teater dan tari tradisional bisa keteteran. Aku rasa harus ada keseimbangan."
 },
+
+     {
+      "type": "character_swap",
+      "position": "right",
+      "image": "ardi.png"
+    },
 
 {
   "type": "dialogue",
@@ -203,16 +235,22 @@
       "text": "Setiap anggota dilibatkan dengan ide-ide berbeda biar saling melengkapi. Inilah bentuk nyata dari kerja sama dan gotong royong."
 },
 
+     {
+      "type": "character_swap",
+      "position": "left",
+      "image": "alya.png"
+    },
+
 {
       "type": "dialogue",
-      "speaker_pos": "right",
+      "speaker_pos": "left",
       "character": "Alya",
       "text": "Kalau tiap divisi kirim  perwakilan, kita bisa bikin konsep yang lebih beragam tapi tetap satu arah."
 },
     
 {
   "type": "dialogue",
-  "speaker_pos": "right",
+  "speaker_pos": "left",
   "character": "Alya",
   "text": "Masuk akal juga. Nggak nyangka anak baru bisa bantu nyelesain masalah kita."
 },
@@ -239,10 +277,16 @@
 
     {
   "type": "dialogue",
-  "speaker_pos": "right",
+  "speaker_pos": "left",
   "character": "Alya",
   "text": "Tim dekor kalian urus dekorasi yang bisa menarik perhatian orang ya"
 },
+
+     {
+      "type": "character_swap",
+      "position": "right",
+      "image": "nadia.png"
+    },
 
   {
   "type": "dialogue",
@@ -260,28 +304,34 @@
 
 {
   "type": "dialogue",
-  "speaker_pos": "right",
+  "speaker_pos": "left",
   "character": "Alya",
   "text": "Eh, dekorasinya kok belum jadi juga?"
 },
 
+ {
+      "type": "character_swap",
+      "position": "right",
+      "image": "afif.png"
+    },
+
 {
   "type": "dialogue",
-  "speaker_pos": "left",
+  "speaker_pos": "right",
   "character": "Afif",
   "text": "Iya, tadi tim konsumsi numpahin sirup pas nyiapin minuman di dekat sini"
 },
 
 {
   "type": "dialogue",
-  "speaker_pos": "right",
+  "speaker_pos": "left",
   "character": "Alya",
   "text": "Tapi kenapa nggak langsung koordinasi aja? Jangan nunggu sampai semua jadi berantakan gini dong!"
 },
 
 {
   "type": "dialogue",
-  "speaker_pos": "left",
+  "speaker_pos": "right",
   "character": "Afif",
   "text": "Kita udah coba ngomong, tapi semua orang sibuk. Lagian bukan salah tim dekor sepenuhnya juga kan?"
 },
@@ -292,6 +342,12 @@
   "character": "Narator",
   "text": "Suasana memanas. Alya dan Afif saling adu argumen, menarik perhatian anggota lain yang mulai gelisah dengan perdebatan itu."
 },
+
+ {
+      "type": "character_swap",
+      "position": "right",
+      "image": "nadia.png"
+    },
 
 {
   "type": "dialogue",
@@ -309,10 +365,22 @@
 
 {
   "type": "dialogue",
-  "speaker_pos": "right",
+  "speaker_pos": "left",
   "character": "Alya",
   "text": "Waduh! Kok bisa mati listrik sih pas lagi sibuk begini?"
 },
+
+ {
+      "type": "character_swap",
+      "position": "right",
+      "image": "nadia.png"
+    },
+
+ {
+      "type": "character_swap",
+      "position": "left",
+      "image": "afif.png"
+    },
 
 {
   "type": "dialogue",
@@ -327,6 +395,12 @@
   "character": "Nadia",
   "text": "Eh, jangan asal nuduh gitu! Kita udah pastiin semua aman sebelum mulai. Bisa aja tim dekorasi nyedot listrik kebanyakan!"
 },
+
+ {
+      "type": "character_swap",
+      "position": "left",
+      "image": "ardi.png"
+    },
 
 {
   "type": "dialogue",
@@ -369,12 +443,24 @@
   "text": "Nah, kayak gitu. Kalau kita saling bantu, masalah kayak gini bisa cepat ketemu penyebabnya."
 },
 
+ {
+      "type": "character_swap",
+      "position": "left",
+      "image": "afif.png"
+    },
+
 {
   "type": "dialogue",
   "speaker_pos": "left",
   "character": "Afif",
   "text": "Iya, maaf juga tadi sempat emosi. Aku cuma khawatir dekorasinya nggak kelar tepat waktu."
 },
+
+ {
+      "type": "character_swap",
+      "position": "right",
+      "image": "alya.png"
+    },
 
 {
   "type": "dialogue",
@@ -390,9 +476,15 @@
   "text": "Tak lama kemudian, listrik kembali menyala. Semua anggota kembali bekerja dengan semangat baru."
 },
 
+ {
+      "type": "character_swap",
+      "position": "left",
+      "image": "ardi.png"
+    },
+
 {
   "type": "dialogue",
-  "speaker_pos": "right",
+  "speaker_pos": "left",
   "character": "Ardi",
   "text": "Nah, gitu dong! Ternyata kerja sama bisa nyalain semangat juga."
 },
@@ -410,18 +502,39 @@
       "character": "Narator",
       "text": "Hari H pensi pun tiba."
     },
+    
+     {
+      "type": "character_swap",
+      "position": "left",
+      "image": "alya.png"
+    },
+    
     {
       "type": "dialogue",
       "speaker_pos": "left",
       "character": "Alya",
       "text": "Dekor udah siap, panggungnya keren banget!"
     },
+    
+     {
+      "type": "character_swap",
+      "position": "right",
+      "image": "nadia.png"
+    },
+    
     {
       "type": "dialogue",
       "speaker_pos": "right",
       "character": "Nadia",
       "text": "Tim teknis juga aman, semua lancar."
     },
+    
+     {
+      "type": "character_swap",
+      "position": "left",
+      "image": "ardi.png"
+    },
+    
     {
       "type": "dialogue",
       "speaker_pos": "left",

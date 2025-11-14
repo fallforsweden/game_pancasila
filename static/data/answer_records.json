@@ -5,5 +5,103 @@
     "correct_answer": "Adil kepada semua orang",
     "is_correct": false,
     "timestamp": "2025-11-12T15:45:00.149Z"
+  },
+  {
+    "question_text": "Dalam agama Kristen, ajaran utama Yesus adalah?",
+    "user_answer": "Kasih",
+    "correct_answer": "Kasih",
+    "is_correct": true,
+    "timestamp": "2025-11-13T01:04:19.120Z"
+  },
+  {
+    "question_text": "Agama Hindu mengenal konsep pembebasan yang disebut?",
+    "user_answer": "Moksha",
+    "correct_answer": "Moksha",
+    "is_correct": true,
+    "timestamp": "2025-11-13T01:04:48.578Z"
+  },
+  {
+    "question_text": "Apa contoh nyata pengamalan sila ketiga?",
+    "user_answer": "Menghormati perbedaan budaya",
+    "correct_answer": "Menghormati perbedaan budaya",
+    "is_correct": true,
+    "timestamp": "2025-11-13T01:04:52.972Z"
+  },
+  {
+    "question_text": "Apa makna kepala banteng dalam Pancasila?",
+    "user_answer": "Kebijaksanaan dalam musyawarah",
+    "correct_answer": "Kebijaksanaan dalam musyawarah",
+    "is_correct": true,
+    "timestamp": "2025-11-13T01:04:57.484Z"
+  },
+  {
+    "question_text": "Lambang sila kelima Pancasila adalah?",
+    "user_answer": "Padi dan Kapas",
+    "correct_answer": "Padi dan Kapas",
+    "is_correct": true,
+    "timestamp": "2025-11-13T01:05:01.171Z"
+  },
+  {
+    "question_text": "Apa contoh keadilan sosial dalam kehidupan sehari-hari?",
+    "user_answer": "Membagi makanan sama rata",
+    "correct_answer": "Membagi makanan sama rata",
+    "is_correct": true,
+    "timestamp": "2025-11-13T01:05:08.630Z"
+  },
+  {
+    "question_text": "Menghormati keputusan hasil musyawarah mencerminkan pengamalan sila ke?",
+    "user_answer": "Pertama",
+    "correct_answer": "Keempat",
+    "is_correct": false,
+    "timestamp": "2025-11-13T01:05:13.489Z"
+  },
+  {
+    "question_text": "Apa makna persaudaraan universal dalam agama?",
+    "user_answer": "Semua manusia bersaudara tanpa membedakan agama",
+    "correct_answer": "Semua manusia bersaudara tanpa membedakan agama",
+    "is_correct": true,
+    "timestamp": "2025-11-13T01:05:18.274Z"
+  },
+  {
+    "question_text": "Lambang sila pertama Pancasila adalah?",
+    "user_answer": "Padi dan Kapas",
+    "correct_answer": "Bintang",
+    "is_correct": false,
+    "timestamp": "2025-11-13T01:05:21.732Z"
+  },
+  {
+    "question_text": "Negara Indonesia berdasarkan?",
+    "user_answer": "Kapitalisme",
+    "correct_answer": "Pancasila",
+    "is_correct": false,
+    "timestamp": "2025-11-13T01:05:25.931Z"
+  },
+  {
+    "question_text": "Dalam agama Hindu, Trimurti terdiri dari Brahma, Siwa, dan ...?",
+    "user_answer": "Wisnu",
+    "correct_answer": "Wisnu",
+    "is_correct": true,
+    "timestamp": "2025-11-14T16:33:06.785Z"
+  },
+  {
+    "question_text": "Apa contoh musyawarah dalam kehidupan sehari-hari?",
+    "user_answer": "Diskusi menentukan ketua kelas",
+    "correct_answer": "Diskusi menentukan ketua kelas",
+    "is_correct": true,
+    "timestamp": "2025-11-14T16:33:09.491Z"
+  },
+  {
+    "question_text": "Apa makna sila keempat bagi kehidupan politik?",
+    "user_answer": "Tidak peduli pada rakyat",
+    "correct_answer": "Musyawarah untuk mufakat",
+    "is_correct": false,
+    "timestamp": "2025-11-14T16:33:11.577Z"
+  },
+  {
+    "question_text": "Apa arti penting persatuan bangsa?",
+    "user_answer": "Memecah belah kelompok",
+    "correct_answer": "Menguatkan rasa kebangsaan",
+    "is_correct": false,
+    "timestamp": "2025-11-14T16:34:06.128Z"
   }
 ]

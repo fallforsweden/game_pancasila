@@ -185,6 +185,11 @@
   </div>
 
   <script>
+    history.pushState(null, null, location.href);
+    window.onpopstate = function () {
+        history.go(1); // every time user hits Back, push them forward again
+    };
+
     const background = document.getElementById("background");
     const charLeft = document.getElementById("char-left");
     const charRight = document.getElementById("char-right");
@@ -222,15 +227,16 @@
     }
 
     function saveProgress() {
-      fetch("/save-progress", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          scene: currentSceneData.scene_id,
-          event_index: eventIndex
-        })
-      });
-    }
+  fetch("/api/story/progress", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      scene_id: currentSceneData.scene_id,
+      event_index: eventIndex
+    })
+  });
+}
+
         
     function goToNextScene() {
       const nextSceneId = currentSceneData.next_scene;
@@ -318,7 +324,6 @@
         } else if (event.position === "right") {
           charRight.src = `/static/img/${event.image}`;
         }
-        
         eventIndex++;
         runEvent();
       }
