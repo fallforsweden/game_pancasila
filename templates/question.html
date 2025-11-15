@@ -88,7 +88,7 @@
     <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
     <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
 
-
+<div class="page-wrapper">
     <div class="container">
         {% if show_answer %}
             <h1>Result</h1>
@@ -158,6 +158,7 @@
 
             <div id="answer-box" style="display:none; margin-top:20px;"></div>
         {% endif %}
+    </div>
     </div>
 
     <script>
@@ -240,15 +241,38 @@ document.addEventListener('DOMContentLoaded', function () {
 
             for (let i = 0; i < data.max_lives; i++) {
                 if (i < data.lives) {
-                    // nyawa masih ada
                     livesDisplay.innerHTML += `
-                        <img src="/static/img/health.png" alt="Life">
+                        <img class="heart" src="/static/img/health.png" style="width:50px;height:50px;" alt="Life">
                     `;
                 } else {
-                    // nyawa hilang → tampilkan heart kosong
                     livesDisplay.innerHTML += `
-                        <img src="/static/img/HeartStroke.png" alt="Lost Life">
+                        <img class="heart" src="/static/img/HeartStroke.png" style="width:50px;height:50px;" alt="Lost Life">
                     `;
+                }
+            }
+
+
+            // Animasi hati terbakar jika salah
+            if (!data.correct) {
+                const hearts = document.querySelectorAll('.heart');
+
+                // Hati yang hilang adalah index ke data.lives
+                const lostIndex = data.lives;
+
+                if (hearts[lostIndex]) {
+                    const target = hearts[lostIndex];
+
+                    // Pakai trik reset biar GIF muncul setiap waktu
+                    target.src = "";
+
+                    setTimeout(() => {
+                        target.src = "/static/img/HatiTerbakar.gif";
+                    }, 50);
+
+                    // Setelah 2.5 detik ubah ke HeartStroke
+                    setTimeout(() => {
+                        target.src = "/static/img/HeartStroke.png";
+                    }, 2500);
                 }
             }
 

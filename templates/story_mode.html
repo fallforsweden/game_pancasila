@@ -269,66 +269,82 @@
       });
     }
 
-    function runEvent(){
-      const event = currentSceneData.events[eventIndex];
-      optionsBox.innerHTML = ""; 
-      nextBtn.disabled = false;  
+    function runEvent() {
+    const event = currentSceneData.events[eventIndex];
+    optionsBox.innerHTML = "";
+    nextBtn.disabled = false;
 
-      if(!event){
+    if (!event) {
         goToNextScene();
         return;
-      }
+    }
 
-      if(event.type === "dialogue"){
+    // DIALOGUE
+    if (event.type === "dialogue") {
         nameEl.textContent = event.character;
         textEl.textContent = event.text;
         setActiveSpeaker(event.speaker_pos);
-      }
+        eventIndex++;
+        return;
+    }
 
-      else if(event.type === "question"){
+    // QUESTION
+    if (event.type === "question") {
         nameEl.textContent = "❓ Kuiz";
         textEl.textContent = event.text;
-        nextBtn.disabled = true; 
+        nextBtn.disabled = true;
         setActiveSpeaker(null);
 
         event.options.forEach(opt => {
-          const btn = document.createElement("button");
-          btn.className = "option-btn";
-          btn.textContent = opt;
+            const btn = document.createElement("button");
+            btn.className = "option-btn";
+            btn.textContent = opt;
 
-          btn.onclick = () => {
-            optionsBox.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
-            if(opt === event.answer){
-              btn.classList.add("correct");
-              textEl.textContent = "Benar! " + event.explanation;
-              nextBtn.disabled = false;
-            } else {
-              btn.classList.add("wrong");
-              textEl.textContent = "Salah. " + event.explanation + " Silakan coba lagi.";
-              
-              setTimeout(() => {
-                textEl.textContent = event.text;
-                optionsBox.querySelectorAll('.option-btn').forEach(b => {
-                  b.disabled = false; 
-                  b.classList.remove("wrong");
-                });
-              }, 2000);
-            }
-          };
-          optionsBox.appendChild(btn);
+            btn.onclick = () => {
+                optionsBox.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
+
+                if (opt === event.answer) {
+                    btn.classList.add("correct");
+                    textEl.textContent = "Benar! " + event.explanation;
+                    nextBtn.disabled = false;
+                } else {
+                    btn.classList.add("wrong");
+                    textEl.textContent = "Salah. " + event.explanation + " Silakan coba lagi.";
+
+                    setTimeout(() => {
+                        textEl.textContent = event.text;
+                        optionsBox.querySelectorAll('.option-btn').forEach(b => {
+                            b.disabled = false;
+                            b.classList.remove("wrong");
+                        });
+                    }, 2000);
+                }
+            };
+
+            optionsBox.appendChild(btn);
         });
-      }
-      else if(event.type === "character_swap") {
-        if (event.position === "left") {
-          charLeft.src = `/static/img/${event.image}`;
-        } else if (event.position === "right") {
-          charRight.src = `/static/img/${event.image}`;
-        }
-        eventIndex++;
-        runEvent();
-      }
+
+        return;
     }
 
+    // CHARACTER SWAP
+    if (event.type === "character_swap") {
+        if (event.position === "left") {
+            charLeft.src = `/static/img/${event.image}`;
+        } else if (event.position === "right") {
+            charRight.src = `/static/img/${event.image}`;
+        }
+        eventIndex++;
+        return;
+    }
+
+    // ⭐ BACKGROUND SWAP — now properly separate
+    if (event.type === "background_swap") {
+        background.src = `/static/img/${event.image}`;
+        eventIndex++;
+        return;
+    }
+}
     // --- (Event Listeners) ---
     nextBtn.addEventListener("click", () => {
       eventIndex++;

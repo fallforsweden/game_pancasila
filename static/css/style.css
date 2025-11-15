@@ -9,6 +9,14 @@ body {
     overflow-x: hidden;
 }
 
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+
 
 @font-face {
   font-family: PressStart2; /* set name */
@@ -29,14 +37,17 @@ p {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     text-align: center;
+    margin-top: 30px;
+    z-index: 99999999999;
 
-    /* Centering setup */
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 200;
+    /* Hapus ini */
+    /* position: absolute; */
+    /* top: 50%; */
+    /* left: 50%; */
+    /* transform: translate(-50%, -50%); */
+    /* z-index: 200; */
 }
+
 
 
 h1 {
@@ -132,7 +143,7 @@ button[type="submit"] {
 /* Style untuk kontainer Scoreboard agar mirip dengan kotak Quiz Complete */
 .scoreboard-container {
     max-width: 600px; /* Samakan dengan .container utama */
-    margin: 50px auto 20px auto; /* Margin agar tidak terlalu rapat */
+    /* margin: 50px auto 20px auto; Margin agar tidak terlalu rapat */
     padding: 30px;
     background-color: rgba(255, 255, 255, 0.9);
     border: 1px solid #ddd;

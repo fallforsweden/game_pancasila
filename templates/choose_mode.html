@@ -16,6 +16,7 @@
         <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
         <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
 
+        <div class="page-wrapper">
     <div class="container">
         <h1>Selamat Datang, {{ current_user.username }}!</h1>
         <p>Silakan pilih mode permainan yang ingin kamu mainkan.</p>
@@ -35,6 +36,7 @@
 
         <br><br><br><br><br>
         <a href="{{ url_for('logout') }}" class="btn" style="background-color: #c82333; margin-top: 30px;">Logout</a>
+    </div>
     </div>
 </body>
 </html>

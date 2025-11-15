@@ -27,6 +27,11 @@
     },
 
     {
+      "type": "background_swap",
+      "image": "koridor.png"  
+    },
+
+    {
       "type": "dialogue",
       "speaker_pos": "narrator", 
       "character": "Prologue",

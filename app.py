@@ -219,17 +219,37 @@ def ask_question():
                 session['current_q_index'] += 1
             else:
                 game_over = True
+
+        lives = session.get("lives", 3)
+        max_lives = 3   
+
+        current_question = QUESTIONS[question_index]
+        user_answer = request.json.get("option")
+        correct = (user_answer == current_question["answer"])
+
+        # Cek bonus
+        bonus = current_question.get("bonus_health", 0)
+        bonus_given = False
+
+        if correct and bonus > 0 and lives < max_lives:
+            lives += bonus
+            if lives > max_lives:
+                lives = max_lives
+            bonus_given = True
+
+        session["lives"] = lives
+
         
         # Buat response untuk dikirim
         return jsonify({
-            "correct": is_correct,
+            "correct": correct,
             "user_answer": user_answer,
-            "correct_answer": correct_answer,
-            "explanation": question_data['explanation'],
-            "question": question_data['question'],
-            "game_over": game_over,
-            "lives": session.get("lives", 0),
-            "max_lives": 3
+            "correct_answer": current_question["answer"],
+            "explanation": current_question["explanation"],
+            "lives": lives,
+            "max_lives": max_lives,
+            "bonus_given": bonus_given,
+            "game_over": game_over
         })
             
     else: # Method GET
@@ -299,6 +319,36 @@ def record_answer():
         json.dump(records, f, indent=2)
 
     return jsonify({"status": "ok"})
+
+@app.route("/api/next-question")
+def api_next_question():
+    questions = session.get("questions", [])
+    index = session.get("question_index", 0)
+    lives = session.get("lives", 3)
+    max_lives = 3
+
+    # pindah ke soal berikutnya
+    index += 1
+    session["question_index"] = index
+
+    # kalau habis
+    if index >= len(questions):
+        return jsonify({
+            "game_over": True
+        })
+
+    q = questions[index]
+
+    return jsonify({
+        "game_over": False,
+        "question_num": index + 1,
+        "question": q["question"],
+        "options": q["options"],
+        "lives": lives,
+        "max_lives": max_lives
+    })
+
+
 
 @app.route("/api/stats")
 def api_stats():
