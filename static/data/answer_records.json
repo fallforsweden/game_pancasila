@@ -684,5 +684,61 @@
     "correct_answer": "Buddha",
     "is_correct": false,
     "timestamp": "2025-11-15T02:05:17.975Z"
+  },
+  {
+    "question_text": "Hari lahir Pancasila diperingati setiap tanggal?",
+    "user_answer": "17 Agustus",
+    "correct_answer": "1 Juni",
+    "is_correct": false,
+    "timestamp": "2025-11-15T02:25:16.421Z"
+  },
+  {
+    "question_text": "Sila kedua Pancasila berbunyi?",
+    "user_answer": "Kerakyatan yang Dipimpin oleh Hikmat",
+    "correct_answer": "Kemanusiaan yang Adil dan Beradab",
+    "is_correct": false,
+    "timestamp": "2025-11-15T02:27:39.779Z"
+  },
+  {
+    "question_text": "Apa lambang sila ketiga Pancasila?",
+    "user_answer": "Kepala Banteng",
+    "correct_answer": "Pohon Beringin",
+    "is_correct": false,
+    "timestamp": "2025-11-15T02:27:45.190Z"
+  },
+  {
+    "question_text": "Sila kedua Pancasila berbunyi?",
+    "user_answer": "Persatuan Indonesia",
+    "correct_answer": "Kemanusiaan yang Adil dan Beradab",
+    "is_correct": false,
+    "timestamp": "2025-11-15T02:27:50.011Z"
+  },
+  {
+    "question_text": "Apa sila pertama dalam Pancasila?",
+    "user_answer": "Ketuhanan yang Maha Esa",
+    "correct_answer": "Ketuhanan yang Maha Esa",
+    "is_correct": true,
+    "timestamp": "2025-11-15T02:27:52.985Z"
+  },
+  {
+    "question_text": "Agama apa yang mengajarkan delapan jalan kebenaran?",
+    "user_answer": "Hindu",
+    "correct_answer": "Buddha",
+    "is_correct": false,
+    "timestamp": "2025-11-15T02:28:03.684Z"
+  },
+  {
+    "question_text": "Lambang sila pertama Pancasila adalah?",
+    "user_answer": "Bintang",
+    "correct_answer": "Bintang",
+    "is_correct": true,
+    "timestamp": "2025-11-15T02:28:06.708Z"
+  },
+  {
+    "question_text": "Hari lahir Pancasila diperingati setiap tanggal?",
+    "user_answer": "17 Agustus",
+    "correct_answer": "1 Juni",
+    "is_correct": false,
+    "timestamp": "2025-11-15T02:28:09.275Z"
   }
 ]

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Prologue</title>
+  <style>
+
+    @font-face {
+  font-family: PressStart2; /* set name */
+  src: url(/static/font/PressStart2.ttf); /* url of the font */
+}
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: black;
+      font-family: 'PressStart2', monospace;
+      color: #ffe81f;
+      height: 100vh;
+      perspective: 400px;
+    }
+
+    .crawl-container {
+      position: absolute;
+      bottom: -100px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .crawl {
+      width: 60%;
+      font-size: 18px;
+      line-height: 30px;
+      text-align: center;
+      transform-origin: 50% 100%;
+      animation: crawl 40s linear forwards;
+    }
+
+    @keyframes crawl {
+      0% { transform: rotateX(25deg) translateY(100%); }
+      100% { transform: rotateX(25deg) translateY(-300%); }
+    }
+
+    .fadeout {
+      animation: fadeoutAnim 2s forwards;
+      animation-delay: 38s;
+    }
+
+    @keyframes fadeoutAnim {
+      0% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="crawl-container fadeout">
+  <div class="crawl">
+    <h2>PROLOGUE</h2><br>
+    Pada tahun 2080, Indonesia berada dalam kondisi kritis.  
+    Teknologi berkembang pesat, namun ketidakadilan dan konflik
+    merajalela. Ardi, seorang fisikawan jenius, menyaksikan
+    kehancuran itu setiap hari.  
+
+    <br><br>
+    Ia memutuskan melakukan sesuatu yang mustahil:  
+    membangun mesin waktu untuk kembali ke masa SMA —
+    masa ketika ia percaya perubahan masih mungkin terjadi.  
+
+    <br><br>
+    Dengan harapan memperbaiki masa depan bangsanya,
+    Ardi menekan tombol terakhir pada mesin waktu...
+  </div>
+</div>
+
+<script>
+  // Setelah animasi selesai → redirect otomatis
+  setTimeout(() => {
+    window.location.href = "/story-mode";
+  }, 40000); // 40 detik
+</script>
+
+</body>
+</html>

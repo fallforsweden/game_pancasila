@@ -348,6 +348,10 @@ def api_next_question():
         "max_lives": max_lives
     })
 
+@app.route('/prologue')
+@login_required
+def prologue():
+    return render_template('prologue.html')
 
 
 @app.route("/api/stats")

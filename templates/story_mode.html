@@ -284,7 +284,6 @@
         nameEl.textContent = event.character;
         textEl.textContent = event.text;
         setActiveSpeaker(event.speaker_pos);
-        eventIndex++;
         return;
     }
 
@@ -334,14 +333,13 @@
         } else if (event.position === "right") {
             charRight.src = `/static/img/${event.image}`;
         }
-        eventIndex++;
         return;
     }
 
     // ⭐ BACKGROUND SWAP — now properly separate
     if (event.type === "background_swap") {
-        background.src = `/static/img/${event.image}`;
-        eventIndex++;
+        background.style.background = `url('/static/img/${event.image}') center/cover no-repeat`;
+        console.log("Swap background to", event.image);
         return;
     }
 }
