@@ -1,4 +1,4 @@
-from flask import Flask, render_template,jsonify, request, redirect, url_for, session, flash, make_response
+from flask import Flask, render_template,jsonify, request, redirect, url_for, session, flash, make_response, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -21,18 +21,19 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
-# --- Database Models ---
+
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     password_hash = db.Column(db.String(256), nullable=False)
-    
-    # --- ADD THIS LINE ---
     current_scene = db.Column(db.String(100), nullable=False, default='scene_1')
-    # ---------------------
+    
+    # [BARU] Kolom RPG
+    exp = db.Column(db.Integer, default=0) 
+    level = db.Column(db.Integer, default=1)
 
     def set_password(self, password): self.password_hash = generate_password_hash(password)
-    def check_password(self, password): return check_password_hash(self.password_hash, password)
+    def check_password(self, password): return check_password_hash(self.password_hash, password)    
 
 class ScoreEntry(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -70,18 +71,31 @@ def index():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated: return redirect(url_for('choose_mode'))
+    
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        confirm_password = request.form['confirm_password'] # 1. Ambil input konfirmasi
+
+        # 2. Validasi: Cek apakah password sama
+        if password != confirm_password:
+            flash('Konfirmasi kata sandi tidak cocok!', 'error')
+            return redirect(url_for('register'))
+
+        # 3. Validasi: Cek username kembar
         if User.query.filter_by(username=username).first():
             flash('Username sudah digunakan.', 'error')
             return redirect(url_for('register'))
+        
+        # 4. Buat User Baru
         new_user = User(username=username)
         new_user.set_password(password)
         db.session.add(new_user)
         db.session.commit()
+        
         flash('Registrasi berhasil! Silakan login.', 'success')
         return redirect(url_for('login'))
+        
     return render_template('register.html')
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -165,12 +179,14 @@ def complete_scene():
 @app.route('/start-endless')
 @login_required
 def start_quiz():
-    # Menginisialisasi skor dan nyawa
     session.pop('score', None)
     session.pop('q_indices', None)
     session.pop('last_q_data', None)
+    session.pop('history', None) # Hapus history lama
+    
     session['score'] = 0
-    session['lives'] = 3  # Memberikan 3 kesempatan di awal
+    session['lives'] = 3
+    session['history'] = [] # List untuk simpan status ['correct', 'wrong', 'correct']
     
     question_indices = list(range(len(QUESTIONS)))
     random.shuffle(question_indices)
@@ -178,95 +194,127 @@ def start_quiz():
     session['current_q_index'] = 0
     return redirect(url_for('ask_question'))
 
+def get_max_exp_for_level(level):
+    # Rumus: Level 1 = 300, Level 2 = 400, Level 3 = 500, dst.
+    return 200 + (level * 100)
+
 # Ganti fungsi ask_question yang lama dengan yang ini
 @app.route('/question', methods=['GET', 'POST'])
 @login_required
 def ask_question():
-    # Pastikan kuis sudah dimulai
-    if 'q_indices' not in session or 'lives' not in session:
-        return redirect(url_for('start_quiz'))
+    if 'q_indices' not in session: return redirect(url_for('start_quiz'))
 
-    current_q_index_pos = session.get('current_q_index', 0)
-    # Jika pertanyaan habis, mulai dari awal lagi
-    if current_q_index_pos >= len(session['q_indices']):
-        random.shuffle(session['q_indices'])
-        session['current_q_index'] = 0
-        current_q_index_pos = 0
+    # Helper untuk ambil history
+    history = session.get('history', [])
 
-    question_index = session['q_indices'][current_q_index_pos]
-    question_data = QUESTIONS[question_index]
-    
-    # --- PERBAIKAN UTAMA ADA DI SINI ---
-    response = None # Variabel untuk menyimpan response
-
+    # [POST - JAWAB]
     if request.method == 'POST' and request.is_json:
         user_answer = request.json.get('option')
+        
+        current_q_pos = session.get('current_q_index', 0)
+        question_index = session['q_indices'][current_q_pos]
+        question_data = QUESTIONS[question_index]
+        
         correct_answer = question_data['answer']
         is_correct = (user_answer == correct_answer)
 
-        # Jika waktu habis
         if not user_answer:
-            user_answer = 'Waktu Habis'
             is_correct = False
-
-        game_over = False
-        if is_correct:
-            session['score'] += 1
-            session['current_q_index'] += 1
-        else:
-            session['lives'] -= 1
-            if session['lives'] > 0:
-                session['current_q_index'] += 1
-            else:
-                game_over = True
+            user_answer = "Waktu Habis"
 
         lives = session.get("lives", 3)
-        max_lives = 3   
-
-        current_question = QUESTIONS[question_index]
-        user_answer = request.json.get("option")
-        correct = (user_answer == current_question["answer"])
-
-        # Cek bonus
-        bonus = current_question.get("bonus_health", 0)
+        max_lives = 3
+        game_over = False
         bonus_given = False
-
-        if correct and bonus > 0 and lives < max_lives:
-            lives += bonus
-            if lives > max_lives:
-                lives = max_lives
-            bonus_given = True
-
-        session["lives"] = lives
-
         
-        # Buat response untuk dikirim
+        # LOGIKA NOMOR SOAL BARU: Berdasarkan panjang history + 1
+        question_number_now = len(history) + 1
+        is_bonus_round = (question_number_now % 10 == 0)
+
+        # RPG Data
+        user = User.query.get(current_user.id)
+        max_exp_required = get_max_exp_for_level(user.level)
+
+        if is_correct:
+            session['score'] += 1
+            user.exp += 100
+            history.append('correct') # Simpan status BENAR
+            
+            while user.exp >= max_exp_required:
+                user.exp -= max_exp_required
+                user.level += 1
+                max_exp_required = get_max_exp_for_level(user.level)
+            
+            db.session.commit()
+
+            if is_bonus_round and lives < max_lives:
+                lives += 1
+                bonus_given = True
+        else:
+            lives -= 1
+            history.append('wrong') # Simpan status SALAH
+            if lives <= 0: game_over = True
+        
+        # SIMPAN HISTORY KE SESSION
+        session['history'] = history
+        session['lives'] = lives
+        
+        # SELALU NEXT SOAL (Kecuali Game Over)
+        if not game_over:
+             session['current_q_index'] += 1
+
         return jsonify({
-            "correct": correct,
+            "correct": is_correct,
             "user_answer": user_answer,
-            "correct_answer": current_question["answer"],
-            "explanation": current_question["explanation"],
+            "correct_answer": correct_answer,
+            "explanation": question_data["explanation"],
             "lives": lives,
             "max_lives": max_lives,
             "bonus_given": bonus_given,
-            "game_over": game_over
+            "game_over": game_over,
+            "current_exp": user.exp,
+            "max_exp": max_exp_required,
+            "level": user.level,
+            "history": history # Kirim history ke frontend
         })
-            
-    else: # Method GET
-        question_num = session.get('score', 0) + 1
-        # Buat response untuk dikirim
-        response = make_response(render_template('question.html',
-                                                 question=question_data,
-                                                 show_answer=False,
-                                                 question_num=question_num,
-                                                 lives=session.get('lives', 3))) # Kirim 'lives'
 
-    # Tambahkan header anti-cache ke response
-    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
-    response.headers['Pragma'] = 'no-cache'
-    response.headers['Expires'] = '0'
-    
-    return response
+    # [GET - LOAD]
+    else:
+        current_q_pos = session.get('current_q_index', 0)
+        
+        if current_q_pos >= len(session['q_indices']):
+            random.shuffle(session['q_indices'])
+            session['current_q_index'] = 0
+            current_q_pos = 0
+
+        question_index = session['q_indices'][current_q_pos]
+        question_data = QUESTIONS[question_index]
+        
+        # LOGIKA NOMOR SOAL: History + 1
+        question_num = len(history) + 1
+        is_bonus_round = (question_num % 10 == 0)
+        max_exp_display = get_max_exp_for_level(current_user.level)
+
+        data_response = {
+            "question_num": question_num,
+            "question": question_data['question'],
+            "options": question_data['options'],
+            "lives": session.get('lives', 3),
+            "game_over": False,
+            "is_bonus": is_bonus_round,
+            "username": current_user.username,
+            "current_exp": current_user.exp,
+            "max_exp": max_exp_display,
+            "level": current_user.level,
+            "total_questions": len(QUESTIONS),
+            "history": history # Kirim history
+        }
+
+        if request.args.get('data_only'):
+            return jsonify(data_response)
+
+        return render_template('question.html', initial_data=data_response)
+
 @app.route('/results')
 @login_required
 def results():
@@ -384,6 +432,17 @@ def api_stats():
 
     return jsonify(result)
 
+@app.route('/download-game')
+@login_required
+def download_game():
+    try:
+        return send_from_directory(
+            directory='static/game', 
+            path='pancasila_adventure.exe', # Ganti dengan nama file aslimu
+            as_attachment=True
+        )
+    except FileNotFoundError:
+        return "File game belum diupload oleh developer.", 404
 
 @app.route("/stats")
 def stats_page():

@@ -3,31 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to the Quiz!</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Welcome - Pancasila Cerdas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stylelogin.css') }}">
 </head>
 <body>
-    <!-- ☁️ Awan langsung tampil & langsung bergerak -->
-    <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
-    <img src="{{ url_for('static', filename='img/awan2.png') }}" alt="cloud" class="ix-cloud large">
-    <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
-    <img src="{{ url_for('static', filename='img/awan2.png') }}" alt="cloud" class="ix-cloud large">
-    <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
-    <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
-    <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
-    <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
-
-
-    <img src="../static/img/pancasilacerdas.png" alt="Pancasila Cerdas" class="judulpancasilaku">
-    <!-- 🌇 Box login & register -->
-    <div class="ix-container">
-        <a href="{{ url_for('login') }}" class="ix-btn">
-            <img src="{{ url_for('static', filename='img/loginbutton.png') }}" alt="Login" class="ix-img">
-        </a>
-
-        <a href="{{ url_for('register') }}" class="ix-btn">
-            <img src="{{ url_for('static', filename='img/registerbutton.png') }}" alt="Register" class="ix-img">
-        </a>
+    
+    <div id="cloud-container">
+        <img src="{{ url_for('static', filename='img/awan2.png') }}" class="pixel-cloud c1">
+        <img src="{{ url_for('static', filename='img/awan.png') }}" class="pixel-cloud c2">
+        <img src="{{ url_for('static', filename='img/awan.png') }}" class="pixel-cloud c3">
+        <img src="{{ url_for('static', filename='img/awan2.png') }}" class="pixel-cloud c4">
     </div>
+
+    <div class="page-wrapper" style="flex-direction: column;">
+        
+        <img src="{{ url_for('static', filename='img/pancasilacerdas.png') }}" alt="Pancasila Cerdas" class="judulpancasilaku">
+
+        <div class="container-login container-index">
+            
+            <p style="margin-bottom: 20px; font-size: 1rem !important;">SIAP MENGUJI PENGETAHUANMU?</p>
+
+            <div class="index-btn-group">
+                <a href="{{ url_for('login') }}" class="ix-btn">
+                    <img src="{{ url_for('static', filename='img/loginbutton.png') }}" alt="Login" class="ix-img" style="width: 200px;">
+                </a>
+
+                <a href="{{ url_for('register') }}" class="ix-btn">
+                    <img src="{{ url_for('static', filename='img/registerbutton.png') }}" alt="Register" class="ix-img" style="width: 200px;">
+                </a>
+            </div>
+
+        </div>
+    </div>
+
 </body>
 </html>

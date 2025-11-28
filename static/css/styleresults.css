@@ -1,0 +1,372 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body {
+    font-family: 'Press Start 2P', cursive;
+    background-color: #2b0f54; /* Fallback */
+    margin: 0;
+    color: white;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -10; /* Taruh paling belakang */
+    
+    /* Gambar Background */
+    background: url("/static/img/opening_background.png") no-repeat center center;
+    background-size: cover;
+    
+    /* COBA GANTI INI JADI 0.5 ATAU 0.6 */
+    /* Semakin kecil angkanya, semakin gelap/pudar gambarnya (makin ungu) */
+    opacity: 0.2; 
+}
+
+/* --- WRAPPERS --- */
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    min-height: 100vh;
+}
+
+/* --- USER RESULT CARD (Kotak Skor Kamu) --- */
+.user-result-card {
+    background: #fff;
+    color: #000;
+    padding: 2rem;
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    border: 4px solid #000;
+    box-shadow: 10px 10px 0px rgba(0,0,0,0.5);
+    margin-bottom: 50px;
+    animation: slideDown 0.8s ease-out;
+    position: relative;
+}
+
+.user-result-card h1 {
+    font-size: 1.5rem;
+    color: #555;
+    margin-bottom: 1rem;
+}
+
+.score-big {
+    font-size: 3rem;
+    color: #ffd700;
+    text-shadow: 4px 4px #000;
+    margin: 20px 0;
+    display: block;
+}
+
+/* --- BUTTONS --- */
+.btn-group {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 15px 20px;
+    font-family: 'Press Start 2P';
+    text-decoration: none;
+    color: white;
+    border: 4px solid rgba(0,0,0,0.5);
+    transition: transform 0.1s;
+    font-size: 0.8rem;
+}
+.btn.play-again { background-color: #28a745; box-shadow: 0 6px 0 #1e7e34; }
+.btn.back-menu { background-color: #173b98; box-shadow: 0 6px 0 #173b98; }
+.btn.logout { background-color: #dc3545; box-shadow: 0 6px 0 #bd2130; }
+
+.btn:active { transform: translateY(4px); box-shadow: none !important; }
+
+/* --- LEADERBOARD SECTION --- */
+.scoreboard-section {
+    width: 100%;
+    max-width: 800px;
+}
+
+.scoreboard-title {
+    text-align: center;
+    color: #ffd700;
+    text-shadow: 4px 4px #ff00de;
+    margin-bottom: 40px;
+    font-size: 1.5rem;
+}
+
+/* --- PODIUM LAYOUT (JUARA 1, 2, 3) --- */
+.podium-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Ratakan bawah */
+    gap: 10px;
+    margin-bottom: 30px;
+    height: 300px; /* Tinggi area podium */
+}
+
+.podium-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 120px;
+    text-align: center;
+    position: relative;
+}
+
+/* Avatar di atas batang podium */
+.podium-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    background: #333;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.podium-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+.podium-name {
+    font-size: 0.6rem;
+    margin-bottom: 5px;
+    color: #fff;
+    text-shadow: 2px 2px #000;
+}
+
+.podium-score {
+    font-size: 0.7rem;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Batang Podium */
+.podium-bar {
+    width: 100%;
+    border: 3px solid #000;
+    border-bottom: none;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 10px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: rgba(0,0,0,0.5);
+    box-shadow: 5px 5px 0px rgba(0,0,0,0.5);
+    animation: growUp 1s ease-out forwards;
+    transform-origin: bottom;
+}
+
+/* Styling Spesifik Juara */
+/* JUARA 2 (Silver) */
+.rank-2 { order: 1; } /* Kiri */
+.rank-2 .podium-bar {
+    height: 120px;
+    background: linear-gradient(to bottom, #c0c0c0, #808080);
+}
+
+/* JUARA 1 (Gold) */
+.rank-1 { order: 2; z-index: 10; } /* Tengah */
+.rank-1 .podium-avatar { width: 70px; height: 70px; border-color: #ffd700; }
+.rank-1 .podium-bar {
+    height: 180px;
+    background: linear-gradient(to bottom, #ffd700, #daa520);
+    position: relative;
+}
+/* Mahkota Juara 1 */
+.rank-1::before {
+    content: '👑';
+    font-size: 2rem;
+    position: absolute;
+    top: -90px;
+    right: 5px; 
+    animation: bounce 1s infinite;
+}
+
+/* JUARA 3 (Bronze) */
+.rank-3 { order: 3; } /* Kanan */
+.rank-3 .podium-bar {
+    height: 80px;
+    background: linear-gradient(to bottom, #cd7f32, #8b4513);
+}
+
+/* --- LIST VIEW (RANK 4 KE BAWAH) --- */
+.list-container {
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid #555;
+    border-radius: 10px;
+    padding: 20px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 2px solid #333;
+    transition: background 0.2s;
+}
+
+/* --- ANIMASI AWAN (CLOUD PARALLAX) --- */
+#cloud-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Mencegah scrollbar muncul saat awan keluar layar */
+    pointer-events: none; /* Klik tembus ke belakang */
+    z-index: -5; /* Di atas background ungu, tapi di bawah konten game */
+}
+
+.pixel-cloud {
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0.6; /* Agak transparan biar nyatu sama bg */
+    left: -200px; /* Start di luar layar kiri */
+}
+
+/* Keyframes Gerakan Kiri ke Kanan */
+@keyframes floatRight {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(100vw + 300px)); } /* Jalan sampai lewat layar kanan */
+}
+
+/* --- VARIASI AWAN (Biar Natural) --- */
+
+/* Awan 1: Besar, Lambat, Paling Belakang (Jauh) */
+.c1 {
+    top: 15%;
+    width: 150px;
+    animation: floatRight 45s linear infinite;
+    animation-delay: -5s; /* Sudah jalan 5 detik saat load */
+    opacity: 0.4;
+}
+
+/* Awan 2: Kecil, Cepat, Agak Depan */
+.c2 {
+    top: 25%;
+    width: 80px;
+    animation: floatRight 25s linear infinite;
+    animation-delay: -18s; /* Sudah jalan 18 detik, jadi ada di tengah */
+    opacity: 0.7;
+}
+
+/* Awan 3: Sedang, Kecepatan Normal */
+.c3 {
+    top: 50%;
+    width: 120px;
+    animation: floatRight 35s linear infinite;
+    animation-delay: -30s;
+    opacity: 0.5;
+}
+
+/* Awan 4: Sangat Lambat, di Bawah */
+.c4 {
+    top: 70%;
+    width: 200px;
+    animation: floatRight 60s linear infinite;
+    animation-delay: -2s;
+    opacity: 0.3;
+}
+
+.list-item:last-child { border-bottom: none; }
+.list-item:hover { background: rgba(255, 255, 255, 0.1); }
+
+.rank-num { color: #888; margin-right: 15px; }
+.list-name { color: #fff; flex-grow: 1; text-align: left; }
+.list-score { color: #ffd700; }
+
+/* ANIMATIONS */
+@keyframes slideDown { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes growUp { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+/* Scrollbar Custom */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #111; }
+::-webkit-scrollbar-thumb { background: #555; border: 1px solid #000; }
+
+/* =========================================
+   RESPONSIVE MOBILE (ANDROID/iOS)
+   ========================================= */
+
+@media screen and (max-width: 768px) {
+    /* 1. Scroll di HP */
+    body {
+        overflow-y: auto; 
+    }
+
+    .page-wrapper {
+        padding: 40px 15px;
+    }
+
+    /* 2. User Result Card lebih kecil */
+    .user-result-card {
+        padding: 1.5rem;
+        width: 95%;
+        margin-bottom: 30px;
+    }
+    .user-result-card h1 { font-size: 1rem; }
+    .score-big { font-size: 2rem; margin: 10px 0; }
+
+    /* 3. Tombol Tumpuk ke Bawah */
+    .btn-group {
+        flex-direction: column;
+        width: 100%;
+        gap: 15px;
+    }
+    .btn {
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    /* 4. Podium Mengecil */
+    .podium-container {
+        gap: 5px; /* Jarak antar juara dirapatkan */
+        height: 250px; /* Tinggi podium dikurangi */
+    }
+    
+    .podium-item {
+        width: 30%; /* Pakai % biar muat bertiga */
+    }
+
+    .podium-name {
+        font-size: 0.5rem; /* Nama dikecilkan */
+    }
+    
+    .podium-score {
+        font-size: 0.6rem;
+    }
+    
+    /* Ukuran Batang & Avatar disesuaikan */
+    .rank-1 .podium-bar { height: 140px; }
+    .rank-2 .podium-bar { height: 90px; }
+    .rank-3 .podium-bar { height: 60px; }
+    
+    .rank-1 .podium-avatar { width: 50px; height: 50px; }
+    .podium-avatar { width: 40px; height: 40px; }
+    
+    .rank-1::before {
+        top: -60px;
+        font-size: 1.5rem;
+    }
+
+    /* 5. List View di HP */
+    .list-container {
+        padding: 10px;
+    }
+    .list-item {
+        padding: 10px;
+        font-size: 0.7rem;
+    }
+}

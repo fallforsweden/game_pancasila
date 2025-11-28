@@ -3,340 +3,456 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Question</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-
-    {% if not show_answer %}
-    <script>
-
-        history.pushState(null, null, location.href);
-    window.onpopstate = function () {
-        history.go(1);
-    };
-    // Bungkus semua kode kamu di dalam event listener ini
-    document.addEventListener('DOMContentLoaded', function() {
-        
-        // Cek apakah elemen timer ada (hanya ada jika not show_answer)
-        const timerElement = document.getElementById('timer');
-        if (!timerElement) {
-            return; // Hentikan eksekusi jika bukan halaman pertanyaan aktif
-        }
-
-        let timeLeft = 30; // Batas waktu 30 detik
-        
-        // Dapatkan elemen form
-        const formElement = document.getElementById('question-form');
-        
-        function countdown() {
-            if (timeLeft <= 0) {
-                // Hentikan interval
-                clearInterval(timerInterval);
-                timerElement.textContent = "Waktu Habis!";
-                
-                setTimeout(() => {
-                    fetch(location.href, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ option: null })
-                    })
-                    .then(res => res.json())
-                    .then(data => {
-                        updateLives(data.lives, 3);     // update darah
-                        showResultBox(data);            // tampilkan result seperti klik tombol
-                    });
-                }, 1000); 
-                return;
-            }
-
-            if (timeLeft <= 10) {
-                timerElement.classList.add('low-time');
-            }
-            
-            // Perbarui tampilan timer
-            timerElement.textContent = timeLeft;
-            
-            // Ganti warna saat waktu hampir habis
-            if (timeLeft <= 10) {
-                timerElement.style.color = '#c53030'; // Merah
-            }
-            
-            timeLeft -= 1;
-        }
-
-        const timerInterval = setInterval(countdown, 1000);
-        
-        // Hentikan timer jika pengguna mengklik tombol apa pun
-        document.querySelectorAll('.options button').forEach(button => {
-            button.addEventListener('click', () => {
-                clearInterval(timerInterval);
-            });
-        });
-    });
-    
-    </script>
-    {% endif %}
-    
-
+    <title>Endless Quiz - Pancasila Cerdas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stylequestion.css') }}">
 </head>
 <body>
-       <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
-    <img src="{{ url_for('static', filename='img/awan2.png') }}" alt="cloud" class="ix-cloud large">
-    <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
-    <img src="{{ url_for('static', filename='img/awan2.png') }}" alt="cloud" class="ix-cloud large">
-    <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
-    <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
-    <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
-    <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
 
-<div class="page-wrapper">
-    <div class="container">
-        {% if show_answer %}
-            <h1>Result</h1>
+    <div id="cloud-container">
+        <img src="{{ url_for('static', filename='img/awan2.png') }}" class="pixel-cloud c1">
+        <img src="{{ url_for('static', filename='img/awan.png') }}" class="pixel-cloud c2">
+        <img src="{{ url_for('static', filename='img/awan.png') }}" class="pixel-cloud c3">
+        <img src="{{ url_for('static', filename='img/awan2.png') }}" class="pixel-cloud c4">
+    </div>
+
+    <audio id="bgm" loop preload="auto"><source src="{{ url_for('static', filename='audio/quizbackground.mp3') }}"></audio>
+    <audio id="sfx-correct"><source src="{{ url_for('static', filename='audio/correct.wav') }}"></audio>
+    <audio id="sfx-wrong"><source src="{{ url_for('static', filename='audio/wrong.wav') }}"></audio>
+    <audio id="sfx-healing"><source src="{{ url_for('static', filename='audio/healing.wav') }}"></audio>
+    <audio id="sfx-levelup"><source src="{{ url_for('static', filename='audio/levelup.wav') }}"></audio>
+
+    <div id="preloader"><h2 id="loading-text" style="color:#fff;">LOADING ASSETS...</h2></div>
+
+    <div id="mode-selection" style="display:none;">
+        <h1 style="color:#ffd700; margin-bottom:30px; text-align:center;">SELECT MODE</h1>
+        <button class="mode-btn" onclick="selectMode('normal')">NORMAL (Dengan Penjelasan)</button>
+        <button class="mode-btn" onclick="selectMode('speedrun')" style="border-color:#ff4444;">SPEEDRUN (Tanpa Penjelasan)</button>
+    </div>
+
+    <div id="countdown-overlay" style="display:none;">
+        <div id="countdown-text" style="font-size:5rem; color:#fff;">READY?</div>
+    </div>
+
+    <div id="screen-fx"></div>
+
+    <div id="overlay-feedback">
+        <div class="overlay-text" id="feedback-text">AWESOME!</div>
+    </div>
+
+    <div id="level-path-container">
+            </div>
+
+    <div class="page-wrapper" style="flex-direction: column;"> 
+
+        <div class="container" id="game-container">
             
-            <!-- <div class="lives-display" style="margin-bottom: 1rem;">
-                {% for _ in range(lives) %}
-                    <img src="{{ url_for('static', filename='img/health.png') }}" alt="Life" style="width: 50px !important; height: 50px !important;">
-                {% endfor %}
-            </div> -->
+            <div class="top-bar" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <div class="lives-display" id="lives-container"></div>
+                
+                <div id="bonus-indicator-text" class="bonus-text" style="display:none;">++ BONUS HEALTH ++</div>
+                
+                <div id="timer" class="timer-display" style="background:#333; color:#fff; padding:10px; border:2px solid #fff;">30</div>
+            </div>
 
-            <div class="question-title">{{ question.question }}</div>
-
-            {% if is_correct %}
-                <div class="explanation correct">
-                    <strong>Correct!</strong><br> Your answer was: <br>{{ user_answer }}
-                </div>
-            {% else %}
-                <div class="explanation incorrect">
-                    <strong>Incorrect.<br></strong> You answered: <br><strong>{{ user_answer }}</strong>.
-                    <p>The correct answer was:<br><strong>{{ correct_answer }}</strong></p>
-                </div>
-            {% endif %}
-
-            <div class="game-feedback-box">
-                <div class="character-img">
-                    <img src="{{ url_for('static', filename='img/karakter.jpg') }}" alt="Character" class="retro-character">
+            <div id="quiz-panel">
+                <h1 id="q-number" style="font-size: 0.8rem; color: #555;">QUESTION {{ initial_data.question_num }}</h1>
+                <div id="q-text" class="question-title" style="font-size: 1.2rem; margin-bottom: 2rem; line-height: 1.6;">
+                    {{ initial_data.question }}
                 </div>
                 
-                <div class="speech-bubble">
-                    <p><strong>Iniloh penjelasannya!</strong></p>
-                    <p>{{ question.explanation }}</p>
-                </div>
+                <div class="options" id="options-container">
+                    </div>
             </div>
 
-            <a href="{{ next_url }}" class="btn" style="background-color: #007BFF;">
-                {% if not game_over %}
-                    Soal Selanjutnya &rarr;
-                {% else %}
-                    Lihat Hasil Akhir &rarr;
-                {% endif %}
-            </a>
-        
-        {% else %} 
-            <div class="top-bar">
-                <div class="lives-display">
-                    {% set max_lives = 3 %}
-                    {% for i in range(max_lives) %}
-                        {% if i < lives %}
-                            <img src="{{ url_for('static', filename='img/health.png') }}" alt="Life">
-                        {% else %}
-                            <img src="{{ url_for('static', filename='img/HeartStroke.png') }}" alt="Lost Life">
-                        {% endif %}
-                    {% endfor %}
+            <div id="result-panel" style="display:none; margin-top:20px;">
+                <div style="text-align:center; margin-bottom:20px;">
+                    <h2 id="result-title"></h2>
+                    <p id="result-user-ans"></p>
+                    <p id="result-correct-ans"></p>
                 </div>
-
-                <div id="timer" class="timer-display">30</div>
+                <div class="game-feedback-box" style="border: 2px dashed #333; padding: 10px; margin-bottom: 20px;">
+                    <p><strong>Penjelasan:</strong></p>
+                    <p id="result-explanation"></p>
+                </div>
+                <button id="next-btn" style="width:100%; padding:15px; font-family:'Press Start 2P'; background:#007BFF; color:white; border:none; cursor:pointer;">LANJUT >></button>
             </div>
-
-            <h1>Question {{ question_num }}</h1>
-            <div class="question-title">{{ question.question }}</div>
-            
-            <form class="options" id="question-form">
-                {% for option in question.options %}
-                    <button type="button" value="{{ option }}">{{ option }}</button>
-                {% endfor %}
-            </form>
-
-            <div id="answer-box" style="display:none; margin-top:20px;"></div>
-        {% endif %}
+        </div>
     </div>
+
+    <div id="rpg-hud">
+        <div class="profile-pic">
+            <img src="{{ url_for('static', filename='img/karakter.jpg') }}" alt="User">
+        </div>
+        <div class="exp-container">
+            <div class="user-info">
+                <span id="hud-username">{{ initial_data.username }}</span>
+                <span id="hud-level" style="color:#ffd700;">LVL {{ initial_data.level }}</span>
+            </div>
+            <div class="exp-bar-frame">
+                <div class="exp-fill" id="exp-fill" style="width: 0%;"></div>
+            </div>
+            <div style="text-align:right; font-size:0.5rem; margin-top:3px; color:#aaa;">
+                <span id="exp-text">{{ initial_data.current_exp }}</span> / <span id="exp-max">{{ initial_data.max_exp }}</span> EXP
+            </div>
+        </div>
     </div>
 
     <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const btns = document.querySelectorAll('#question-form button');
-    const answerBox = document.getElementById('answer-box');
+    // --- VARIABLES ---
+    let currentLives = {{ initial_data.lives }};
+    let currentExp = {{ initial_data.current_exp }};
+    let maxExp = {{ initial_data.max_exp }};
+    let currentLevel = {{ initial_data.level }};
+    let isBonusRound = {{ 'true' if initial_data.is_bonus else 'false' }};
+    let questionOptions = {{ initial_data.options | tojson }};
+    let totalQuestions = {{ initial_data.total_questions }};
+    
+    let correctStreak = localStorage.getItem('quizStreak') ? parseInt(localStorage.getItem('quizStreak')) : 0;
+    let timerInterval;
+    let isSpeedrun = false;
+    let history = {{ initial_data.history | tojson }};
+    const bgm = document.getElementById('bgm');
 
-    btns.forEach(btn => {
-        btn.addEventListener('click', async function () {
-            const selected = this.value;
+    // --- SETUP AWAL ---
+    window.onload = function() {
+        document.getElementById('loading-text').innerText = "SYSTEM READY!";
+        setTimeout(() => {
+            document.getElementById('preloader').style.display = 'none';
+            document.getElementById('mode-selection').style.display = 'flex';
+        }, 1000);
+    };
 
-            document.getElementById('question-form').style.display = 'none';
+    // Render Elemen UI Awal
+    updateLivesUI(currentLives, 3);
+    updateExpBar(currentExp, maxExp);
+    renderOptions(questionOptions);
+    checkBonusIndicator(isBonusRound);
+    
+    // RENDER PATH PERTAMA KALI (PENTING!)
+    renderLevelPath( {{ initial_data.question_num }}, history );
 
-            const response = await fetch(location.href, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ option: selected })
-            });
+    let isProcessing = false;
 
-            const data = await response.json();
+    // --- LOGIKA UTAMA ---
+    async function handleAnswer(selectedOption) {
+        if (isProcessing) return;
+        isProcessing = true;
 
-            fetch("/api/answer-record", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    question_text: data.question || "{{ question.question }}",
-                    user_answer: data.user_answer,
-                    correct_answer: data.correct_answer,
-                    is_correct: data.correct,
-                    timestamp: new Date().toISOString()
-                })
-            });
-
-            answerBox.style.display = 'block';
-
-            answerBox.innerHTML = `
-                ${
-                    data.correct
-                    ? `
-                        <div class="explanation correct">
-                            <strong>Correct!</strong><br> Your answer was: <br>${data.user_answer}
-                        </div>
-                    `
-                    : `
-                        <div class="explanation incorrect">
-                            <strong>Incorrect.<br></strong> You answered: <br><strong>${data.user_answer}</strong>.
-                            <p>The correct answer was:<br><strong>${data.correct_answer}</strong></p>
-                        </div>
-                    `
-                }
-
-                <div class="game-feedback-box">
-                    <div class="character-img">
-                        <img src="/static/img/karakter.jpg" alt="Character" class="retro-character">
-                    </div>
-
-                    <div class="speech-bubble">
-                        <p><strong>Iniloh penjelasannya!</strong></p>
-                        <p>${data.explanation}</p>
-                    </div>
-                </div>
-
-                <a id="next-btn" class="btn" style="background-color:#007BFF; cursor:pointer;">
-                    ${data.game_over ? "Lihat Hasil Akhir →" : "Soal Selanjutnya →"}
-                </a>
-            `;
-
-            const nextBtn = document.getElementById('next-btn');
-
-            nextBtn.addEventListener('click', () => {
-                if (data.game_over) {
-                    window.location.href = "/results";
-                } else {
-                    window.location.reload();
-                }
-            });
-
-            const livesDisplay = document.querySelector('.lives-display');
-            livesDisplay.innerHTML = '';
-
-            for (let i = 0; i < data.max_lives; i++) {
-                if (i < data.lives) {
-                    livesDisplay.innerHTML += `
-                        <img class="heart" src="/static/img/health.png" style="width:50px;height:50px;" alt="Life">
-                    `;
-                } else {
-                    livesDisplay.innerHTML += `
-                        <img class="heart" src="/static/img/HeartStroke.png" style="width:50px;height:50px;" alt="Lost Life">
-                    `;
-                }
-            }
-
-
-            // Animasi hati terbakar jika salah
-            if (!data.correct) {
-                const hearts = document.querySelectorAll('.heart');
-
-                // Hati yang hilang adalah index ke data.lives
-                const lostIndex = data.lives;
-
-                if (hearts[lostIndex]) {
-                    const target = hearts[lostIndex];
-
-                    // Pakai trik reset biar GIF muncul setiap waktu
-                    target.src = "";
-
-                    setTimeout(() => {
-                        target.src = "/static/img/HatiTerbakar.gif";
-                    }, 50);
-
-                    // Setelah 2.5 detik ubah ke HeartStroke
-                    setTimeout(() => {
-                        target.src = "/static/img/HeartStroke.png";
-                    }, 2500);
-                }
-            }
-
-
-            // jika game over, redirect otomatis
-            // if (data.game_over) {
-            //     setTimeout(() => {
-            //         window.location.href = "/results";
-            //     }, 1200);
-            // } else {
-            //     // lanjut soal berikutnya
-            //     setTimeout(() => {
-            //         window.location.reload();
-            //     }, 1300);
-            // }
+        const allButtons = document.querySelectorAll('#options-container button');
+        allButtons.forEach(btn => {
+            btn.disabled = true; // Matikan fungsi klik HTML
+            btn.style.opacity = "0.6"; // Pudarkan dikit
+            btn.style.cursor = "not-allowed"; // Ubah kursor
+            btn.style.transform = "none"; // Hilangkan efek tekan
         });
-    });
-});
 
+        clearInterval(timerInterval);
 
-function updateLives(lives, max) {
-    const livesDisplay = document.querySelector('.lives-display');
-    livesDisplay.innerHTML = '';
-    for (let i = 0; i < max; i++) {
-        if (i < lives) {
-            livesDisplay.innerHTML += `<img src="/static/img/health.png">`;
+        const response = await fetch('/question', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ option: selectedOption })
+        });
+        const data = await response.json();
+
+        history = data.history;
+
+        // 1. Audio Effect
+        duckBGM();
+
+        if (data.correct) {
+            correctStreak++;
+            localStorage.setItem('quizStreak', correctStreak);
+            // Sequence Benar
+            await playCorrectSequence(correctStreak, data.bonus_given);
         } else {
-            livesDisplay.innerHTML += `<img src="/static/img/HeartStroke.png">`;
+            correctStreak = 0;
+            localStorage.setItem('quizStreak', 0);
+            // Sequence Salah
+            await playWrongSequence();
+        }
+
+        restoreBGM();
+
+        // 2. Update Data RPG
+        updateExpBar(data.current_exp, data.max_exp);
+        
+        if (data.level > currentLevel) {
+            playLevelUp(); 
+            currentLevel = data.level; 
+            document.getElementById('hud-level').innerText = "LVL " + currentLevel;
+        }
+
+        updateLivesUI(data.lives, data.max_lives);
+
+        if (data.game_over) {
+            setTimeout(() => { window.location.href = "/results"; }, 1000);
+            return;
+        }
+
+        // 3. Lanjut Soal
+        if (isSpeedrun) {
+            loadNextQuestion();
+        } else {
+            showResultPanel(data);
         }
     }
-}
 
-function showResultBox(data) {
-    document.getElementById('question-form').style.display = 'none';
-    const answerBox = document.getElementById('answer-box');
-    answerBox.style.display = "block";
+    // --- FUNGSI RENDER PATH (O--O--O) ---
+    function renderLevelPath(currentNum, historyData) {
+        const container = document.getElementById('level-path-container');
+        container.innerHTML = ''; 
 
-    answerBox.innerHTML = `
-        ${data.correct
-            ? `<div class="explanation correct"><strong>Correct!</strong><br>Your answer was:<br>${data.user_answer}</div>`
-            : `<div class="explanation incorrect"><strong>Incorrect.</strong><br>You answered:<br>${data.user_answer}<br>
-                <p>The correct answer was:<br><strong>${data.correct_answer}</strong></p></div>`
+        let batchIndex = Math.floor((currentNum - 1) / 10);
+        let startNum = (batchIndex * 10) + 1;
+        let endNum = startNum + 9;
+
+        for (let i = startNum; i <= endNum; i++) {
+            const node = document.createElement('div');
+            node.className = 'path-node';
+            node.innerText = i;
+
+            // LOGIKA WARNA PATH BERDASARKAN HISTORY
+            // Index history dimulai dari 0 (Soal 1 = history[0])
+            let historyIndex = i - 1;
+            let status = historyData[historyIndex]; // 'correct', 'wrong', atau undefined
+
+            if (status === 'wrong') {
+                node.classList.add('wrong'); // MERAH
+            } else if (status === 'correct') {
+                node.classList.add('completed'); // ABU
+            } else if (i === currentNum) {
+                node.classList.add('current'); // EMAS (Soal Aktif)
+            }
+
+            // Checkpoint Style
+            if (i % 10 === 0) node.classList.add('checkpoint');
+
+            container.appendChild(node);
+
+            // Garis Penghubung
+            if (i < endNum) {
+                const line = document.createElement('div');
+                line.className = 'path-line';
+                // Garis nyala jika node ini sudah dikerjakan (ada statusnya)
+                if (status !== undefined) {
+                    line.classList.add('completed');
+                }
+                container.appendChild(line);
+            }
         }
+    }
+    
+    // --- NEXT QUESTION LOGIC ---
+    async function loadNextQuestion() {
+        const response = await fetch('/question?data_only=true');
+        const data = await response.json();
+        history = data.history;
+        
+        if (data.game_over) { window.location.href = "/results"; return; }
 
-        <div class="game-feedback-box">
-            <div class="character-img"><img src="/static/img/karakter.jpg" class="retro-character"></div>
-            <div class="speech-bubble">
-                <p><strong>Iniloh penjelasannya!</strong></p>
-                <p>${data.explanation}</p>
-            </div>
-        </div>
+        isProcessing = false;
+        
+        // Reset Panel
+        document.getElementById('result-panel').style.display = 'none';
+        document.getElementById('quiz-panel').style.display = 'block';
+        
+        // Update Info Soal
+        document.getElementById('q-number').innerText = `QUESTION ${data.question_num}`;
+        document.getElementById('q-text').innerText = data.question;
+        
+        // UPDATE PATH SECARA DINAMIS DISINI
+        renderLevelPath(data.question_num, history);
 
-        <a id="next-btn" class="btn" style="background-color:#007BFF; cursor:pointer;">
-            ${data.game_over ? "Lihat Hasil Akhir →" : "Soal Selanjutnya →"}
-        </a>
-    `;
+        checkBonusIndicator(data.is_bonus);
+        renderOptions(data.options);
+        startTimer();
+    }
 
-    document.getElementById('next-btn').onclick = () => {
-        if (data.game_over) window.location.href = "/results";
-        else window.location.reload();
-    };
-}
+    // --- HELPER FUNCTIONS (UI & AUDIO) ---
+    
+    function renderOptions(options) {
+        const container = document.getElementById('options-container');
+        container.innerHTML = '';
+        options.forEach((opt, index) => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.innerText = opt;
+            btn.onclick = () => handleAnswer(opt);
+            if (index % 2 === 0) btn.classList.add('btn-enter-left');
+            else btn.classList.add('btn-enter-right');
+            btn.style.animationDelay = `${index * 0.1}s`;
+            container.appendChild(btn);
+        });
+    }
 
-</script>
+    function checkBonusIndicator(isBonus) {
+        const ind = document.getElementById('bonus-indicator-text');
+        ind.style.display = isBonus ? 'block' : 'none';
+    }
 
+    function showResultPanel(data) {
+        document.getElementById('quiz-panel').style.display = 'none';
+        const resPanel = document.getElementById('result-panel');
+        resPanel.style.display = 'block';
+        const title = document.getElementById('result-title');
+        title.innerText = data.correct ? 'JAWABAN BENAR!' : 'YAH, SALAH!';
+        title.style.color = data.correct ? '#00cc00' : '#cc0000';
+        document.getElementById('result-user-ans').innerText = `Jawabanmu: ${data.user_answer || "-"}`;
+        document.getElementById('result-correct-ans').innerHTML = !data.correct ? `Yang benar: <strong>${data.correct_answer}</strong>` : '';
+        document.getElementById('result-explanation').innerText = data.explanation;
+        document.getElementById('next-btn').onclick = loadNextQuestion;
+    }
+
+    function selectMode(mode) {
+        isSpeedrun = (mode === 'speedrun');
+        document.getElementById('mode-selection').style.display = 'none';
+        bgm.volume = 0.5; bgm.play();
+        startCountdown();
+    }
+
+    function startCountdown() {
+        const overlay = document.getElementById('countdown-overlay');
+        const text = document.getElementById('countdown-text');
+        overlay.style.display = 'flex';
+        let sequence = ["ARE YOU READY?", "3", "2", "1", "GO!"];
+        let i = 0;
+        function playStep() {
+            if (i >= sequence.length) {
+                overlay.style.display = 'none';
+                document.getElementById('game-container').style.display = 'block';
+                startTimer();
+                return;
+            }
+            text.innerText = sequence[i];
+            
+            // --- PASTIKAN LOGIKA INI ADA ---
+            if (["3", "2", "1"].includes(sequence[i])) {
+                text.classList.add('heartbeat'); // Memanggil animasi CSS
+            } else {
+                text.classList.remove('heartbeat');
+                // Style khusus untuk GO!
+                if(sequence[i] === "GO!") text.style.color = "#00ff00"; 
+            }
+            // -------------------------------
+            
+            i++;
+            setTimeout(playStep, 1000);
+        }
+        playStep();
+    }
+
+    function startTimer() {
+        let timeLeft = 30;
+        const timerElem = document.getElementById('timer');
+        timerElem.style.color = "#fff";
+        timerElem.textContent = timeLeft;
+        clearInterval(timerInterval);
+        timerInterval = setInterval(() => {
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                timerElem.textContent = "0";
+                handleAnswer(null); 
+            } else {
+                timerElem.textContent = timeLeft;
+                if (timeLeft <= 10) timerElem.style.color = '#ff0000';
+                timeLeft--;
+            }
+        }, 1000);
+    }
+
+    function updateLivesUI(lives, max) {
+        const container = document.getElementById('lives-container');
+        container.innerHTML = '';
+        for(let i=0; i<max; i++){
+            const img = document.createElement('img');
+            img.width = 40; img.style.marginRight = "5px";
+            if(i < lives) img.src = "{{ url_for('static', filename='img/health.png') }}";
+            else img.src = "{{ url_for('static', filename='img/HeartStroke.png') }}";
+            container.appendChild(img);
+        }
+    }
+
+    function updateExpBar(curr, max) {
+        const percent = Math.min(100, (curr / max) * 100);
+        document.getElementById('exp-fill').style.width = percent + "%";
+        document.getElementById('exp-text').innerText = curr;
+        document.getElementById('exp-max').innerText = max;
+    }
+
+    // --- SOUND SEQUENCES ---
+    function playCorrectSequence(streak, isBonus) {
+        return new Promise(resolve => {
+            let msg = "CORRECT!";
+            if (streak === 2) msg = "GOOD JOB!";
+            else if (streak === 3) msg = "AWESOME!";
+            else if (streak === 4) msg = "FANTASTIC!";
+            else if (streak === 5) msg = "UNSTOPPABLE!";
+            else if (streak >= 6) msg = "LEGENDARY!";
+            
+            const overlay = document.getElementById('overlay-feedback');
+            const textElem = document.getElementById('feedback-text');
+            textElem.innerText = msg;
+            
+            const sound = document.getElementById('sfx-correct');
+            sound.volume = 0.4;
+            sound.currentTime = 0;
+            sound.play();
+
+            overlay.classList.add('active');
+            textElem.classList.remove('animate');
+            void textElem.offsetWidth; 
+            textElem.classList.add('animate');
+
+            setTimeout(() => {
+                overlay.classList.remove('active');
+                if (isBonus) {
+                    playSound('sfx-healing');
+                    triggerScreenFX('healing');
+                }
+                resolve();
+            }, 1500);
+        });
+    }
+
+    function playWrongSequence() {
+        return new Promise(resolve => {
+            const wrongSfx = document.getElementById('sfx-wrong');
+            wrongSfx.volume = 0.4; 
+            wrongSfx.currentTime = 0;
+            wrongSfx.play();
+            triggerScreenFX('fire');
+            setTimeout(() => { resolve(); }, 1000);
+        });
+    }
+
+    function playLevelUp() {
+        const hud = document.getElementById('rpg-hud');
+        playSound('sfx-levelup');
+        hud.classList.add('levelup-effect');
+        setTimeout(() => { hud.classList.remove('levelup-effect'); }, 1500);
+    }
+
+    function duckBGM() { bgm.volume = 0.2; }
+    function restoreBGM() {
+        let vol = bgm.volume;
+        const fade = setInterval(() => {
+            if (vol < 0.5) { vol += 0.05; bgm.volume = Math.min(0.5, vol); }
+            else { clearInterval(fade); }
+        }, 100);
+    }
+    function playSound(id) {
+        const sound = document.getElementById(id);
+        if(sound) { sound.currentTime = 0; sound.play().catch(e => console.log(e)); }
+    }
+    function triggerScreenFX(type) {
+        const fxLayer = document.getElementById('screen-fx');
+        fxLayer.className = ''; 
+        fxLayer.style.opacity = '1';
+        if (type === 'healing') fxLayer.classList.add('fx-healing');
+        if (type === 'fire') fxLayer.classList.add('fx-fire');
+        setTimeout(() => { fxLayer.style.opacity = '0'; }, 800);
+    }
+    </script>
 </body>
 </html>

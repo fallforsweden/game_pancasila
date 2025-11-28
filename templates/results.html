@@ -3,37 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Results</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Quiz Results - Pencasila Cerdas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styleresults.css') }}">
 </head>
 <body>
+
+    <div id="cloud-container">
+        <img src="{{ url_for('static', filename='img/awan2.png') }}" class="pixel-cloud c1">
+        <img src="{{ url_for('static', filename='img/awan.png') }}" class="pixel-cloud c2">
+        <img src="{{ url_for('static', filename='img/awan.png') }}" class="pixel-cloud c3">
+        <img src="{{ url_for('static', filename='img/awan2.png') }}" class="pixel-cloud c4">
+    </div>
+
+    <audio id="result-bgm" loop autoplay>
+        <source src="{{ url_for('static', filename='audio/resultbackground.mp3') }}" type="audio/mpeg">
+    </audio>
+
     <div class="page-wrapper">
 
-    <div class="container">
-        <h1>Quiz Selesai!</h1>
-        <h2>Kerja bagus, {{ username }}!</h2>
-        <div class="results">
-            Skor Akhir Kamu: <strong>{{ score }}</strong>
+        <div class="user-result-card">
+            <h1>QUIZ SELESAI!</h1>
+            <p>Kerja bagus, <span style="color:#007bff">{{ username }}</span>!</p>
+            
+            <span class="score-big">{{ score }}</span>
+            <p>POINTS</p>
+
+            <div class="btn-group">
+                <a href="{{ url_for('start_quiz') }}" class="btn play-again">MAIN LAGI</a>
+                <a href="{{ url_for('index') }}" class="btn back-menu">MAIN MENU</a>
+            </div>
         </div>
-        <a href="{{ url_for('start_quiz') }}" class="btn play-again">Main Lagi?</a>
-        <a href="{{ url_for('logout') }}" class="btn" style="background-color: #c82333;">Logout</a>
+
+        <div class="scoreboard-section">
+            <h2 class="scoreboard-title">GLOBAL RANKING</h2>
+
+            <div class="podium-container">
+                {% for entry in top_scores[:3] %}
+                    <div class="podium-item rank-{{ loop.index }}">
+                        <div class="podium-avatar">
+                            <img src="{{ url_for('static', filename='img/karakter.jpg') }}" alt="User">
+                        </div>
+                        <div class="podium-name">{{ entry.username }}</div>
+                        <div class="podium-score">{{ entry.score }} pts</div>
+                        <div class="podium-bar">{{ loop.index }}</div>
+                    </div>
+                {% endfor %}
+                
+                </div>
+
+            {% if top_scores|length > 3 %}
+            <div class="list-container">
+                {% for entry in top_scores[3:] %}
+                    <div class="list-item">
+                        <span class="rank-num">#{{ loop.index + 3 }}</span>
+                        <span class="list-name">{{ entry.username }}</span>
+                        <span class="list-score">{{ entry.score }} pts</span>
+                    </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+        </div>
     </div>
 
-    <div class="scoreboard-container">
-        <h2>🏆 Global Scoreboard</h2>
-        <ol class="scoreboard-list">
-        {% for entry in top_scores %}
-            <li>
-                <span>{{ loop.index }}. <strong>{{ entry.username }}</strong></span>
-                <span class="score-points">{{ entry.score }} points</span>
-            </li>
-        {% else %}
-            <li>Belum ada skor yang tercatat.</li>
-        {% endfor %}
-        </ol>
-    </div>
+    <script>
+        // Force Audio Play (Browser policy workaround)
+        const audio = document.getElementById('result-bgm');
+        
+        // Coba play saat load
+        window.onload = function() {
+            audio.volume = 0.5;
+            audio.play().catch(error => {
+                console.log("Autoplay prevented via policy. Waiting for interaction.");
+            });
+        };
 
-</div>
-
+        // Play saat user klik dimanapun (backup plan)
+        document.body.addEventListener('click', () => {
+            if(audio.paused) audio.play();
+        }, { once: true });
+    </script>
 </body>
 </html>

@@ -1,0 +1,266 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* --- BACKGROUND SETUP (Opacity Fix) --- */
+body {
+    font-family: 'Press Start 2P', cursive;
+    background-color: #2b0f54;
+    margin: 0;
+    overflow: hidden;
+    color: white;
+    position: relative;
+    min-height: 100vh;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -10;
+    background: url("/static/img/opening_background.png") no-repeat center center;
+    background-size: cover;
+    opacity: 0.2; /* Gelapkan background agar input jelas */
+}
+
+/* --- ANIMASI AWAN --- */
+#cloud-container {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    overflow: hidden; pointer-events: none; z-index: -5;
+}
+.pixel-cloud { position: absolute; background-repeat: no-repeat; background-size: contain; left: -200px; }
+@keyframes floatRight { 0% { transform: translateX(0); } 100% { transform: translateX(calc(100vw + 300px)); } }
+.c1 { top: 15%; width: 150px; animation: floatRight 45s linear infinite; animation-delay: -5s; opacity: 0.4; }
+.c2 { top: 25%; width: 80px; animation: floatRight 25s linear infinite; animation-delay: -18s; opacity: 0.7; }
+.c3 { top: 50%; width: 120px; animation: floatRight 35s linear infinite; animation-delay: -30s; opacity: 0.5; }
+.c4 { top: 70%; width: 200px; animation: floatRight 60s linear infinite; animation-delay: -2s; opacity: 0.3; }
+
+/* --- LAYOUT UTAMA --- */
+.page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+/* --- LOGIN CONTAINER BOX --- */
+.container-login {
+    background: #fff;
+    color: #000;
+    padding: 3rem;
+    text-align: center;
+    
+    /* RPG Box Style */
+    border: 4px solid #000;
+    outline: 4px solid #fff;
+    box-shadow: 
+        0 0 0 8px #000, 
+        20px 20px 0px rgba(0,0,0,0.5);
+        
+    width: 100%;
+    max-width: 500px;
+    
+    animation: popUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popUp { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+.container-login h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #007bff; /* Biru Pixel */
+    text-shadow: 3px 3px 0px #000;
+    text-transform: uppercase;
+}
+
+.container-login p {
+    font-size: 0.7rem !important;
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+/* --- FORM STYLING --- */
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    box-sizing: border-box; /* Agar padding tidak merusak lebar */
+    
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.9rem;
+    
+    border: 3px solid #000;
+    background: #eee;
+    box-shadow: inset 3px 3px 0px rgba(0,0,0,0.1);
+    outline: none;
+    transition: all 0.2s;
+}
+
+input:focus {
+    background: #fff;
+    border-color: #007bff;
+    box-shadow: inset 3px 3px 0px rgba(0,123,255,0.2);
+}
+
+/* --- TOMBOL LOGIN (IMAGE) --- */
+.ix-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: transform 0.2s;
+}
+
+.ix-img {
+    display: block;
+    width: 200px;
+    image-rendering: pixelated;
+    filter: drop-shadow(4px 4px 0px rgba(0,0,0,0.3));
+}
+
+.ix-btn:hover {
+    transform: scale(1.1);
+}
+
+.ix-btn:active {
+    transform: scale(1.05);
+}
+
+/* --- FLASH MESSAGES (ALERTS) --- */
+.explanation {
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 0.8rem;
+    border: 3px dashed;
+    text-transform: uppercase;
+}
+
+.explanation.incorrect {
+    background-color: #ffe6e6;
+    color: #cc0000;
+    border-color: #cc0000;
+}
+
+.explanation.correct {
+    background-color: #e6fffa;
+    color: #006600;
+    border-color: #006600;
+}
+
+/* --- LINK DAFTAR --- */
+.login-register-link {
+    font-size: 0.6rem !important;
+    margin-top: 30px;
+}
+
+.login-register-link a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+.login-register-link a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+/* --- TAMBAHAN KHUSUS INDEX (LANDING PAGE) --- */
+
+/* Style untuk Logo Pancasila Cerdas */
+.judulpancasilaku {
+    display: block;
+    max-width: 90%;   /* Agar responsif di HP */
+    width: 600px;     /* Ukuran maksimal logo */
+    height: auto;
+    /* margin-bottom: 40px;  */
+    
+    /* Agar Pixel Art Tajam */
+    image-rendering: pixelated; 
+    
+    /* Efek Bayangan & Animasi Melayang */
+    filter: drop-shadow(5px 5px 0px rgba(0,0,0,0.5));
+    animation: floatLogo 3s ease-in-out infinite;
+}
+
+@keyframes floatLogo {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); } /* Naik turun sedikit */
+}
+
+/* Grouping tombol agar sejajar */
+.index-btn-group {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; /* Turun ke bawah kalau layar sempit */
+}
+
+/* Modifikasi Container Login khusus di Index agar tidak terlalu tinggi */
+.container-index {
+    padding: 2rem !important; /* Padding lebih kecil dari login biasa */
+    max-width: 500px !important;
+}
+
+/* =========================================
+   RESPONSIVE MOBILE (ANDROID/iOS)
+   ========================================= */
+
+@media screen and (max-width: 768px) {
+
+    /* 1. Izinkan Scroll di HP */
+    body {
+        overflow-y: auto; 
+        height: auto;
+        min-height: 100vh;
+    }
+
+    /* 2. Sesuaikan Wrapper */
+    .page-wrapper {
+        height: auto; /* Biarkan tinggi menyesuaikan konten */
+        min-height: 100vh;
+        padding: 40px 20px; /* Beri jarak atas bawah lebih lega */
+        box-sizing: border-box;
+    }
+
+    /* 3. Kecilkan Container Putih */
+    .container-login {
+        width: 90%; /* Agar tidak nempel pinggir layar */
+        padding: 1.5rem; /* Padding dikurangi biar muat */
+        
+        /* Shadow dikurangi */
+        box-shadow: 
+            0 0 0 4px #000, 
+            10px 10px 0px rgba(0,0,0,0.5); 
+    }
+
+    .container-login h1 {
+        font-size: 1.5rem; /* Judul dikecilkan dikit */
+    }
+
+    /* 4. Form Input di HP */
+    input[type="text"],
+    input[type="password"] {
+        padding: 12px;
+        font-size: 0.8rem; /* Font input dikecilkan sedikit */
+    }
+
+    /* 5. Logo Index di HP */
+    .judulpancasilaku {
+        width: 85%; /* Logo ambil 85% lebar layar */
+        margin-bottom: 20px; /* Jarak ke kotak dikurangi */
+    }
+
+    /* 6. Tombol Index (Login & Register) Tumpuk Vertikal */
+    .index-btn-group {
+        flex-direction: column; /* Stack ke bawah */
+        gap: 15px;
+    }
+
+    /* Tombol Login/Register Image */
+    .ix-img {
+        width: 100%; /* Full width container induknya */
+        max-width: 200px; /* Tapi dibatasin biar gak raksasa */
+    }
+}

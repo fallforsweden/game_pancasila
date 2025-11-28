@@ -138,6 +138,10 @@ button[type="submit"] {
     background-color: #28a745;
 }
 
+.btn.back-menu {
+    background-color: #173b98;
+}
+
 /* --- Tambahkan kode ini di static/css/style.css --- */
 
 /* Style untuk kontainer Scoreboard agar mirip dengan kotak Quiz Complete */

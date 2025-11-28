@@ -1,0 +1,511 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body {
+    font-family: 'Press Start 2P', cursive;
+    background-color: #2b0f54; /* Warna ungu gelap di belakang gambar */
+    /* background: url("/static/img/opening_background.png") no-repeat center center;
+    background-size: cover;
+    opacity: 80%; */
+    margin: 0;
+    overflow-x: hidden; /* Mencegah scroll samping */
+    color: white;
+    position: relative;
+    min-height: 100vh;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -10; /* Taruh paling belakang */
+    
+    /* Gambar Background */
+    background: url("/static/img/opening_background.png") no-repeat center center;
+    background-size: cover;
+    
+    /* COBA GANTI INI JADI 0.5 ATAU 0.6 */
+    /* Semakin kecil angkanya, semakin gelap/pudar gambarnya (makin ungu) */
+    opacity: 0.2; 
+}
+
+/* --- SCREEN FX (Updated Healing) --- */
+#screen-fx {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 50; opacity: 0; transition: opacity 0.3s;
+}
+
+/* Healing sekarang getar (shake) + border hijau, bukan blok warna penuh */
+.fx-healing {
+    background: radial-gradient(circle, transparent 50%, rgba(5, 171, 52, 0.5) 100%);
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+/* Fire tetap sama */
+.fx-fire {
+    background: radial-gradient(circle, transparent 50%, rgba(255, 0, 0, 0.5) 100%);
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes shake {
+    10%, 90% { transform: translate3d(-4px, 0, 0); }
+    20%, 80% { transform: translate3d(6px, 0, 0); }
+    30%, 50%, 70% { transform: translate3d(-8px, 0, 0); }
+    40%, 60% { transform: translate3d(8px, 0, 0); }
+}
+
+/* --- RPG HUD (FLOATING STYLE) --- */
+#rpg-hud {
+    position: fixed;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    /* SEJAJAR DENGAN CONTAINER */
+    width: 90%; /* Memberi jarak sedikit dari pinggir layar HP */
+    max-width: 800px; /* Sama persis dengan max-width .container */
+    height: auto;
+    
+    /* TRANSPARAN (Tanpa Background) */
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    
+    display: flex;
+    align-items: center;
+    padding: 0; /* Rata tepi */
+    box-sizing: border-box;
+    z-index: 8000;
+}
+
+/* --- EFEK LEVEL UP BARU --- */
+/* Karena container transparan, yang kita animasikan adalah isinya */
+#rpg-hud.levelup-effect .profile-pic {
+    transform: scale(1.2) rotate(10deg);
+    box-shadow: 0 0 20px #ffd700;
+    border-color: #fff;
+}
+
+#rpg-hud.levelup-effect .exp-bar-frame {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #00ff00;
+    border-color: #ffd700;
+}
+
+#rpg-hud.levelup-effect .user-info #hud-level {
+    color: #fff !important;
+    text-shadow: 0 0 10px #ffd700;
+    font-size: 1rem; /* Membesar */
+}
+
+.profile-pic {
+    width: 60px; /* Sedikit diperbesar biar gagah */
+    height: 60px;
+    background: #333;
+    border: 3px solid #ffd700;
+    border-radius: 50%; /* Bulat */
+    margin-right: 15px;
+    overflow: hidden;
+    flex-shrink: 0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3); /* Bayangan kecil di foto */
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.profile-pic img { width: 100%; height: 100%; object-fit: cover; }
+
+.exp-container { 
+    flex-grow: 1; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    /* Tambahkan text-shadow agar tulisan terbaca jelas di background apapun */
+    text-shadow: 2px 2px 0 #000; 
+}
+.user-info { 
+    display: flex; 
+    justify-content: space-between; 
+    font-size: 0.8rem; 
+    margin-bottom: 8px; 
+    color: #fff; 
+    font-weight: bold;
+}
+
+.exp-bar-frame { 
+    width: 100%; 
+    height: 12px; 
+    background: rgba(0, 0, 0, 0.6); /* Background bar agak gelap transparan */
+    border-radius: 10px; 
+    overflow: hidden; 
+    border: 2px solid #fff; /* Border putih tegas ala retro */
+    box-shadow: 0 4px 0 rgba(0,0,0,0.5); /* Efek 3D */
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.exp-fill { 
+    height: 100%; 
+    background: linear-gradient(90deg, #00b09b, #96c93d); 
+    width: 0%; 
+    transition: width 0.5s ease-out; 
+}
+
+/* --- LEVEL PATH VISUALIZER (UPDATED) --- */
+#level-path-container {
+    position: fixed; /* KUNCI BIAR GAK GERAK */
+    top: 50px;       /* Jarak dari atas layar */
+    left: 50%;
+    transform: translateX(-50%); /* Tengah layar */
+    
+    width: 90%;
+    max-width: 800px;
+    height: auto;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    z-index: 8000; /* Layer paling atas */
+    pointer-events: none; /* Supaya klik tembus ke bawah kalau perlu */
+}
+
+.path-node {
+    /* ... style lama ... */
+    width: 45px;
+    height: 45px;
+    background-color: #222;
+    border: 3px solid #555;
+    border-radius: 50%;
+    color: #fff;
+    display: flex; justify-content: center; align-items: center;
+    font-size: 0.9rem; font-weight: bold; position: relative;
+    z-index: 2;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+    transition: all 0.3s;
+}
+
+.path-line {
+    flex-grow: 1;
+    height: 6px; /* Garis lebih tebal */
+    background-color: #333;
+    margin: 0 -2px; /* Agar nyambung sempurna */
+    z-index: 1;
+    max-width: 40px; /* Disesuaikan biar proporsional */
+}
+
+/* STATUS: COMPLETED (Soal sudah lewat) */
+/* Kita pakai warna solid abu-abu, teks tetap putih */
+.path-node.completed {
+    background-color: #555; /* Abu-abu solid */
+    border-color: #777;
+    color: #fff;
+    opacity: 1; /* Tidak transparan */
+}
+.path-line.completed {
+    background-color: #555;
+}
+
+.path-node.wrong {
+    background-color: #ff0000; /* Merah */
+    border-color: #800000;     /* Merah Gelap */
+    color: #fff;
+    box-shadow: 0 0 10px #ff0000;
+}
+
+/* STATUS: CURRENT (Soal sekarang) */
+.path-node.current {
+    background-color: #ffd700; /* Kuning Emas */
+    border-color: #fff;
+    color: #000; /* Teks Hitam biar terbaca di background emas */
+    
+    /* UKURAN MEMBESAR */
+    transform: scale(1.3); 
+    box-shadow: 0 0 20px #ffd700; /* Glow Effect */
+    z-index: 3;
+}
+
+/* STATUS: BOSS/CHECKPOINT (Tiap kelipatan 10) */
+/* Default (Belum sampai) */
+.path-node.checkpoint {
+    border-color: #00ff00; /* Hijau Neon */
+    color: #00ff00;
+}
+
+/* Kalau Checkpoint sedang aktif/current */
+.path-node.checkpoint.current {
+    background-color: #00ff00;
+    color: #000;
+    box-shadow: 0 0 25px #00ff00;
+    transform: scale(1.4);
+}
+
+/* Kalau Checkpoint sudah lewat */
+.path-node.checkpoint.completed {
+    background-color: #2e5c2e; /* Hijau tua redup */
+    color: #fff;
+    border-color: #00ff00;
+}
+
+/* ... (Sisa CSS Button, Overlay, dll tetap sama) ... */
+.bonus-text { font-family: 'Press Start 2P'; color: #00ff00; font-size: 0.7rem; animation: blinkBonus 0.5s infinite alternate; text-shadow: 0 0 5px #fff; }
+@keyframes blinkBonus { from { opacity: 0.5; } to { opacity: 1; text-shadow: 0 0 15px #00ff00; } }
+@keyframes slideInLeft { from { transform: translateX(-50%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes slideInRight { from { transform: translateX(50%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes heartbeatAnim {
+    0% { transform: scale(1); }
+    15% { transform: scale(1.3); } /* Detak Keras */
+    30% { transform: scale(1); }
+    45% { transform: scale(1.15); } /* Detak Lemah */
+    60% { transform: scale(1); }
+    100% { transform: scale(1); }
+}
+
+/* Class ini akan ditempel oleh JS saat hitungan 3, 2, 1 */
+.heartbeat {
+    animation: heartbeatAnim 0.8s ease-in-out infinite;
+    color: #ff0055 !important; /* Merah Neon */
+    text-shadow: 0 0 20px #ff0055;
+}
+.btn-enter-left { animation: slideInLeft 0.4s ease-out forwards; }
+.btn-enter-right { animation: slideInRight 0.4s ease-out forwards; }
+.page-wrapper {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 100vh; 
+    padding: 20px; 
+    box-sizing: border-box; 
+    
+    /* TAMBAHAN PENTING */
+    padding-top: 100px; /* Kasih ruang buat Path di atas */
+    padding-bottom: 120px; /* Kasih ruang buat HUD di bawah */
+}
+.container {
+    background: #fff;
+    color: #000;
+    padding: 2.5rem; /* Padding lebih lega */
+    
+    /* GAYA PIXEL RPG (Double Border) */
+    border: 4px solid #000; /* Garis luar */
+    outline: 4px solid #fff; /* Garis putih sela */
+    box-shadow: 
+        0 0 0 8px #000, /* Garis hitam terluar */
+        15px 15px 0px rgba(0,0,0,0.4); /* Bayangan kasar */
+        
+    width: 100%;
+    max-width: 800px;
+    display: none;
+    position: relative;
+    /* Sedikit tekstur halus biar gak terlalu putih polos (Opsional) */
+    background-image: linear-gradient(#f8f8f8 2px, transparent 2px),
+    linear-gradient(90deg, #f8f8f8 2px, transparent 2px);
+    background-size: 20px 20px;
+}
+.options button {
+    display: block;
+    width: 100%;
+    padding: 18px 20px;
+    margin: 12px 0;
+    
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    text-align: left;
+    
+    /* GAYA TOMBOL TIMBUL (BEVEL) */
+    background-color: #eee;
+    color: #333;
+    border: none;
+    
+    /* Efek 3D Pixel menggunakan Box Shadow */
+    box-shadow: 
+        inset 3px 3px 0px #fff,  /* Highlight kiri-atas */
+        inset -3px -3px 0px #aaa, /* Shadow kanan-bawah */
+        3px 3px 0px #000;        /* Bayangan solid luar */
+        
+    border: 2px solid #000; /* Garis tegas */
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.1s;
+    opacity: 0; /* Untuk animasi slideIn */
+}
+
+/* Saat Hover */
+.options button:hover {
+    background-color: #fff;
+    color: #000;
+    /* Geser sedikit biar berasa disentuh */
+    transform: translate(-2px, -2px); 
+    box-shadow: 
+        inset 3px 3px 0px #fff,
+        inset -3px -3px 0px #ccc,
+        6px 6px 0px #000; /* Bayangan memanjang */
+}
+
+/* Saat Klik (Active) */
+.options button:active {
+    background-color: #ffd700; /* Kuning pas ditekan */
+    transform: translate(2px, 2px); /* Penetan ke dalam */
+    box-shadow: 
+        inset 3px 3px 0px rgba(0,0,0,0.2), /* Inner shadow */
+        0px 0px 0px #000; /* Bayangan hilang */
+}
+
+.game-feedback-box {
+    /* Menambah jarak antar baris teks */
+    line-height: 2.0 !important; 
+    
+    /* Opsional: Memastikan teks tidak terlalu mepet ke border dashed */
+    padding: 20px !important; 
+    font-size: 1rem; /* Sedikit dikecilkan biar muat banyak, opsional */
+}
+
+.game-feedback-box p {
+    margin-bottom: 15px; /* Memberi jarak antara judul "Penjelasan:" dengan isinya */
+}
+
+/* --- ANIMASI AWAN (CLOUD PARALLAX) --- */
+#cloud-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Mencegah scrollbar muncul saat awan keluar layar */
+    pointer-events: none; /* Klik tembus ke belakang */
+    z-index: -5; /* Di atas background ungu, tapi di bawah konten game */
+}
+
+.pixel-cloud {
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0.6; /* Agak transparan biar nyatu sama bg */
+    left: -200px; /* Start di luar layar kiri */
+}
+
+/* Keyframes Gerakan Kiri ke Kanan */
+@keyframes floatRight {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(100vw + 300px)); } /* Jalan sampai lewat layar kanan */
+}
+
+/* --- VARIASI AWAN (Biar Natural) --- */
+
+/* Awan 1: Besar, Lambat, Paling Belakang (Jauh) */
+.c1 {
+    top: 15%;
+    width: 150px;
+    animation: floatRight 45s linear infinite;
+    animation-delay: -5s; /* Sudah jalan 5 detik saat load */
+    opacity: 0.4;
+}
+
+/* Awan 2: Kecil, Cepat, Agak Depan */
+.c2 {
+    top: 25%;
+    width: 80px;
+    animation: floatRight 25s linear infinite;
+    animation-delay: -18s; /* Sudah jalan 18 detik, jadi ada di tengah */
+    opacity: 0.7;
+}
+
+/* Awan 3: Sedang, Kecepatan Normal */
+.c3 {
+    top: 50%;
+    width: 120px;
+    animation: floatRight 35s linear infinite;
+    animation-delay: -30s;
+    opacity: 0.5;
+}
+
+/* Awan 4: Sangat Lambat, di Bawah */
+.c4 {
+    top: 70%;
+    width: 200px;
+    animation: floatRight 60s linear infinite;
+    animation-delay: -2s;
+    opacity: 0.3;
+}
+
+#preloader, #mode-selection, #countdown-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; }
+.mode-btn { font-family: 'Press Start 2P'; padding: 20px; margin: 10px; cursor: pointer; background: #fff; border: 4px solid #000; }
+.mode-btn:hover { background: #ffd700; }
+#overlay-feedback { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: flex; justify-content: center; align-items: center; z-index: 9000; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+#overlay-feedback.active { opacity: 1; }
+.overlay-text { font-size: 3rem; color: #ffd700; text-shadow: 4px 4px #ff00de; transform: scale(0); }
+.overlay-text.animate { animation: popIn 0.5s forwards; }
+@keyframes popIn { 0% { transform: scale(0); } 80% { transform: scale(1.2); } 100% { transform: scale(1); } }
+
+/* =========================================
+   RESPONSIVE MOBILE (ANDROID/iOS)
+   ========================================= */
+
+@media screen and (max-width: 768px) {
+    /* 1. Izinkan Scroll di HP */
+    body {
+        overflow-y: auto; 
+        height: auto;
+    }
+
+    /* 2. Sesuaikan Wrapper */
+    .page-wrapper {
+        padding-top: 100px; /* Jarak untuk Path */
+        padding-bottom: 120px; /* Jarak untuk HUD */
+        height: auto;
+    }
+
+    /* 3. Level Path (KECILKAN AGAR MUAT 10 BIJI) */
+    #level-path-container {
+        top: 20px; /* Naik dikit */
+        width: 100%; /* Full width */
+    }
+    
+    .path-node {
+        width: 25px; /* Kecilkan bulatan */
+        height: 25px;
+        font-size: 0.5rem; /* Font kecil */
+        border-width: 2px;
+    }
+    
+    .path-line {
+        height: 3px;
+        max-width: 5px; /* Garis jadi sangat pendek biar muat */
+    }
+    
+    .path-node.current { transform: scale(1.2); } /* Efek scale dikurangi */
+
+    /* 4. Kotak Soal */
+    .container {
+        padding: 1.5rem;
+        width: 90%;
+        margin-top: 20px;
+    }
+    
+    h1#q-number { font-size: 0.6rem; }
+    .question-title { font-size: 0.8rem !important; line-height: 1.4; }
+    
+    .options button {
+        padding: 12px;
+        font-size: 0.6rem;
+    }
+
+    /* 5. RPG HUD (Rampingkan) */
+    #rpg-hud {
+        bottom: 10px;
+        width: 95%;
+        padding-left: 10px; padding-right: 10px;
+    }
+    
+    .profile-pic {
+        width: 40px; height: 40px; /* Foto kecil */
+        margin-right: 10px;
+    }
+    
+    .user-info { font-size: 0.5rem; } /* Font info kecil */
+    
+    /* 6. Overlay Text (Awesome, dll) */
+    .overlay-text { font-size: 1.5rem; }
+    
+    /* 7. Countdown */
+    #countdown-text { font-size: 3rem !important; }
+}

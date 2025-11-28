@@ -1,0 +1,343 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* --- BACKGROUND SETUP (Opacity Fix) --- */
+body {
+    font-family: 'Press Start 2P', cursive;
+    background-color: #2b0f54;
+    margin: 0;
+    overflow: hidden;
+    color: white;
+    position: relative;
+    min-height: 100vh;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -10;
+    
+    /* Gambar Background */
+    background: url("/static/img/opening_background.png") no-repeat center center;
+    background-size: cover;
+    
+    /* OPACITY 0.5 AGAR TEKS TERBACA JELAS */
+    opacity: 0.2; 
+}
+
+/* --- ANIMASI AWAN (Sama persis dengan Question) --- */
+#cloud-container {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    overflow: hidden; pointer-events: none; z-index: -5;
+}
+
+.pixel-cloud {
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: contain;
+    left: -200px;
+}
+
+/* Keyframes Gerakan Kiri ke Kanan */
+@keyframes floatRight {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(100vw + 300px)); }
+}
+
+.c1 { top: 15%; width: 150px; animation: floatRight 45s linear infinite; animation-delay: -5s; opacity: 0.4; }
+.c2 { top: 25%; width: 80px; animation: floatRight 25s linear infinite; animation-delay: -18s; opacity: 0.7; }
+.c3 { top: 50%; width: 120px; animation: floatRight 35s linear infinite; animation-delay: -30s; opacity: 0.5; }
+.c4 { top: 70%; width: 200px; animation: floatRight 60s linear infinite; animation-delay: -2s; opacity: 0.3; }
+
+/* --- LAYOUT UTAMA --- */
+.page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Tengah Layar Vertikal & Horizontal */
+    padding: 20px;
+}
+
+/* --- RPG CONTAINER BOX --- */
+.choose-container {
+    background: #fff;
+    color: #000;
+    padding: 3rem;
+    text-align: center;
+    
+    /* STYLE PIXEL BORDER (RPG STYLE) */
+    border: 4px solid #000;
+    outline: 4px solid #fff; /* Garis putih luar */
+    box-shadow: 
+        0 0 0 8px #000, 
+        20px 20px 0px rgba(0,0,0,0.5); /* Bayangan Jatuh */
+        
+    width: 100%;
+    max-width: 600px;
+    
+    /* Animasi Muncul */
+    animation: popUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popUp {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.choose-container h1 {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.choose-container p {
+    font-size: 0.7rem;
+    color: #666;
+    margin-bottom: 40px;
+}
+
+/* --- TOMBOL MODE (Retro Style) --- */
+.mode-buttons {
+    display: flex;
+    gap: 30px; /* Jarak antar tombol diperlebar sedikit */
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+    align-items: center;
+}
+
+.mode-btn {
+    /* HAPUS STYLE LAMA (Background, Border, Text, dll) */
+    background: transparent;
+    border: none;
+    padding: 0;
+    box-shadow: none;
+    text-decoration: none;
+    
+    display: inline-block; /* Agar membungkus gambar dengan pas */
+    position: relative;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Transisi halus membal */
+    cursor: pointer;
+}
+
+/* Hapus hiasan bintang lama */
+.mode-btn::after {
+    content: none;
+}
+
+/* Style untuk Gambar di dalam tombol */
+.mode-btn img {
+    display: block; /* Menghilangkan celah bawah pada gambar inline */
+    max-width: 100%; /* Responsif */
+    height: auto;
+    /* PENTING: Agar gambar pixel art tetap tajam saat diperbesar */
+    image-rendering: pixelated; 
+    /* Opsional: Tambah drop shadow pada gambarnya langsung biar timbul */
+    filter: drop-shadow(5px 5px 0px rgba(0,0,0,0.3));
+}
+
+/* EFEK HOVER (TETAP DIPERTAHANKAN) */
+.mode-btn:hover {
+    background: transparent;
+    /* Hapus rotate, sisakan scale saja */
+    transform: scale(1.1); 
+    z-index: 10;
+}
+
+.mode-btn:active {
+    /* Hapus rotate, sisakan scale saja */
+    transform: scale(1.05);
+}
+
+/* --- LOGOUT BUTTON (Tetap sama) --- */
+.btn-logout {
+    display: inline-block;
+    background: #dc3545;
+    color: white;
+    text-decoration: none;
+    padding: 15px 30px;
+    font-family: 'Press Start 2P'; /* Pastikan font pixel */
+    font-size: 0.7rem;
+    border: 3px solid #000;
+    box-shadow: 3px 3px 0px #000;
+    transition: transform 0.1s;
+}
+
+.btn-logout:hover {
+    background: #ff4444;
+    transform: translateY(-2px);
+}
+
+/* --- MODAL POPUP STYLES --- */
+.modal-overlay {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Gelap di belakang */
+    z-index: 99999;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+}
+
+/* --- MODAL POPUP (ALIGN LEFT UPDATE) --- */
+.modal-box {
+    background: #fff;
+    color: #000;
+    padding: 30px;
+    width: 90%;
+    max-width: 500px; /* Lebarin dikit biar teks gak kepotong */
+    
+    /* ALIGN LEFT */
+    text-align: left !important; 
+    
+    border: 4px solid #000;
+    outline: 4px solid #fff;
+    box-shadow: 0 0 0 8px #000, 20px 20px 0 rgba(0,0,0,0.5);
+    
+    animation: popUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Judul Singkat & Tegas */
+.modal-box h2 {
+    font-size: 1.2rem;
+    color: #dc3545;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #eee; /* Garis pemisah tipis */
+    text-transform: uppercase;
+}
+
+/* Isi Teks Diperjelas */
+.modal-box p {
+    font-size: 0.9rem !important; 
+    line-height: 1.8 !important; /* Jarak baris lega */
+    margin-bottom: 30px;
+    color: #333;
+}
+
+/* Khusus teks kecil (secondary) */
+.modal-box .sub-text {
+    font-size: 0.8rem !important; /* Agak kecil dikit */
+    color: #555;
+    line-height: 1.8 !important;
+    margin-bottom: 30px;
+}
+
+/* Tombol di dalam Modal */
+.btn-download {
+    background: #28a745;
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    font-size: 0.7rem;
+    font-family: 'Press Start 2P';
+    border: 3px solid #000;
+    box-shadow: 4px 4px 0 #000;
+    transition: transform 0.1s;
+    display: inline-block;
+}
+.btn-download:hover { background: #218838; transform: scale(1.05); }
+
+.btn-cancel {
+    background: #dc3545;
+    color: white;
+    padding: 12px 20px;
+    font-size: 0.7rem;
+    font-family: 'Press Start 2P';
+    border: 3px solid #000;
+    box-shadow: 4px 4px 0 #000;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+.btn-cancel:hover { background: #c82333; transform: scale(1.05); }
+
+/* =========================================
+   RESPONSIVE MOBILE (ANDROID/iOS)
+   ========================================= */
+
+@media screen and (max-width: 768px) {
+
+    /* 1. Izinkan Scroll di HP (Penting jika tombol ditumpuk jadi tinggi) */
+    body {
+        overflow-y: auto; 
+        height: auto;
+        min-height: 100vh;
+    }
+
+    /* 2. Sesuaikan Wrapper */
+    .page-wrapper {
+        height: auto; /* Biarkan tinggi menyesuaikan konten */
+        min-height: 100vh;
+        padding: 40px 20px; /* Beri jarak atas bawah lebih lega */
+        box-sizing: border-box;
+    }
+
+    /* 3. Kecilkan Container Putih */
+    .choose-container {
+        padding: 1.5rem; /* Padding dikurangi setengah biar muat */
+        width: 90%; /* Agar tidak nempel pinggir layar */
+        
+        /* Kurangi ketebalan bayangan agar tidak keluar layar */
+        box-shadow: 
+            0 0 0 4px #000, 
+            10px 10px 0px rgba(0,0,0,0.5); 
+    }
+
+    .choose-container h1 {
+        font-size: 1rem; /* Font judul dikecilkan */
+        line-height: 1.5;
+    }
+
+    /* 4. TOMBOL MODE: Tumpuk Vertikal (Atas-Bawah) */
+    .mode-buttons {
+        flex-direction: column; /* Stack ke bawah */
+        gap: 20px;
+    }
+
+    .mode-btn img {
+        width: 100%; /* Gambar ambil lebar penuh container */
+        max-width: 250px; /* Tapi jangan kegedean banget */
+        height: auto;
+    }
+
+    /* 5. Tombol Logout */
+    .btn-logout {
+        width: 100%; /* Tombol logout jadi lebar penuh biar gampang dipencet */
+        box-sizing: border-box;
+        padding: 15px;
+    }
+
+    /* 6. MODAL POPUP DI HP */
+    .modal-box {
+        width: 85%; /* Lebih lebar dikit di HP */
+        padding: 20px; /* Padding dikurangi */
+        max-height: 80vh; /* Jaga-jaga kalau layar pendek */
+        overflow-y: auto; /* Scroll kalau teks kepanjangan */
+    }
+
+    .modal-box h2 {
+        font-size: 1rem;
+    }
+
+    .modal-box p {
+        font-size: 0.8rem !important;
+    }
+
+    /* Tombol di Modal jadi tumpuk atau mengecil */
+    .modal-box div {
+        flex-direction: column; /* Tombol Batal & Download tumpuk */
+        width: 100%;
+    }
+
+    .btn-download, .btn-cancel {
+        width: 100%; /* Tombol full width */
+        text-align: center;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+    }
+}

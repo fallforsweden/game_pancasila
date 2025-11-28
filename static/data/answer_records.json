@@ -740,5 +740,19 @@
     "correct_answer": "1 Juni",
     "is_correct": false,
     "timestamp": "2025-11-15T02:28:09.275Z"
+  },
+  {
+    "question_text": "Agama apa yang mengajarkan delapan jalan kebenaran?",
+    "user_answer": "Buddha",
+    "correct_answer": "Buddha",
+    "is_correct": true,
+    "timestamp": "2025-11-22T02:37:20.850Z"
+  },
+  {
+    "question_text": "Sila kedua Pancasila berbunyi?",
+    "user_answer": "Persatuan Indonesia",
+    "correct_answer": "Kemanusiaan yang Adil dan Beradab",
+    "is_correct": false,
+    "timestamp": "2025-11-22T02:37:40.058Z"
   }
 ]

@@ -1,2 +1,4 @@
 .env
 env
+*.exe
+static/game/*.exe

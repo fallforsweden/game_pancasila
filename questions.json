@@ -3,8 +3,7 @@
         "question": "Apa sila pertama dalam Pancasila?",
         "options": ["Kemanusiaan yang Adil dan Beradab", "Ketuhanan yang Maha Esa", "Persatuan Indonesia", "Keadilan Sosial bagi Seluruh Rakyat Indonesia"],
         "answer": "Ketuhanan yang Maha Esa",
-        "explanation": "Sila pertama berbunyi Ketuhanan yang Maha Esa.",
-        "bonus_health": 1
+        "explanation": "Sila pertama berbunyi Ketuhanan yang Maha Esa."
     },
     {
         "question": "Sila kedua Pancasila berbunyi?",

@@ -4,46 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Pancasila Cerdas</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stylelogin.css') }}">
 </head>
 <body>
-    <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
-    <img src="{{ url_for('static', filename='img/awan2.png') }}" alt="cloud" class="ix-cloud large">
-    <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
-    <img src="{{ url_for('static', filename='img/awan2.png') }}" alt="cloud" class="ix-cloud large">
-    <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
-    <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
-    <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
-    <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
+    
+    <div id="cloud-container">
+        <img src="{{ url_for('static', filename='img/awan2.png') }}" class="pixel-cloud c1">
+        <img src="{{ url_for('static', filename='img/awan.png') }}" class="pixel-cloud c2">
+        <img src="{{ url_for('static', filename='img/awan.png') }}" class="pixel-cloud c3">
+        <img src="{{ url_for('static', filename='img/awan2.png') }}" class="pixel-cloud c4">
+    </div>
 
-    <div class="container-login"> 
-        <h1>LOGIN</h1>
-        <br>
-        <p>Silakan masuk untuk memulai kuis</p>
-        
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="explanation {{ 'correct' if category == 'success' else 'incorrect' }}" style="text-align: center; margin-bottom: 20px;">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
+    <div class="page-wrapper">
+        <div class="container-login"> 
+            <h1>LOGIN</h1>
+            <p>Silakan masuk untuk memulai kuis</p>
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="explanation {{ 'correct' if category == 'success' else 'incorrect' }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
 
-        <form method="post">
-            <input type="text" name="username" placeholder="Masukkan Nama Pengguna" required>
-            <input type="password" name="password" placeholder="Masukkan Kata Sandi" required> 
-        
-            <button type="submit" class="ix-btn" >
-                <img src="{{ url_for('static', filename='img/loginbutton.png') }}" alt="Tombol Login" class="ix-img" style="width: 170px !important;">
-            </button>
-        </form>
-        
-        <p style="margin-top: 30px;" class="login-register-link"> 
-            Belum punya akun? <a href="{{ url_for('register') }}">Daftar di sini</a>
-        </p>
-        
+            <form method="post">
+                <input type="text" name="username" placeholder="Masukkan Nama Pengguna" required>
+                <input type="password" name="password" placeholder="Masukkan Kata Sandi" required> 
+            
+                <button type="submit" class="ix-btn">
+                    <img src="{{ url_for('static', filename='img/loginbutton.png') }}" alt="Tombol Login" class="ix-img">
+                </button>
+            </form>
+            
+            <p class="login-register-link"> 
+                Belum punya akun? <a href="{{ url_for('register') }}">Daftar di sini</a>
+            </p>
+            
+        </div>
     </div>
 </body>
 </html>

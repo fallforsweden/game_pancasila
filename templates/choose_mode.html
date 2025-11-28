@@ -3,40 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pilih Mode - Pancasila Cerdas</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Pilih Mode Permainan</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stylechoosemode.css') }}">
 </head>
 <body>
-       <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
-        <img src="{{ url_for('static', filename='img/awan2.png') }}" alt="cloud" class="ix-cloud large">
-        <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
-        <img src="{{ url_for('static', filename='img/awan2.png') }}" alt="cloud" class="ix-cloud large">
-        <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
-        <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
-        <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
-        <img src="{{ url_for('static', filename='img/awan.png') }}" alt="cloud" class="ix-cloud small">
+    
+    <div id="cloud-container">
+        <img src="{{ url_for('static', filename='img/awan2.png') }}" class="pixel-cloud c1">
+        <img src="{{ url_for('static', filename='img/awan.png') }}" class="pixel-cloud c2">
+        <img src="{{ url_for('static', filename='img/awan.png') }}" class="pixel-cloud c3">
+        <img src="{{ url_for('static', filename='img/awan2.png') }}" class="pixel-cloud c4">
+    </div>
 
-        <div class="page-wrapper">
-    <div class="container">
-        <h1>Selamat Datang, {{ current_user.username }}!</h1>
-        <p>Silakan pilih mode permainan yang ingin kamu mainkan.</p>
-        <br><br>
+    <div class="page-wrapper">
+        <div class="choose-container">
+            <h1>Selamat Datang, {{ current_user.username }}!</h1>
+            <p>Silakan pilih mode permainan yang ingin kamu mainkan.</p>
 
-        <div class="mode-selection-container">
-            <!-- Story Mode Button -->
-            <a href="{{ url_for('prologue') }}" class="mode-button">
-                <img src="{{ url_for('static', filename='img/story_mode.png') }}" alt="Story Mode" class="mode-image">
-            </a>
+            <div class="mode-buttons">
+                <a href="#" onclick="openModal(event)" class="mode-btn">
+                    <img src="{{ url_for('static', filename='img/story_mode.png') }}" alt="Story Mode" width="200">
+                </a>
 
-            <!-- Endless Mode Button -->
-            <a href="{{ url_for('start_quiz') }}" class="mode-button">
-                <img src="{{ url_for('static', filename='img/endless_mode.png') }}" alt="Endless Mode" class="mode-image">
-            </a>
+                <a href="{{ url_for('start_quiz') }}" class="mode-btn">
+                    <img src="{{ url_for('static', filename='img/endless_mode.png') }}" alt="Endless Mode" width="200">
+                </a>
+            </div>
+
+            <a href="{{ url_for('logout') }}" class="btn-logout">Logout</a>
         </div>
+    </div>
 
-        <br><br><br><br><br>
-        <a href="{{ url_for('logout') }}" class="btn" style="background-color: #c82333; margin-top: 30px;">Logout</a>
+    <div id="pc-warning-modal" class="modal-overlay">
+        <div class="modal-box">
+            <h2>PERHATIAN</h2>
+            
+            <p>
+                Mode ini adalah <strong>Game PC (.exe)</strong>.<br>
+                Tidak dapat dimainkan di HP/Smartphone.<br><br>
+                Kamu akan mengunduh file game eksternal.
+            </p>
+
+            <div class="modal-buttons">
+                <button onclick="closeModal()" class="btn-cancel">Batal</button>
+                
+                <a href="{{ url_for('download_game') }}" class="btn-download">
+                    Oke, Download
+                </a>
+            </div>
+        </div>
     </div>
-    </div>
+
+    <script>
+        function openModal(e) {
+            e.preventDefault(); // Mencegah link pindah halaman
+            document.getElementById('pc-warning-modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('pc-warning-modal').style.display = 'none';
+        }
+    </script>
+
 </body>
 </html>
